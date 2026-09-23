@@ -1,834 +1,1720 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اختبار الرخصة المهنية للمدربين | إعداد المهندس سمير حبيب بنتن</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        etec: {
-                            50: '#f0fdf4',
-                            100: '#dcfce7',
-                            200: '#bbf7d0',
-                            300: '#86efac',
-                            400: '#4ade80',
-                            500: '#22c55e',
-                            600: '#16a34a',
-                            700: '#15803d',
-                            800: '#166534',
-                            900: '#14532d',
-                            primary: '#0d7a3f',
-                            dark: '#0a5c2f'
-                        }
-                    },
-                    fontFamily: {
-                        tajawal: ['Tajawal', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { font-family: 'Tajawal', sans-serif; }
-        .glass { background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); }
-        .dark .glass { background: rgba(15,23,42,0.92); }
-        .fade-in { animation: fadeIn 0.35s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulseRed { 0%,100%{opacity:1} 50%{opacity:0.55} }
-        .pulse-red { animation: pulseRed 0.9s infinite; }
-        .map-btn { transition: all 0.15s ease; }
-        .map-btn:hover { transform: scale(1.08); }
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 3px; }
-        .dark ::-webkit-scrollbar-thumb { background: #475569; }
-        .etec-pattern {
-            background-image: radial-gradient(circle at 20% 30%, rgba(13,122,63,0.06) 0%, transparent 50%),
-                              radial-gradient(circle at 80% 70%, rgba(13,122,63,0.05) 0%, transparent 45%);
-        }
-        .dark .etec-pattern {
-            background-image: radial-gradient(circle at 20% 30%, rgba(34,197,94,0.08) 0%, transparent 50%),
-                              radial-gradient(circle at 80% 70%, rgba(34,197,94,0.06) 0%, transparent 45%);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0066CC">
+<meta name="description" content="اختبار الرخصة المهنية للمدربين - بنك الأسئلة الشامل">
+<title>اختبار الرخصة المهنية للمدربين</title>
+<link rel="manifest" href="data:application/json,{}">
+<style>
+:root {
+  --primary: #0066CC;
+  --primary-dark: #004A99;
+  --primary-light: #E8F0FE;
+  --secondary: #00A86B;
+  --secondary-light: #E6F7EF;
+  --accent: #FF6B35;
+  --bg: #F0F4F8;
+  --bg2: #FFFFFF;
+  --bg3: #E8ECF0;
+  --text: #1A2332;
+  --text2: #4A5568;
+  --text3: #718096;
+  --border: #D2D8E0;
+  --shadow: 0 4px 24px rgba(0,0,0,0.08);
+  --shadow2: 0 8px 40px rgba(0,0,0,0.12);
+  --radius: 16px;
+  --radius2: 12px;
+  --green: #22C55E;
+  --green-light: #DCFCE7;
+  --red: #EF4444;
+  --red-light: #FEE2E2;
+  --yellow: #F59E0B;
+  --yellow-light: #FEF3C7;
+  --gray: #94A3B8;
+  --gray-light: #F1F5F9;
+  --font-size: 16px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+[data-theme="dark"] {
+  --bg: #0F172A;
+  --bg2: #1E293B;
+  --bg3: #334155;
+  --text: #F1F5F9;
+  --text2: #CBD5E1;
+  --text3: #94A3B8;
+  --border: #475569;
+  --shadow: 0 4px 24px rgba(0,0,0,0.3);
+  --shadow2: 0 8px 40px rgba(0,0,0,0.4);
+  --primary-light: #1E3A5F;
+  --secondary-light: #1A3A2A;
+  --green-light: #14532D;
+  --red-light: #450A0A;
+  --yellow-light: #451A03;
+  --gray-light: #1E293B;
+}
+[data-theme="high-contrast"] {
+  --bg: #000000;
+  --bg2: #1A1A1A;
+  --bg3: #333333;
+  --text: #FFFFFF;
+  --text2: #E0E0E0;
+  --text3: #CCCCCC;
+  --border: #FFFFFF;
+  --primary: #4D9FFF;
+  --secondary: #00FF88;
+  --accent: #FF8844;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  font-size: var(--font-size);
+  background: var(--bg);
+  color: var(--text);
+  transition: var(--transition);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+[data-font="small"] { --font-size: 14px; }
+[data-font="medium"] { --font-size: 16px; }
+[data-font="large"] { --font-size: 18px; }
+.screen { display:none; min-height:100vh; animation: fadeIn 0.5s ease; }
+.screen.active { display:block; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+@keyframes slideIn { from{opacity:0;transform:translateX(30px)} to{opacity:1;transform:translateX(0)} }
+@keyframes slideOut { from{opacity:1;transform:translateX(0)} to{opacity:0;transform:translateX(-30px)} }
+@keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)} }
+@keyframes confettiFall { 0%{transform:translateY(-100vh) rotate(0deg);opacity:1} 100%{transform:translateY(100vh) rotate(720deg);opacity:0} }
+@keyframes glow { 0%,100%{box-shadow:0 0 5px var(--primary)} 50%{box-shadow:0 0 20px var(--primary)} }
+@keyframes streakPulse { 0%{transform:scale(1)} 50%{transform:scale(1.3)} 100%{transform:scale(1)} }
+@keyframes bgShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+@keyframes spin { to{transform:rotate(360deg)} }
+
+/* ETEC-inspired header */
+.etec-header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, #003366 100%);
+  background-size: 200% 200%;
+  animation: bgShift 8s ease infinite;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+.etec-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+  animation: spin 20s linear infinite;
+}
+.etec-header h1 { font-size: 1.6em; margin-bottom: 5px; position: relative; z-index: 1; }
+.etec-header p { font-size: 0.9em; opacity: 0.9; position: relative; z-index: 1; }
+.etec-logo {
+  width: 70px; height: 70px;
+  background: white;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4em; font-weight: bold; color: var(--primary);
+  position: relative; z-index: 1;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Home Screen */
+.home-container { max-width: 800px; margin: 0 auto; padding: 20px; }
+.mode-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 24px 0; }
+.mode-card {
+  background: var(--bg2);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.mode-card:hover { transform: translateY(-4px); box-shadow: var(--shadow2); border-color: var(--primary); }
+.mode-card .icon { font-size: 2.5em; margin-bottom: 12px; }
+.mode-card h3 { font-size: 1.1em; margin-bottom: 8px; color: var(--text); }
+.mode-card p { font-size: 0.85em; color: var(--text2); }
+.mode-card.featured { border-color: var(--primary); background: var(--primary-light); }
+.mode-card.featured::after {
+  content: '⭐ الأكثر استخداماً';
+  position: absolute; top: 10px; left: 10px;
+  background: var(--accent); color: white;
+  padding: 2px 10px; border-radius: 20px; font-size: 0.7em;
+}
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 28px;
+  border: none; border-radius: var(--radius2);
+  font-size: 1em; font-weight: 600;
+  cursor: pointer; transition: var(--transition);
+  font-family: inherit;
+}
+.btn-primary { background: var(--primary); color: white; }
+.btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: var(--shadow); }
+.btn-secondary { background: var(--bg3); color: var(--text); border: 1px solid var(--border); }
+.btn-secondary:hover { background: var(--border); }
+.btn-success { background: var(--secondary); color: white; }
+.btn-success:hover { background: #008F5A; }
+.btn-danger { background: var(--red); color: white; }
+.btn-danger:hover { background: #DC2626; }
+.btn-sm { padding: 8px 16px; font-size: 0.85em; }
+.btn-icon { width: 44px; height: 44px; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+
+.resume-banner {
+  background: linear-gradient(135deg, var(--secondary), #00C97B);
+  color: white;
+  border-radius: var(--radius);
+  padding: 20px;
+  margin: 16px 0;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+  animation: pulse 2s infinite;
+}
+.resume-banner .btn { background: white; color: var(--secondary); }
+
+/* Settings */
+.settings-panel {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin: 16px 0;
+  box-shadow: var(--shadow);
+}
+.settings-panel h3 { margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.setting-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.setting-row:last-child { border-bottom: none; }
+.toggle {
+  width: 52px; height: 28px;
+  background: var(--gray);
+  border-radius: 14px;
+  position: relative;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.toggle.active { background: var(--primary); }
+.toggle::after {
+  content: '';
+  width: 22px; height: 22px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px; right: 3px;
+  transition: var(--transition);
+}
+.toggle.active::after { right: 27px; }
+.font-btns { display: flex; gap: 8px; }
+.font-btn {
+  padding: 6px 14px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.font-btn.active { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
+
+/* Quiz Screen */
+.quiz-container { max-width: 900px; margin: 0 auto; padding: 16px; }
+.quiz-top-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--bg2);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.quiz-progress {
+  display: flex; align-items: center; gap: 12px;
+  font-weight: 600; color: var(--text);
+}
+.progress-bar-container {
+  width: 200px; height: 8px;
+  background: var(--bg3);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+.streak-badge {
+  display: flex; align-items: center; gap: 6px;
+  background: linear-gradient(135deg, #FF6B35, #FF8F65);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9em;
+}
+.streak-badge.pop { animation: streakPulse 0.5s ease; }
+
+/* Timer */
+.timer-container {
+  position: relative;
+  width: 80px; height: 80px;
+  display: flex; align-items: center; justify-content: center;
+}
+.timer-svg { position: absolute; top: 0; left: 0; transform: rotate(-90deg); }
+.timer-circle-bg { fill: none; stroke: var(--bg3); stroke-width: 4; }
+.timer-circle { fill: none; stroke: var(--green); stroke-width: 4; stroke-linecap: round; transition: stroke-dashoffset 1s linear, stroke 0.5s; }
+.timer-text { font-size: 1.3em; font-weight: 700; z-index: 1; }
+.timer-warning { color: var(--yellow) !important; }
+.timer-danger { color: var(--red) !important; animation: pulse 0.5s infinite; }
+
+/* Question Card */
+.question-card {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+  animation: slideIn 0.4s ease;
+  position: relative;
+}
+.question-card.shake { animation: shake 0.5s ease; }
+.question-meta {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75em;
+  font-weight: 600;
+}
+.badge-domain { background: var(--primary-light); color: var(--primary); }
+.badge-easy { background: var(--green-light); color: var(--green); }
+.badge-medium { background: var(--yellow-light); color: var(--yellow); }
+.badge-hard { background: var(--red-light); color: var(--red); }
+.question-text {
+  font-size: 1.15em;
+  font-weight: 600;
+  line-height: 1.8;
+  margin-bottom: 24px;
+  color: var(--text);
+}
+.options-list { display: flex; flex-direction: column; gap: 12px; }
+.option-btn {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 20px;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: var(--radius2);
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: right;
+  font-size: 1em;
+  font-family: inherit;
+  color: var(--text);
+  width: 100%;
+}
+.option-btn:hover:not(.disabled) { border-color: var(--primary); background: var(--primary-light); transform: translateX(-4px); }
+.option-btn.selected { border-color: var(--primary); background: var(--primary-light); }
+.option-btn.correct { border-color: var(--green) !important; background: var(--green-light) !important; }
+.option-btn.wrong { border-color: var(--red) !important; background: var(--red-light) !important; }
+.option-btn.disabled { cursor: default; opacity: 0.8; }
+.option-letter {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--bg3);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+.option-btn.selected .option-letter { background: var(--primary); color: white; }
+.option-btn.correct .option-letter { background: var(--green); color: white; }
+.option-btn.wrong .option-letter { background: var(--red); color: white; }
+
+/* Explanation */
+.explanation-box {
+  margin-top: 20px;
+  padding: 20px;
+  background: var(--secondary-light);
+  border-right: 4px solid var(--secondary);
+  border-radius: 0 var(--radius2) var(--radius2) 0;
+  animation: fadeIn 0.5s ease;
+  display: none;
+}
+.explanation-box.show { display: block; }
+.explanation-box h4 { color: var(--secondary); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.explanation-box p { color: var(--text2); line-height: 1.7; }
+
+/* Navigation */
+.quiz-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.quiz-nav-group { display: flex; gap: 8px; }
+
+/* Question Map */
+.map-toggle {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 100;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  border: none;
+  font-size: 1.4em;
+  cursor: pointer;
+  box-shadow: var(--shadow2);
+  transition: var(--transition);
+  display: none;
+}
+.map-toggle:hover { transform: scale(1.1); }
+.map-toggle.visible { display: flex; align-items: center; justify-content: center; }
+.question-map-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.question-map-overlay.show { display: flex; }
+.question-map {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  padding: 24px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow2);
+  animation: fadeIn 0.3s ease;
+}
+.question-map h3 { margin-bottom: 16px; text-align: center; }
+.map-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(48px, 1fr));
+  gap: 8px;
+}
+.map-item {
+  width: 48px; height: 48px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+  font-size: 0.85em;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 2px solid transparent;
+  background: var(--gray-light);
+  color: var(--text2);
+}
+.map-item:hover { transform: scale(1.1); }
+.map-item.current { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0,102,204,0.3); }
+.map-item.correct { background: var(--green-light); color: var(--green); border-color: var(--green); }
+.map-item.wrong { background: var(--red-light); color: var(--red); border-color: var(--red); }
+.map-item.timeout { background: var(--yellow-light); color: var(--yellow); border-color: var(--yellow); }
+.map-item.skipped { background: var(--gray-light); color: var(--gray); }
+.map-legend {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  margin-top: 16px; justify-content: center;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.8em; color: var(--text2); }
+.legend-dot { width: 14px; height: 14px; border-radius: 4px; }
+
+/* Copy Button */
+.copy-btn {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 0.8em;
+  color: var(--text2);
+  transition: var(--transition);
+  font-family: inherit;
+}
+.copy-btn:hover { background: var(--primary); color: white; }
+.copy-btn.copied { background: var(--green); color: white; }
+
+/* Quote */
+.quote-banner {
+  background: linear-gradient(135deg, var(--primary), #6366F1);
+  color: white;
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  margin: 16px 0;
+  animation: fadeIn 0.5s ease;
+  display: none;
+}
+.quote-banner.show { display: block; }
+.quote-banner p { font-size: 1.1em; font-style: italic; line-height: 1.6; }
+.quote-banner .author { margin-top: 8px; opacity: 0.8; font-size: 0.9em; }
+
+/* Results Screen */
+.results-container { max-width: 900px; margin: 0 auto; padding: 20px; }
+.results-header {
+  text-align: center;
+  padding: 40px 20px;
+  background: var(--bg2);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+}
+.score-circle {
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  font-size: 2.5em; font-weight: 800;
+  position: relative;
+}
+.score-circle::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  padding: 4px;
+  background: conic-gradient(var(--primary) var(--score-pct), var(--bg3) 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+.score-label { font-size: 0.35em; color: var(--text2); font-weight: 400; }
+.results-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin: 24px 0;
+}
+.stat-card {
+  background: var(--bg2);
+  border-radius: var(--radius2);
+  padding: 20px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.stat-card .stat-value { font-size: 1.8em; font-weight: 800; }
+.stat-card .stat-label { font-size: 0.8em; color: var(--text2); margin-top: 4px; }
+.stat-correct .stat-value { color: var(--green); }
+.stat-wrong .stat-value { color: var(--red); }
+.stat-timeout .stat-value { color: var(--yellow); }
+.stat-skipped .stat-value { color: var(--gray); }
+
+/* Charts */
+.chart-container {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+}
+.chart-container h3 { margin-bottom: 16px; }
+.chart-canvas { width: 100%; height: 250px; }
+.domain-bars { display: flex; flex-direction: column; gap: 12px; }
+.domain-bar-row { display: flex; align-items: center; gap: 12px; }
+.domain-bar-label { width: 160px; font-size: 0.85em; color: var(--text2); flex-shrink: 0; }
+.domain-bar-track { flex: 1; height: 28px; background: var(--bg3); border-radius: 14px; overflow: hidden; position: relative; }
+.domain-bar-fill { height: 100%; border-radius: 14px; transition: width 1s ease; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75em; font-weight: 700; }
+.domain-bar-pct { width: 50px; text-align: center; font-weight: 700; font-size: 0.9em; }
+
+/* Badges */
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+.badge-card {
+  background: var(--bg2);
+  border-radius: var(--radius2);
+  padding: 16px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+.badge-card.earned { border: 2px solid var(--yellow); }
+.badge-card.locked { opacity: 0.4; filter: grayscale(1); }
+.badge-card .badge-icon { font-size: 2em; margin-bottom: 8px; }
+.badge-card .badge-name { font-size: 0.8em; font-weight: 600; }
+
+/* Confetti */
+.confetti-piece {
+  position: fixed;
+  width: 10px; height: 10px;
+  top: -10px;
+  z-index: 9999;
+  animation: confettiFall 3s linear forwards;
+}
+
+/* Review Screen */
+.review-container { max-width: 800px; margin: 0 auto; padding: 20px; }
+.review-item {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+  border-right: 4px solid var(--red);
+}
+.review-item.review-correct { border-right-color: var(--green); }
+
+/* Duel Mode */
+.duel-container { max-width: 600px; margin: 0 auto; padding: 20px; text-align: center; }
+.duel-input {
+  width: 100%;
+  padding: 14px 20px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius2);
+  font-size: 1.1em;
+  font-family: inherit;
+  background: var(--bg2);
+  color: var(--text);
+  margin: 12px 0;
+  text-align: center;
+}
+.duel-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 24px 0;
+}
+.duel-player {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+.duel-player.winner { border: 3px solid var(--yellow); }
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 50%;
+  transform: translateX(50%) translateY(100px);
+  background: var(--text);
+  color: var(--bg);
+  padding: 12px 24px;
+  border-radius: var(--radius2);
+  font-weight: 600;
+  z-index: 9999;
+  transition: transform 0.3s ease;
+  white-space: nowrap;
+}
+.toast.show { transform: translateX(50%) translateY(0); }
+
+/* Footer */
+.credit-footer {
+  text-align: center;
+  padding: 20px;
+  color: var(--text3);
+  font-size: 0.85em;
+  margin-top: 20px;
+}
+.credit-footer strong { color: var(--primary); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .etec-header h1 { font-size: 1.2em; }
+  .question-card { padding: 20px; }
+  .quiz-top-bar { flex-direction: column; text-align: center; }
+  .progress-bar-container { width: 100%; }
+  .mode-grid { grid-template-columns: 1fr; }
+  .results-stats { grid-template-columns: repeat(2, 1fr); }
+  .duel-comparison { grid-template-columns: 1fr; }
+  .domain-bar-label { width: 100px; font-size: 0.75em; }
+  .map-toggle { bottom: 16px; left: 16px; width: 48px; height: 48px; font-size: 1.2em; }
+}
+@media print {
+  .no-print { display: none !important; }
+  .screen { display: block !important; }
+  body { background: white; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--gray); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text3); }
+</style>
 </head>
-<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-300">
-    <div id="root"></div>
+<body data-theme="light" data-font="medium">
 
-    <script type="text/babel">
-        const { useState, useEffect, useRef, useMemo, useCallback } = React;
+<!-- Toast -->
+<div class="toast" id="toast"></div>
 
-        // ========== ICONS ==========
-        const Icon = ({ d, className="w-5 h-5", fill="none" }) => (
-            <svg className={className} fill={fill} viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d={d} />
-            </svg>
-        );
-        const CheckCircle = (p) => <Icon d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" {...p} />;
-        const XCircle = (p) => <Icon d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" {...p} />;
-        const ChevronLeft = (p) => <Icon d="M15 19l-7-7 7-7" {...p} />;
-        const ChevronRight = (p) => <Icon d="M9 5l7 7-7 7" {...p} />;
-        const Home = (p) => <Icon d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" {...p} />;
-        const Clock = (p) => <Icon d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" {...p} />;
-        const Book = (p) => <Icon d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" {...p} />;
-        const Target = (p) => <Icon d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0-18 0 M12 12m-5 0a5 5 0 1 0 10 0a5 5 0 1 0-10 0 M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0-2 0" {...p} />;
-        const Shield = (p) => <Icon d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" {...p} />;
-        const Cpu = (p) => <Icon d="M9 3v2m6-2v2M9 19v2m6-2v2M3 9h2m-2 6h2m14-6h2m-2 6h2M7 7h10v10H7V7z" {...p} />;
-        const Copy = (p) => <Icon d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" {...p} />;
-        const Refresh = (p) => <Icon d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" {...p} />;
-        const Moon = (p) => <Icon d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" {...p} />;
-        const Sun = (p) => <Icon d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" {...p} />;
-        const MapIcon = (p) => <Icon d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" {...p} />;
-        const Info = (p) => <Icon d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" {...p} />;
-        const Award = (p) => <Icon d="M12 15v5m-3 0h6M12 3a6 6 0 00-6 6c0 2.5 1.5 4.5 3.5 5.5l.5 2.5h4l.5-2.5c2-.9 3.5-3 3.5-5.5a6 6 0 00-6-6z" {...p} />;
-        const Layers = (p) => <Icon d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" {...p} />;
-        const Note = (p) => <Icon d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" {...p} />;
-        const Skip = (p) => <Icon d="M13 5l7 7-7 7M5 5l7 7-7 7" {...p} />;
+<!-- HOME SCREEN -->
+<div class="screen active" id="homeScreen">
+  <div class="etec-header">
+    <div class="etec-logo">ETEC</div>
+    <h1>اختبار الرخصة المهنية للمدربين</h1>
+    <p>بنك الأسئلة الشامل - 80 سؤالاً</p>
+  </div>
+  <div class="home-container">
+    <div id="resumeBanner" class="resume-banner" style="display:none">
+      <div>
+        <strong>📌 لديك اختبار غير مكتمل</strong>
+        <p style="font-size:0.85em;margin-top:4px" id="resumeInfo"></p>
+      </div>
+      <button class="btn" onclick="resumeQuiz()">استئناف ▶</button>
+    </div>
 
-        // ========== QUESTIONS (Full 80) ==========
-        const allQuestions = [
-            {id:1,domain:1,domainName:"المعرفة المهنية",question:"يلاحظ مدرب أن بعض المتدربين يفضلون التعلم من خلال الممارسة العملية المباشرة، بينما يفضل آخرون القراءة والتأمل. ما المفهوم الذي يصف هذه الظاهرة بدقة؟",options:[{text:"الفروق الفردية وأنماط التعلم المتنوعة لدى المتدربين",isCorrect:true,rationale:"تتفاوت استجابة المتدربين للأساليب التدريبية بناءً على نمط استيعابهم (بصري، سمعي، حركي، تأملي)، وهو جوهر مراعاة الفروق الفردية."},{text:"ضعف الدافعية الداخلية لدى بعض المتدربين",isCorrect:false,rationale:"تفضيل أسلوب لا يعني ضعف الدافعية، بل يعني اختلاف القناة الإدراكية المفضلة."},{text:"اختلاف المستوى المعرفي السابق بين المتدربين",isCorrect:false,rationale:"المستوى المعرفي يتعلق بالحصيلة العلمية السابقة، بينما السيناريو يتعلق بطريقة المعالجة والتعلم."},{text:"تباين الأهداف الشخصية لكل متدرب",isCorrect:false,rationale:"الأهداف تتعلق بالغاية المنشودة من التدريب وليست بطريقة استيعاب المادة."}]},
-            {id:2,domain:1,domainName:"المعرفة المهنية",question:"أي من النظريات التالية تُركز أساساً على أن التعلم يحدث من خلال الملاحظة والتقليد والتعزيز الاجتماعي؟",options:[{text:"نظرية المعالجة المعلوماتية",isCorrect:false,rationale:"تركز على الذاكرة البشرية وكيفية ترميز واسترجاع المعلومات."},{text:"النظرية السلوكية الكلاسيكية",isCorrect:false,rationale:"تركز على الاقتران الشرطي بين المثير والاستجابة."},{text:"النظرية البنائية الاجتماعية",isCorrect:false,rationale:"تركز على بناء المعرفة بالصنع والخبرة المباشرة والتفاعل."},{text:"نظرية التعلم الاجتماعي لباندورا",isCorrect:true,rationale:"ألبرت باندورا صاغ مفهوم التعلم بالنمذجة والتقليد والملاحظة في البيئة الاجتماعية."}]},
-            {id:3,domain:1,domainName:"المعرفة المهنية",question:"ما المبداء الأساسي الذي تقوم عليه نظريات تعليم الكبار (الأندراغوجيا) مقارنة بتعليم الأطفال (البيداغوجيا)؟",options:[{text:"اعتماد الكبار التام على المدرب كمصدر وحيد للمعرفة",isCorrect:false,rationale:"الكبار يفضلون التعلم الذاتي الموجه والتشاركي."},{text:"ارتباط التعلم لدى الكبار بحل مشكلات واقعية وتطبيقات مباشرة",isCorrect:true,rationale:"تعليم الكبار يرتكز على الخبرات السابقة والدافع الداخلي والحل العملي للمشكلات الواقعية."},{text:"افتقار الكبار للخبرات السابقة المفيدة في التعلم",isCorrect:false,rationale:"على العكس، الخبرات السابقة للكبار هي الحجر الأساس للتعلم الجديد."},{text:"اعتماد الكبار على التحفيز الخارجي فقط كالعلامات والجوائز",isCorrect:false,rationale:"الدافعية لدى الكبار نابعة غالباً من الحاجة الداخلية للتطور المهني والشخصي."}]},
-            {id:4,domain:1,domainName:"المعرفة المهنية",question:"ما الفرق الجوهري بين نموذج ADDIE ونموذج SAM في تصميم التدريب؟",options:[{text:"ADDIE يُستخدم للتدريب الإلكتروني فقط، بينما SAM للحضوري",isCorrect:false,rationale:"كلاهما يتناسب مع مختلف أنماط التدريب الإلكتروني والحضوري."},{text:"ADDIE نموذج خطي تسلسلي، بينما SAM نموذج تكراري مرن",isCorrect:true,rationale:"يتكون ADDIE من 5 مراحل متسلسلة، بينما يعتمد SAM على حلقات تكرار سريعة ونماذج أولية للتقويم المستمر."},{text:"SAM لا يشمل مرحلة التقويم خلافاً لنموذج ADDIE",isCorrect:false,rationale:"التقويم حاضر ومستمر في SAM في كل دورة تكرارية."},{text:"ADDIE أقدم تاريخياً من نموذج SAM",isCorrect:false,rationale:"رغم صحتها تاريخياً، إلا أنها ليست الفرق الجوهري الفلسفي في التصميم."}]},
-            {id:5,domain:1,domainName:"المعرفة المهنية",question:"أي الخطوات التالية تُعد الخطوة الأولى والأساسية في عملية تحليل الاحتياجات التدريبية (TNA)؟",options:[{text:"تصميم الأنشطة والألعاب التدريبية",isCorrect:false,rationale:"تصميم الأنشطة يأتي في مرحلة التصميم والتطوير بعد تحديد الفجوات."},{text:"تحديد الفجوة بين الأداء الحالي والأداء المأمول",isCorrect:true,rationale:"الاحتياج التدريبي هو الفرق بين ما هو قائم وما يجب أن يكون عليه الأداء."},{text:"تقييم ردود فعل المتدربين على البرنامج",isCorrect:false,rationale:"تقييم ردود الفعل يكون بعد تنفيذ البرنامج."},{text:"تحديد ميزانية القاعة والخدمات اللوجستية",isCorrect:false,rationale:"هذه إجراءات إدارية مساندة وليست خطوة التحليل الفني للاحتياج."}]},
-            {id:6,domain:1,domainName:"المعرفة المهنية",question:"أي الأهداف السلوكية التالية يصاغ بشكل صحيح وفق مستويات 'تصنيف بلوم' للمجال المعرفي (مستوى التحليل)؟",options:[{text:"أن يذكُر المتدرب تعريف إدارة الوقت بدقة",isCorrect:false,rationale:"هذا يعبر عن مستوى التذكر (المعرفة البسيطة)."},{text:"أن يفكك المتدرب عناصر المشكلة التدريبية إلى مكوناتها الأولية",isCorrect:true,rationale:"فعل 'يفكك' أو 'يقارن' يعبر عن التفكيك والتحليل والعلاقات الهيكلية."},{text:"أن يشعر المتدرب بأهمية الالتزام بالوقت",isCorrect:false,rationale:"هذا هدف في المجال الوجداني العاطفي وليس المعرفي."},{text:"أن يصمم المتدرب خطة تدريبية كاملة بنفسه",isCorrect:false,rationale:"التصميم والابتكار يمثل مستوى التخليق/الابتكار (الأعلى في بلوم)."}]},
-            {id:7,domain:1,domainName:"المعرفة المهنية",question:"أي من أساليب التقييم التالية يُركز على توفير تغذية راجعة مستمرة أثناء عملية التدريب لتعديل المسار؟",options:[{text:"التقويم التشخيصي (Diagnostic)",isCorrect:false,rationale:"يتم قبل البدء لمعرفة نقطة الانطلاق والمعارف السابقة."},{text:"التقويم التكويني/البنائي (Formative)",isCorrect:true,rationale:"يتم أثناء تنفيذ البرنامج بهدف توجيه التعلم وتحسين الأداء أولاً بأول."},{text:"التقويم الختامي/الجامع (Summative)",isCorrect:false,rationale:"يتم في نهاية البرنامج لقياس مدى تحقق الأهداف النهائية."},{text:"التقويم المعياري (Norm-referenced)",isCorrect:false,rationale:"يقارن أداء المتدرب بأداء أقرانه وليس بتتبع تطوره الذاتي."}]},
-            {id:8,domain:1,domainName:"المعرفة المهنية",question:"وفق نموذج كيركباتريك (Kirkpatrick) لقياس الأثر التدريبي، ما الذي يقيسه المستوى الثالث (Level 3)؟",options:[{text:"ردود أفعال المتدربين ومدى رضاهم عن القاعة",isCorrect:false,rationale:"هذا هو المستوى الأول (Reaction)."},{text:"مقدار المعارف والمهارات المكتسبة بالنهاية",isCorrect:false,rationale:"هذا هو المستوى الثاني (Learning)."},{text:"السلوك والتطبيق الفعلي للمهارات في بيئة العمل",isCorrect:true,rationale:"المستوى الثالث يقيس التغير السلوكي ونقل أثر التدريب للوظيفة (Behavior)."},{text:"العائد على الاستثمار والنتائج المالية للمؤسسة",isCorrect:false,rationale:"هذا هو المستوى الرابع (Results) أو الخامس لدى جاك فيليبس."}]},
-            {id:9,domain:1,domainName:"المعرفة المهنية",question:"ما المقصود بـ 'التعليم المقلوب' (Flipped Classroom) في البيئة التدريبية الحديثة؟",options:[{text:"إلغاء التطبيق العملي والاقتصار على المحاضرة النظرية",isCorrect:false,rationale:"التعليم المقلوب يضاعف وقت التطبيق العملي التفاعلي."},{text:"إطلاع المتدربين على المحتوى النظري قبل الجلسة واستغلال وقت اللقاء للتطبيق والتفاعل",isCorrect:true,rationale:"يتم تقديم المعرفة النظرية ذاتياً قبل الجلسة، وتُخصص الجلسة النقاشية للتطبيق والتحليل."},{text:"تدريب المتدربين على المهارات العكسية التي لا يحتاجونها",isCorrect:false,rationale:"تعريف خاطئ للمفهوم."},{text:"قيام المتدربين بشرح الحقيبة كاملاً بدلاً من المدرب",isCorrect:false,rationale:"المدرب يظل موثقاً وميسراً وموجهاً أثناء الأنشطة في القاعة."}]},
-            {id:10,domain:1,domainName:"المعرفة المهنية",question:"تُعد بطاقات Rubrics (مقاييس التقدير المحددة) أداة ممتازة لـ:",options:[{text:"قياس الانطباع العام فقط دون معايير",isCorrect:false,rationale:"الـ Rubrics تُبنى تحديداً على معايير ومؤشرات كمية ونوعية دقيقة."},{text:"تقييم الأداء المهاراتي بشكل موضوعي وفق معايير ومؤشرات واضحة",isCorrect:true,rationale:"تضع سلم تقييم متدرج ومحدد مسبقاً يقلل من التحيز الشخصي للمقيّم."},{text:"اختبار الذاكرة السريعة للحقائق والمصطلحات",isCorrect:false,rationale:"الأسئلة الموضوعية متعددة الخيارات أنسب للاختبارات السريعة."},{text:"تسجيل حضور وغياب المتدربين إلكترونياً",isCorrect:false,rationale:"لا علاقة لها بكشوف الحضور والغياب."}]},
-            {id:11,domain:1,domainName:"المعرفة المهنية",question:"ما الهدف الرئيسي من استخدام 'أنشطة كسر الجمود' (Icebreakers) في بداية الدورة؟",options:[{text:"إهداء الوقت حتى يكتمل عدد المتدربين",isCorrect:false,rationale:"المقصود منه هدف تربوي ونفسي وليس إهدار الوقت."},{text:"تخفيف التوتر وبناء الألفة وخلق بيئة تفاعلية آمنة",isCorrect:true,rationale:"تساعد الأنشطة الافتتاحية في حصر الانتباه، وإزالة الحاجز النفسي والتعارف."},{text:"اختبار قدرات المتدربين بشكل معقد لإحراجهم",isCorrect:false,rationale:"يتنافى تماماً مع إيجابية البيئة التدريبية."},{text:"إنهاء المادة النظرية بصورة سريعة",isCorrect:false,rationale:"أنشطة الجمود لا تتناول المحتوى النظري المعقد بالأساس."}]},
-            {id:12,domain:1,domainName:"المعرفة المهنية",question:"أي من الاستراتيجيات التالية تعتبر الأكثر فاعلية في تثبيت مهارات اتخاذ القرار لدى القياديين؟",options:[{text:"المحاضرة المباشرة طويلة المدة",isCorrect:false,rationale:"المحاضرة تمنح معارف لكنها لا تبني مهارات اتخاذ قرار عملية."},{text:"دراسة الحالة والحوار التفاعلي (Case Study)",isCorrect:true,rationale:"دراسة الحالات الواقعية تضع المتدرب في بيئة محاكاة واختبار البدائل والنتائج."},{text:"القراءة الفردية الصامتة للحقيبة",isCorrect:false,rationale:"لا توفر التفاعل وتعدد الآراء والتغذية الراجعة."},{text:"مشاهدة فيديو توثيقي دون نقاش",isCorrect:false,rationale:"دون نقاش وتحليل يفقد الفيديو قيمته التفاعلية."}]},
-            {id:13,domain:1,domainName:"المعرفة المهنية",question:"عند صياغة جدول المحتويات في الحقيبة التدريبية، يُفضل اعتماد الترتيب التالي:",options:[{text:"من المعقد إلى البسيط ومن المجهول إلى المعلوم",isCorrect:false,rationale:"هذا يعقد الفهم ويزيد التشتت في البدايات."},{text:"من البسيط إلى المركب ومن المعلوم إلى المجهول تدريجياً",isCorrect:true,rationale:"التدرج المنطقي يراعي البناء المعرفي التراكمي في ذهن المتدرب."},{text:"عشوائياً حسب رغبة المدرب أثناء الشرح",isCorrect:false,rationale:"المنهجية المنظمة شرط أساسي لنجاح الحقيبة."},{text:"التركيز على التطبيق العملي قبل تقديم المبادئ الأساسية نهائياً",isCorrect:false,rationale:"التطبيق يتطلب الحد الأدنى من المفاهيم التوجيهية أولاً."}]},
-            {id:14,domain:1,domainName:"المعرفة المهنية",question:"حسب نظرية الذكاءات المتعددة لـ (هاوارد جاردنر)، المتدرب الذي يتعلم أفضل من خلال المخططات والخرائط الذهنية يمتلك ذكاءً عالية في المجال:",options:[{text:"الذكاء اللغوي الشفهي",isCorrect:false,rationale:"يتعلق بالكلمات والتعبير والخطابة."},{text:"الذكاء البصري - المكاني",isCorrect:true,rationale:"أصحاب الذكاء البصري يستوعبون المعرفة عبر الصور والألوان والتنظيم المكاني."},{text:"الذكاء المنطقي - الرياضي",isCorrect:false,rationale:"يركز على الأرقام والمعادلات والعلاقات السبب والنتيجة."},{text:"الذكاء الجسدي - الحركي",isCorrect:false,rationale:"يتعلم عبر الحركة واللمس وتمثيل الأدوار."}]},
-            {id:15,domain:1,domainName:"المعرفة المهنية",question:"أي الجمل التالية توضح شرط التغذية الراجعة (Feedback) الفعالة؟",options:[{text:"أن تكون عامة ومبهمة لحماية مشاعر المتدرب",isCorrect:false,rationale:"التغذية العامة لا تفيد المتدرب في تحديد موقع الخلل للتحسين."},{text:"أن تكون محددة، فورية، وتركز على السلوك والأداء لا الشخص",isCorrect:true,rationale:"التغذية المحددة والمركزة على الأداء تساعد المتدرب على تعديل مساره بمهنية."},{text:"أن تُؤجل إلى نهاية الدورة التدريبية بعد أيام",isCorrect:false,rationale:"التأخير يفقد التغذية الراجعة قيمتها واقترانها بالحدث."},{text:"أن تتضمن النقد الشخصي والسخرية أمام الجميع",isCorrect:false,rationale:"يهدم البيئة الآمنة ويتنافى مع الميثاق الأخلاقي."}]},
-            {id:16,domain:1,domainName:"المعرفة المهنية",question:"ماذا يُقصد بمفهوم 'مصفوفة التدريب' (Training Matrix) في إدارة الموارد البشرية؟",options:[{text:"مخطط توزيع مقاعد المتدربين في القاعة",isCorrect:false,rationale:"هذا تصميم القاعة فقط."},{text:"جدول يربط الوظائف بالمهارات والكفايات التدريبية المطلوبة لكل مسمى",isCorrect:true,rationale:"تحدد المصفوفة المهارات المطلوبة للوظائف ودورات التدريب المستهدفة لكل موظف."},{text:"برنامج حاسوبي لحساب مكافآت المدربين",isCorrect:false,rationale:"نظام مالي إداري لا يتصل بالمسار التدريبي المهاراتي."},{text:"قائمة بأبسط الأنشطة السريعة للتعارف",isCorrect:false,rationale:"مصفوفة التدريب تخطيط استراتيجي كلي للرفع من قدرات المنظمة."}]},
-            {id:17,domain:1,domainName:"المعرفة المهنية",question:"قاعدة أساسية في جلسات 'العصف الذهني' (Brainstorming) يجب على المدرب الالتزام بها هي:",options:[{text:"نقد وتقييم الأفكار فور طرحها مباشرة",isCorrect:false,rationale:"النقد المبكر يكبح التفكير الإبداعي ويقلل الأفكار."},{text:"فصل مرحلة توليد الأفكار عن مرحلة تقييمها والترحيب بالكم الكثيف",isCorrect:true,rationale:"قاعدة العصف الذهني هي: الكم يجلب الكيف، ويحظر النقد أو التقويم أثناء فترة الجمع."},{text:"السماح فقط لأصحاب الخبرة بالمشاركة",isCorrect:false,rationale:"العصف الذهني يحتاج مشاركة جميع أفراد المجموعة."},{text:"استبعاد الأفكار الغريبة والجديدة فوراً",isCorrect:false,rationale:"الأفكار الغريبة قد تكون نواة لحلول ابتكارية ممتازة."}]},
-            {id:18,domain:1,domainName:"المعرفة المهنية",question:"في دلفي (Delphi Technique) المستعملة في تحديد الاحتياجات المستقبلية، يتم جمع الآراء من خلال:",options:[{text:"مواجهة مباشرة وسجال بين الخبراء في طاولة واحدة",isCorrect:false,rationale:"دلفي تتجنب المواجهة المباشرة لمنع تأثير أصحاب النفوذ."},{text:"استبيانات متتابعة وسرية للخبراء دون لقاء مباشر بينهم على جولات",isCorrect:true,rationale:"تضمن التقنية الوصول لإجماع الخبراء بشكل علمي ومستقل دون تحيز أو ضغوط."},{text:"استطلاع رأي عام عبر وسائل التواصل الاجتماعي",isCorrect:false,rationale:"تتطلب استشارة خبراء متخصصين محددين."},{text:"اختبارات سريعة مفاجئة للمتدربين",isCorrect:false,rationale:"دلفي أداة بحث واستشراف وليست اختيارات للمتدربين."}]},
-            {id:19,domain:1,domainName:"المعرفة المهنية",question:"أي من مكونات 'الحقيبة التدريبية' يوجّه تحديداً للمتدرب لمساعدته أثناء التطبيق والمراجعة الذاتية؟",options:[{text:"دليل المدرب (Instructor Guide)",isCorrect:false,rationale:"يحتوي إرشادات وإداريات ومفاتيح الحل الخاصة بالمدرب."},{text:"دليل المتدرب / مذكرة المتدرب (Trainee Manual)",isCorrect:true,rationale:"يشمل المادة العلمية والأنشطة والتمارين والمراجع الموجهة للمتدرب."},{text:"العرض التقديمي للشرائح",isCorrect:false,rationale:"أداة عرض مساعدة ملخصة وليست دليلاً شاملاً للقراءة والتطبيقات."},{text:"تقرير التقييم النهائي للدورة",isCorrect:false,rationale:"وثيقة إدارية لمكتب التدريب والجهة المنظمة."}]},
-            {id:20,domain:1,domainName:"المعرفة المهنية",question:"المبدأ الذي ينص على أن المتدرب يميل لتكرار السلوك الذي يتبعه مكافأة أو نصر، يتوافق مع قانون:",options:[{text:"قانون الأثر لثورندايك (Law of Effect)",isCorrect:true,rationale:"الاستجابات التي تتبعها نتائج مريحة ومكافأة تميل للثبات والتكرار."},{text:"قانون الحفظ المعرفي",isCorrect:false,rationale:"ليس مصطلحاً قانونياً سلوكياً معتمداً في التعلم."},{text:"مبدأ الإنكار السلوكي",isCorrect:false,rationale:"مصطلح لا يتوافق مع معززات التعلم."},{text:"قانون النسبية النفسية",isCorrect:false,rationale:"لا يمت بصلة لنظريات التعلم الاشتراطي."}]},
-            // Domain 2
-            {id:21,domain:2,domainName:"الممارسات المهنية",question:"ما التصرف الأمثل للمدرب عندما يطرح متدرب سؤالاً معقداً لا يعرف المدرب إجابته الفورية؟",options:[{text:"اختراع إجابة غير دقيقة للحفاظ على الهيبة أمام القاعة",isCorrect:false,rationale:"يفقد المدرب مصداقيته ويهدم الأمانة العلمية."},{text:"تجاهل السؤال والانتقال لشريحة أخرى فوراً",isCorrect:false,rationale:"يعطي انطباعاً بالتهرب وضعف المهارة في إدارة الحوار."},{text:"الاعتراف بشفافية، وتحويل السؤال للمجموعات أو إرجاء إجابته للبحث للقاء القادم",isCorrect:true,rationale:"سلوك احترافي يعزز الشفافية والبحث الشاركي ويحافظ على مصداقية المدرب."},{text:"توبيخ المتدرب على طرح سؤال خارج النطاق",isCorrect:false,rationale:"يسيء للمتدرب ويخلق بيئة تدريبية عدائية."}]},
-            {id:22,domain:2,domainName:"الممارسات المهنية",question:"أي من أنماط تنظيم مقاعد القاعة التدريبية يعتبر الأنسب لورش العمل التفاعلية القائمة على المجموعات الصغيرة؟",options:[{text:"نمط المدرج التقليدي (Auditorium)",isCorrect:false,rationale:"مناسب للمحاضرات العامة والجمهور الكبير دون تفاعل."},{text:"نمط الصفوف المتوازية (School Classroom)",isCorrect:false,rationale:"يدعم الاتصال من طرف واحد (المدرب إلى المتدربين)."},{text:"نمط الطاولات الدائرية / المجموعات (Cabaret / Islands)",isCorrect:true,rationale:"يسهل التواصل البصري والتفاعل والعمل الجماعي بين أعضاء كل مجموعة."},{text:"نمط الممر المغلق",isCorrect:false,rationale:"يعوق حركة المدرب والتواصل البصري بين الأفراد."}]},
-            {id:23,domain:2,domainName:"الممارسات المهنية",question:"كيف يتعامل المدرب بمهنية مع متدرب 'مسيطر وثاقب الرأي' يحاول الاحتكار والاستئثار بالحديث دائماً؟",options:[{text:"طرده مباشرة من القاعة التدريبية",isCorrect:false,rationale:"تصرف حاد وغير تربوي يثير التوتر."},{text:"شكر مشاركته، ثم إعادة توجيه الحديث بلطف لبقية المتدربين مع استخدام وقت محدد بالعادة",isCorrect:true,rationale:"إدارة الوقت والفرص بذكاء ولطافة دون جرح المتدرب وبمنح الآخرين فرصة المشاركة."},{text:"تجاهله التام وعدم النظر إليه أبداً",isCorrect:false,rationale:"قد يستفزه لمزيد من المقاطعات والتشويش."},{text:"الدخول معه في جدال حاد لإثبات خطأ رأيه",isCorrect:false,rationale:"يحول الجلسة إلى صراع شخصي يخرج الدورة عن أهدافها."}]},
-            {id:24,domain:2,domainName:"الممارسات المهنية",question:"عند استخدام العروض التقديمية (PowerPoint)، ما القاعدة الذهبية لضمان الاستيعاب البصري للشرائح؟",options:[{text:"ملء الشريحة بفقرات طويلة جداً من الكتاب",isCorrect:false,rationale:"تسبب إجهاداً بصرياً وتجعل المتدرب يقرأ بدلاً من الاستماع."},{text:"استخدام قاعدة (6×6) أو الشفافية، وموجز النقاط المختصرة مع التباين الجيد",isCorrect:true,rationale:"الشرائح المبتكرة تحتوي نقاطاً مفتاحية قليلة ورسومات معبرة لدعم الحديث العرضي."},{text:"وضع حركة وتأثيرات صوتية مزعجة مع كل كلمة",isCorrect:false,rationale:"تشتت الانتباه وتفقد العرض جديته واحترافيته."},{text:"استخدام ألوان خطوط باهتة متقاربة مع خلفية الشريحة",isCorrect:false,rationale:"تضعف الرؤية والقراءة من المسافات البعيدة."}]},
-            {id:25,domain:2,domainName:"الممارسات المهنية",question:"أي العناصر التالية في لغة الجسد يُعزز الألفة والثقة بين المدرب والمتدربين بدرجة أكبر؟",options:[{text:"الوقوف بثبات مع مكتوف اليدين والنظر للسقف",isCorrect:false,rationale:"يعكس الحظر والتعالي وضعف التواصل."},{text:"التواصل البصري المتوازن (Eye Contact) والابتسامة وحركة اليدين المفتوحة",isCorrect:true,rationale:"التواصل البصري الشامل يشعر كل متدرب بالاهتمام والترحيب والأمان."},{text:"المشي السريع والمستمر عبر القاعة دون توقف",isCorrect:false,rationale:"يسبب القلق والتشتت البصري للمستمعين."},{text:"الإشارة بالإصبع المباشر الشديد نحو وجوه الحاضرين",isCorrect:false,rationale:"سلوك اتهامي يثير الدفاعية لدى المتدرب."}]},
-            {id:26,domain:2,domainName:"الممارسات المهنية",question:"ما الإجراء الصحيح الذي يتخذه المدرب عند قيادة تمرين 'لعب الأدوار' (Role Playing)؟",options:[{text:"ترك المتدربين يؤدون الدور دون إحاطتهم بالسيناريو أو الهدف",isCorrect:false,rationale:"يؤدي للعشوائية والخروج عن هدف المهارة."},{text:"تحديد الأهداف، وتوزيع الأدوار بوضوح، مع إجراء التعقيب والتأمل (Debriefing) بعد التمرين",isCorrect:true,rationale:"التعقيب واستخلاص الدروس (Debriefing) هو المرحلة الأكثر أهمية لتحويل التمثيل لتعلم حقيقي."},{text:"إنهاء الدورة فور نجاح التمثيل دون مناقشة النتائج",isCorrect:false,rationale:"يفقد التمرين قيمته التدريبية والتعليمية."},{text:"إجبار متدرب خجول جداً بالقوة على لعب دور بطولي معقد",isCorrect:false,rationale:"قد يسبب حرجاً شديداً وعزوفاً عن المشاركة المستقبلي."}]},
-            {id:27,domain:2,domainName:"الممارسات المهنية",question:"في بداية الجلسة الأولى لبرنامج تدريبي، أي المهام التالية يجب على المدرب البدء بها بعد التعارف؟",options:[{text:"شرح المادة المعقدة فوراً لربح الوقت",isCorrect:false,rationale:"يتجاهل التهيئة النفسية وتوضيح التوقعات والاتفاقات."},{text:"بناء قواعد العمل (Ground Rules) واستعراض أهداف وتوقعات البرنامج",isCorrect:true,rationale:"الاتفاق على القواعد (كالمواعيد والهواتف) والتوقعات يمنح الجلسة انضباطاً وشفافية."},{text:"إجراء الاختبار الختامي للدورة",isCorrect:false,rationale:"الاختبار الختامي مكانه النهاية لقياس المخرجات."},{text:"توزيع شهادات الحضور مباشرة",isCorrect:false,rationale:"الشهادات تُعطى بعد التحقق من استيفاء متطلبات الحضور والتقويم."}]},
-            {id:28,domain:2,domainName:"الممارسات المهنية",question:"ما معنى استخدام مهارة 'تعديل نبرة الصوت وتناغم السرعة' (Pacing & Pitch) لدى المدرب؟",options:[{text:"التحدث بنبرة واحدة ثابتة ورتيبة طول اليوم",isCorrect:false,rationale:"تسبب السأم والنعاس لدى المتدربين."},{text:"تغيير النبرة والسرعة وشدة الصوت بما يتناسب مع أهمية النقطة والحالة العاطفية",isCorrect:true,rationale:"التنوع الصوتي (Vocal Variety) يجذب الانتباه ويؤكد على الأفكار الرئيسة ويطرد الملل."},{text:"الصراخ المستمر بأعلى صوت طوال الجلسة",isCorrect:false,rationale:"يسبب إجهاداً للمدرب وإزعاجاً كبيراً للحاضرين."},{text:"الهمس الضعيف الذي لا يكاد يُسمع في الصفوف الخلفية",isCorrect:false,rationale:"يعيق وصول المعلومة ويشتت انتباه القاعة."}]},
-            {id:29,domain:2,domainName:"الممارسات المهنية",question:"حدث عطل تقني مفاجئ وانقطع انقطاعاً كاملاً أجهزة العرض (Projector)، ما التصرف المهني المرن للمدرب؟",options:[{text:"إلغاء الجلسة والاعتذار والانصراف فوراً",isCorrect:false,rationale:"ضعف بالجاهزية والمرونة والسيطرة على الأزمات."},{text:"الانتقال للبدائل كالسبورة الورقية (Flipchart) والنقاش التفاعلي بدعم مذكرة المتدرب",isCorrect:true,rationale:"المدرب المحترف يمتلك دائماً خطة طوارئ (Plan B) ولا يتوقف تعليمه على التقنية فقط."},{text:"الصراخ على فني الصيانات والانتظار لساعات",isCorrect:false,rationale:"يهدر الوقت ويفقد المدرب رباطة جأشه."},{text:"قراءة النص حرفياً من شاشة هاتفه دون إشراك المتدربين",isCorrect:false,rationale:"أسلوب ممل لا يراعي تفاعل المتدربين."}]},
-            {id:30,domain:2,domainName:"الممارسات المهنية",question:"ما الهدف الأساسي من إجراء 'التعقيب واستخلاص الدروس' (Debriefing) عقب انتهائك من أي نشاط تدريبي؟",options:[{text:"ملء وقت فراغ الجلسة",isCorrect:false,rationale:"هدف ثانوي وغير مهني."},{text:"مساعدة المتدربين على ربط تجربة النشاط بالمعارف النظرية والتطبيقات الواقعية",isCorrect:true,rationale:"الـ Debriefing يحول النشاط من مجرد لعبة أو مرح إلى خبرة تعلم عميقة ومستدامة."},{text:"تحديد الفائزين وإعطائهم جوائز فقط",isCorrect:false,rationale:"المكافأة جانب تحفيزي، أما الفائدة الحقيقية فهي استخلاص التعلم."},{text:"إظهار الأخطاء والتسلية بها",isCorrect:false,rationale:"يتنافى مع الأخلاقيات وخلق البيئة الآمنة."}]},
-            {id:31,domain:2,domainName:"الممارسات المهنية",question:"كيف يتأكد المدرب من استيعاب المتدربين لخطوات مهارة عملية معقدة قبل الانتقال للتطبيق؟",options:[{text:"سؤالهم فقط 'هل فهمتم؟' وانتظار هز الرؤوس",isCorrect:false,rationale:"إجابة نعم لا تعني بالضرورة الفهم والاستيعاب الفعلي."},{text:"إعادة شرح النظريات من جديد من بداية اليوم",isCorrect:false,rationale:"تكرار إهداري للوقت دون قياس للأداء."},{text:"طلب تقديم نموذج أداء توضيحي (Demonstration) أو سؤالهم تشخيصياً عن الخطوة",isCorrect:true,rationale:"العرض التوضيحي المتبادل والأسئلة الموجهة تكشف الفجوات فوراً."},{text:"الانتقال فوراً دون أي تقييم مرحلي",isCorrect:false,rationale:"قد يؤدي إلى تراكم الأخطاء أثناء الممارسة العملية."}]},
-            {id:32,domain:2,domainName:"الممارسات المهنية",question:"ما التصرف المناسب تجاه متدرب صامت وخجول جداً لا يشارك في النقاشات العامة؟",options:[{text:"إحراجه بالسؤال المباشر المفاجئ أمام الجميع بأسئلة معقدة",isCorrect:false,rationale:"يزيد من انغلاقه وخوفه من المشاركة."},{text:"تشجيعه في المجموعات الصغيرة أولاً، وطرح أسئلة مفتوحة سهلة تناسب اهتماماته",isCorrect:true,rationale:"التدرج من المجموعات الصغيرة يقلل من رهبة الحديث أمام الجمهور وبناء الثقة تدريجياً."},{text:"تجاهل وجوده بالكلية وعدم إشراكه نهائياً",isCorrect:false,rationale:"يحرمه من حق التعلم والتطوير."},{text:"خصم نقاط حضوره بسبب الصمت",isCorrect:false,rationale:"الخجل طبيعة شخصية تحتاج معالجة تدريبية لا عقاباً."}]},
-            {id:33,domain:2,domainName:"الممارسات المهنية",question:"عند توجيه سؤال للقاعة، ما طول 'زمن الانتظار' (Wait Time) الموصى به علمياً قبل تلقي الإجابات؟",options:[{text:"صفر ثانية (الإجابة فوراً أو إعطاؤها للغير)",isCorrect:false,rationale:"لا يمنح فرصة للمعالجة الذهنية العميقة."},{text:"من 3 إلى 5 ثوانٍ على الأقل لإتاحة التفكير والتجهيز",isCorrect:true,rationale:"زمن الانتظار يزيد من جودة وتنوع الإجابات ويشجع الفئات الخجولة."},{text:"15 دقيقة صمت تام",isCorrect:false,rationale:"وقت طويل جداً يسبب الركود وتشتت القاعة."},{text:"الإجابة عن السؤال بواسطة المدرب نفسه فور طرحه مباشرة",isCorrect:false,rationale:"يلغي دور المتدربين ويحوله إلى ملقن."}]},
-            {id:34,domain:2,domainName:"الممارسات المهنية",question:"أثناء إدارة النقاش، يميل بعض المتدربين إلى الخروج عن موضوع الجلسة الأساسي. الممارسة الأفضل هي:",options:[{text:"مسايرتهم والخروج التام عن الجدول لإنهاء اليوم",isCorrect:false,rationale:"يؤدي لإخفاق البرنامج في تحقيق أهدافه المخططة."},{text:"تأطير الحديث بلطف، وتدوين النقطة الخارجة في 'مواقف السيارات / الحاضنة' (Parking Lot)",isCorrect:true,rationale:"أداة Parking Lot تحافظ على تقدير فكرة المتدرب مع بقاء الجلسة في مسارها المحدد."},{text:"الاستهزاء بالمتدرب الذي خرج عن الموضوع",isCorrect:false,rationale:"يدمر العلاقة التدريبية والبيئة الآمنة."},{text:"إنهاء الدورة فوراً",isCorrect:false,rationale:"قرار غير متناسب بالكلية."}]},
-            {id:35,domain:2,domainName:"الممارسات المهنية",question:"ما الفائدة الرئيسة من تقسيم وقت الجلسة التدريبية وفق قاعدة (20-70-10) تقريباً؟",options:[{text:"جعل 70% للشرح النظري المباشر للمدرب",isCorrect:false,rationale:"يتعارض مع مبادئ التعلم النشط وتدريب الراشدين."},{text:"تخصيص 70% للتطبيقات والأنشطة المباشرة، مع تقديم ومراجعة متوازنة",isCorrect:true,rationale:"يعزز التركيز على مهارة الممارسة والمشاركة النشطة من قبل المتدربين."},{text:"تخصيص 70% للاستراحات وتناول الوجبات",isCorrect:false,rationale:"إهدار لوقت البرنامج وأهدافه."},{text:"الاعتماد على التقويم الختامي بـ 70% من الوقت",isCorrect:false,rationale:"التقويم جزء مرحلي وخاتمي ولا يستغرق معظم وقت البرنامج."}]},
-            {id:36,domain:2,domainName:"الممارسات المهنية",question:"أهم ميزة لأداة الاستبيانات الرقمية الفورية (مثل Kahoot أو Mentimeter) أثناء تنفيذ التدريب هي:",options:[{text:"تعويض نقص المادة العلمية لدى المدرب",isCorrect:false,rationale:"الأداة لا تعوض المحتوى الضعيف."},{text:"زيادة التفاعل، وقياس استيعاب القاعة لحظياً، والتنوع والتشويق",isCorrect:true,rationale:"تمنح التفاعل وإظهار النتائج لحظياً بالرسوم البيانية وتنشيط الجلسة."},{text:"تجميع أرقام هواتف المتدربين لغرض الإعلانات",isCorrect:false,rationale:"ليس هدفاً تدريبياً ويتعارض مع الخصوصية."},{text:"إلغاء الحاجة لوجود المدرب داخل القاعة",isCorrect:false,rationale:"التقنية أداة مساعدة في يد المدرب وليست بديلاً عنه."}]},
-            {id:37,domain:2,domainName:"الممارسات المهنية",question:"ما المقصود بـ 'التيسير' (Facilitation) في الممارسة التدريبية الاحترافية؟",options:[{text:"إلقاء المحاضرات والتلقين من طرف واحد دون مشاركة",isCorrect:false,rationale:"هذا هو التعليم الإلقائي التقليدي."},{text:"مساعدة المتدربين على اكتشاف المعرفة والوصول للحلول بأنفسهم عبر أساليب تفاعلية",isCorrect:true,rationale:"المدرب الميسر يوجه النقاش ويرشد العمليات ليجعل التفكير والإنتاج لدى المتدربين."},{text:"التساهل في التقييم وإعطاء الجميع الدرجات دون قياس",isCorrect:false,rationale:"خلط بين التيسير التدريبي والتساهل غير المهني."},{text:"تقليل وقت البرنامج للإنهاء السريع",isCorrect:false,rationale:"التيسير يتعلق بمنهجية إشراك العقول وتوجيه التعلم."}]},
-            {id:38,domain:2,domainName:"الممارسات المهنية",question:"كيف يضمن المدرب التوزيع العادل للمشاركات بين المجموعات داخل القاعة؟",options:[{text:"السماح دائماً لنفس المجموعة السريعة بالإجابة في كل مرة",isCorrect:false,rationale:"يؤدي لإحباط وتهميش باقي المجموعات."},{text:"تطبيق التدوير المنتظم، ورؤساء المجموعات، والاستدعاء العشوائي المنظم للمشاركات",isCorrect:true,rationale:"يضمن إتاحة فرص متساوية وتنوع الآراء والتفاعل من كافة الطاولات."},{text:"عدم إعطاء أي فرصة لأي مجموعة للحديث",isCorrect:false,rationale:"يحول التدريب لنظام التلقين الجاف."},{text:"اختيار المتدربين بناءً على المظهر الخارجي",isCorrect:false,rationale:"تميز غير موضوعي يتنافى مع ميثاق المهنة."}]},
-            {id:39,domain:2,domainName:"الممارسات المهنية",question:"إذا لاحظ المدرب هبوطاً حاداً في طاقة وانتباه المتدربين بعد فترة الغداء، التصرف الأنسب هو:",options:[{text:"زيادة كمية المحتوى النظري الجاف للتسريع",isCorrect:false,rationale:"سيزيد من الاستغراق في النوم والتشتت."},{text:"تنفيذ نشاط تنشيطي حركي قصير (Energy Booster) أو أداء تمرين تفاعلي",isCorrect:true,rationale:"الأنشطة التنشيطية تعيد تدفق الدم وتجدد الطاقة الذهنية والتركيز."},{text:"الصراخ في القاعة لتنبيههم",isCorrect:false,rationale:"تصرف ينفر الحضور ولا يعالج الانخفاض الفسيولوجي للطاقة."},{text:"إلغاء بقية اليوم التدريبي فوراً",isCorrect:false,rationale:"إضرار بخطة الدورة والساعات المعتمدة."}]},
-            {id:40,domain:2,domainName:"الممارسات المهنية",question:"في ختام الدورة التدريبية، الأسلوب الأمثل لإنهاء اليوم الأخير هو:",options:[{text:"المغادرة الخاطفة بمجرد انتهاء الشريحة الأخيرة",isCorrect:false,rationale:"يترك نهايات مفتوحة وغير مهنية."},{text:"مراجعة تلخيصية للمحاور، وربطها بخطط التطبيق الشخصية، وتقديم التقييم والتغذية الراجعة",isCorrect:true,rationale:"الختام الاحترافي يلخص التعلم ويساعد المتدرب على وضع خطة عمل لتطبيق ما تعلمه في وظيفته."},{text:"فتح باب الجدال السياسي والفكري",isCorrect:false,rationale:"يخرج الدورة عن هدفها ويسبب حساسية."},{text:"الطلب من المتدربين إعادة تقديم الدورة كاملة",isCorrect:false,rationale:"غير منطقي ولا يتماشى مع الوقت المتبقي."}]},
-            // Domain 3
-            {id:41,domain:3,domainName:"القيم والمسؤوليات المهنية",question:"قام مدرب بنقل حقيبة تدريبية كاملة أعدها زميل آخر ونسبها لنفسه دون إذن أو إشارة للمصدر. هذا التصرف يعد انتهاكاً لـ:",options:[{text:"قواعد الأمن والسلامة في القاعة",isCorrect:false,rationale:"لا يتعلق بسلامة القاعة المادية."},{text:"الأمانة العلمية وحقوق الملكية الفكرية وميثاق أخلاقيات التدريب",isCorrect:true,rationale:"نسبة جهد الآخرين للذات سرقة علمية وتجاوز لأخلاقيات الممارسة المهنية."},{text:"إدارة الوقت والجدول الزمني",isCorrect:false,rationale:"لا يمت بصلة لتوزيع أوقات الجلسات."},{text:"معايير التقييم التشخيصي",isCorrect:false,rationale:"لا يتصل بأساليب التقييم."}]},
-            {id:42,domain:3,domainName:"القيم والمسؤوليات المهنية",question:"أي من المواقف التالية يُجسد النزاهة والعدالة لدى المدرب أثناء تقييم المتدربين؟",options:[{text:"منح درجات عالية لأحد المتدربين بسبب صلة قرابة شخصية",isCorrect:false,rationale:"تضارب مصالح وانحياز يخل بالعدالة."},{text:"تقييم جميع المتدربين بناءً على معايير موضوعية معلنة وموحدة للجميع دون تمييز",isCorrect:true,rationale:"العدالة والموضوعية تضمن تكافؤ الفرص وحيادية التقويم وفق مؤشرات أداء موثوقة."},{text:"تخفيض درجات المتدربين الذين يطرحون أسئلة ذكية",isCorrect:false,rationale:"عقاب تعسفي يقتل التفكير النقدي."},{text:"تسريب أسئلة التقييم النهائي لبعض الأفراد دون الآخرين",isCorrect:false,rationale:"فساد مهني وإخلال بشفافية الاختبار."}]},
-            {id:43,domain:3,domainName:"القيم والمسؤوليات المهنية",question:"إذا اكتشف المدرب وجود 'تضارب مصالح' (Conflict of Interest) بين دوره كمدرب ومصلحة شخصية في تقييم عقد تدريبي، التصرف الأخلاقي هو:",options:[{text:"إخفاء الأمر والمضي قدماً لتحقيق مكاسب شخصية",isCorrect:false,rationale:"سلوك غير أخلاقي يعرض المدرب للمساءلة."},{text:"الإفصاح الشفاف للجهة المعنية والتنحي أو اتخاذ الإجراء المنظم المعتمد",isCorrect:true,rationale:"الإفصاح والشفافية معيار أساسي للنزاهة وتجنب شبهة الفساد والاستغلال."},{text:"الطلب من المتدربين التكتم على الموضوع",isCorrect:false,rationale:"يزيد من الشبهة ويضر بالمصداقية."},{text:"اتهام الآخرين بتعطيل عمله",isCorrect:false,rationale:"هروب من المسئولية الأخلاقية."}]},
-            {id:44,domain:3,domainName:"القيم والمسؤوليات المهنية",question:"أي التصرفات التالية يعكس احترام المدرب للتنوع الثقافي والاجتماعي بين المتدربين؟",options:[{text:"السخرية من لهجة أو خلفية بعض المشاركين",isCorrect:false,rationale:"سلوك تنمري مرفوض يخرق القوانين والأخلاق."},{text:"استخدام لغة وأمثلة متوازنة وشاملة تحترم جميع الثقافات وتمنع التمييز",isCorrect:true,rationale:"يقوم التدريب الاحترافي على دمج الجميع وخلق بيئة تقبل وتنوع ثرية."},{text:"فرض رؤيته الثقافية الشخصية بالقوة كمرجع وحيد",isCorrect:false,rationale:"يتعارض مع الانفتاح ومرونة المدرب."},{text:"تقسيم المتدربين في القاعة بناءً على الانتماءات القبلية أو المناطقية",isCorrect:false,rationale:"يغذي التعصب المرفوض ويضر بالتكتل الإيجابي."}]},
-            {id:45,domain:3,domainName:"القيم والمسؤوليات المهنية",question:"التطوير المهني المستمر للمدرب (CPD) يتطلب منه بشكل أساسي:",options:[{text:"الاكتفاء بما تعلمه في سنوات شبابه الأولى",isCorrect:false,rationale:"يؤدي لتقادم المعرفة والعزل عن التطورات الحديثة."},{text:"التأمل الذاتي، ومواكبة المستجدات، وحضور البرامج وقراءة الأبحاث واستطلاع التغذية الراجعة",isCorrect:true,rationale:"النمو المهني عملية مستمرة ترفع كفاءة التخطيط والتنفيذ لدى المدرب."},{text:"رفض تقييم المتدربين وملاحظات المسئولين",isCorrect:false,rationale:"يعيق اكتشاف نقاط التحسين والتطور."},{text:"تكرار نفس الشفافية والمحتوى لمدة 20 سنة دون تعديل",isCorrect:false,rationale:"يؤدي إلى فقدان الشغف ومواكبة الحداثة."}]},
-            {id:46,domain:3,domainName:"القيم والمسؤوليات المهنية",question:"كيف يحافظ المدرب على سرية المعلومات (Confidentiality) الخاصة بالمنظمة المتدربة؟",options:[{text:"نشر المشكلات الداخلية والبيانات المالية للشركة على وسائل التواصل للتعليم",isCorrect:false,rationale:"خرق صريح للسرية والاتفاقيات الأمنية للمنظمة."},{text:"عدم إفشاء أي بيانات أو حالة عمل حصرية إلا بإذن كتابي صريح واستخدام أمثلة عامة مجردة",isCorrect:true,rationale:"حماية أسرار العميل والشركة الموجهة جزء أساسي من عقود التدريب المهني."},{text:"بيع هذه البيانات لشركات منافسة",isCorrect:false,rationale:"جريمة إلكترونية ومهنية شنيعة."},{text:"تداول الأسماء الحقيقية للمتدربين في جلسات شخصية خروجاً عن القاعة",isCorrect:false,rationale:"ينتهك سرية الأشخاص والمنظمات."}]},
-            {id:47,domain:3,domainName:"القيم والمسؤوليات المهنية",question:"عندما يلاحظ المدرب وجود حالة خاصة لمتدرب من أصحاب الإعاقة الحركة أو البصرية، الواجب المهني الأخلاقي هو:",options:[{text:"تجاهل الحالة وطلب منه التكيف بنفسه",isCorrect:false,rationale:"يتنافى مع إتاحة الوصول والمساواة."},{text:"توفير التسهيلات المعقولة (Accessibility) وتكييف الوسائل لضمان اندماجه الكامل",isCorrect:true,rationale:"المعيار الشامل للحقوق يضمن إتاحة أدوات التدريب والبيئة المكانية للجميع."},{text:"طلب استبعاده من الدورة التدريبية",isCorrect:false,rationale:"تمييز مرفوض وانتهاك لحقوق الإنسان والتعليم."},{text:"إعطاؤه الشهادة فوراً دون أن يحضر الجلسات",isCorrect:false,rationale:"يعيق اكتساب المهارة الحقيقية ويخل بالعدالة."}]},
-            {id:48,domain:3,domainName:"القيم والمسؤوليات المهنية",question:"السلوك الاحترافي المعبّر عن 'تقبل التغذية الراجعة والتقييم' لدى المدرب بعد نهاية البرنامج هو:",options:[{text:"الغضب وتوبيخ المتدربين الذين وضعوا تقييماً منخفضاً",isCorrect:false,rationale:"يعكس عدم نضج مهني وضعف في الذكاء العاطفي."},{text:"تحليل ملاحظات التقييم بموضوعية واستثمارها كفرص للتحسين والتطوير المستقبلي",isCorrect:true,rationale:"المدرب الناجح ينظر للتقييم المنخفض كبوصلة لتحديث أساليبه ومادته."},{text:"إلغاء أوراق التقييم وتمزيقها",isCorrect:false,rationale:"سلوك غير مسؤول يحرم المنظمة من فرص التحسين."},{text:"رفع دعوى ضد مركز التدريب",isCorrect:false,rationale:"تصرف غير متزن في التعامل مع آراء التقييم."}]},
-            {id:49,domain:3,domainName:"القيم والمسؤوليات المهنية",question:"إبراز المدرب لسيرته الذاتية ومؤهلاته العلمية يتطلب الالتزام بـ:",options:[{text:"تضخيم الخبرات وادعاء الحصول على شهادات غير حقيقية لجذب العقود",isCorrect:false,rationale:"تزوير واحتيال يهدد السمعة والمهنة."},{text:"المصداقية والشفافية والدقة التامة في عرض المؤهلات والخبرات دون مبالغة",isCorrect:true,rationale:"المصداقية والنزاهة أساس بناء السمعة المهنية المستدامة."},{text:"إخفاء جميع الشهادات بالكامل",isCorrect:false,rationale:"من حق العميل الاطلاع على مؤهلات المدرب المعتمدة."},{text:"شراء ألقاب وهمية من جهات غير معتمدة واستخدامها",isCorrect:false,rationale:"يضر بالممارسة المهنية ويعرض للمساءلة."}]},
-            {id:50,domain:3,domainName:"القيم والمسؤوليات المهنية",question:"كيف يمارس المدرب القدوة والنمذجة الإيجابية (Positive Role Modeling) داخل البيئة التدريبية؟",options:[{text:"التأخر عن مواعيد الجلسة بينما يطالب المتدربين بالانضباط",isCorrect:false,rationale:"تناقض يضعف مصداقية كلامه."},{text:"الالتزام التام بالمواعيد، وحسن الاصغاء، وتجسيد السلوكيات المهنية التي يدعو إليها",isCorrect:true,rationale:"السلوك الملاحظ أعلى صوتاً من الكلام الشفهي، والقدوة هي المحرك الفعلي للاقتداء."},{text:"استخدام الهاتف في التصفح أثناء مشاركات المتدربين",isCorrect:false,rationale:"عدم احترام للحاضرين وقلة اهتمام."},{text:"استغلال القاعة للترويج لمنتجات تجارية شخصية غير مرخصة",isCorrect:false,rationale:"استغلال غير مشروع للبيئة التدريبية."}]},
-            {id:51,domain:3,domainName:"القيم والمسؤوليات المهنية",question:"تُعرف 'الرقابة الذاتية' للمدرب بأنها:",options:[{text:"الخوف فقط من عقوبات إدارة المركز التدريبي",isCorrect:false,rationale:"هذا دافع خارجي مؤقت وليس رقابة ذاتية."},{text:"الالتزام الداخلي الصادق بالمعايير الأخلاقية والجودة حتى في غياب الرقابة الخارجية",isCorrect:true,rationale:"الضمير المهني الداخلي يضمن تقديم أقصى جودة وشفافية في كل الظروف."},{text:"الامتناع عن الحديث خوفاً من الأخطاء",isCorrect:false,rationale:"يعيق التفاعل وشرح المحتوى."},{text:"تسجيل مقاطع الفيديو لنفسه ومراجعتها فقط",isCorrect:false,rationale:"هذه أداة تقويم ذاتي وليست المفهوم الشامل للرقابة الذاتية."}]},
-            {id:52,domain:3,domainName:"القيم والمسؤوليات المهنية",question:"عند تصميم الأنشطة التدريبية التي تتطلب مجهوداً حركياً، مسئولية المدرب تجاه سلامة المتدربين تشمل:",options:[{text:"تجاهل المخاطر وترك المتدربين يجربون دون إرشاد",isCorrect:false,rationale:"تعريض مباشر لأخطار الإصابات."},{text:"تقييم البيئة الفيزيائية، والتأكد من خلو المساحة من المخاطر وتقديم تعليمات سلامة صريحة",isCorrect:true,rationale:"السلامة الجسدية والنفسية ركن أساسي قبل البدء بأي تطبيق حركي أو خارجي."},{text:"إلزام كبار السن والمصابين بالقيام بنفس القفزات المعقدة",isCorrect:false,rationale:"عدم مراعاة للحالات الصحية والقدرات الفردية."},{text:"توفير ألعاب خطرة لإصابة بعضهم بذهول للتسلية",isCorrect:false,rationale:"تصرف خطير ومجرم أخلاقياً وقانونياً."}]},
-            {id:53,domain:3,domainName:"القيم والمسؤوليات المهنية",question:"شهد المدرب وقوع حادثة خرق للسلامة أو مضايقة بين متدربين داخل القاعة. الإجراء الأخلاقي الفوري هو:",options:[{text:"التكتم الكامل والتظاهر بعدم رؤية شيء",isCorrect:false,rationale:"تهاون وسماح بتفاقم الضرر النفسي أو الجسدي."},{text:"التدخل الفوري لضبط القاعة لحماية الضحية، والتعامل مع الموقف وفق الأنظمة المعتمدة",isCorrect:true,rationale:"المدرب مسؤول عن ضبط البيئة التدريبية وحفظ الأمن والسلامة والاحترام لجميع الأطراف."},{text:"تشجيع المتدربين على الاشتباك لحسم الأمر",isCorrect:false,rationale:"سلوك غير أخلاقي بالكلية."},{text:"تصوير المشهد ونشره فوراً",isCorrect:false,rationale:"خرق جسيم للخصوصية والنظام."}]},
-            {id:54,domain:3,domainName:"القيم والمسؤوليات المهنية",question:"عند طلب جهة معينة تنفيذ برنامج تدريبي يتضح للمدرب بعد التحليل أن التدريب ليس الحل المناسب للمشكلة، فإن المسئولية المهنية تقتضي:",options:[{text:"الموافقة فوراً للحصول على العائد المالي بغض النظر عن الفائدة",isCorrect:false,rationale:"تغليب المصالح المادية على النزاهة والمستشارية الصادقة."},{text:"توضيح ذلك بصدق للعميل وتقديم النصيحة الاستشارية بأن الحل قد يكون إدارياً أو إجرائياً",isCorrect:true,rationale:"المدرب المستشار يمارس النزاهة ويوفر على العميل هدر الأموال في حلول غير مناسبة."},{text:"تقديم برنامج معقد جداً لإرباكهم",isCorrect:false,rationale:"سلوك غير مهني ولا يحل الفجوة."},{text:"انسحاب بدون تقديم أي توضيح",isCorrect:false,rationale:"قطع التواصل دون تقديم القيمة الاستشارية المتوقعة."}]},
-            {id:55,domain:3,domainName:"القيم والمسؤوليات المهنية",question:"العلاقة المهنية بين المدرب والمتدرب يجب أن تُبنى على نطاق الحدود المهنية وتتجنب:",options:[{text:"الاحترام المتبادل والدعم المهاراتي",isCorrect:false,rationale:"هذا أساس العلاقة الصحية المطلوب."},{text:"الانخراط في علاقات استغلالية أو مصلحية تؤثر على حيادية التقييم والعدالة",isCorrect:true,rationale:"المحافظة على الحدود المهنية تضمن تكافؤ الفرص وعدم الانحياز."},{text:"تقديم التغذية الراجعة البناءة",isCorrect:false,rationale:"جزء أساسي من الممارسة التطويرية."},{text:"تشجيع التعلم الذاتي المستمر",isCorrect:false,rationale:"هدف رائد لجميع المناهج الحديثة."}]},
-            {id:56,domain:3,domainName:"القيم والمسؤوليات المهنية",question:"أي الممارسات التالية تعتبر تدعيماً للعمل الاستدامي وحماية البيئة في التدريب؟",options:[{text:"طباعة آلاف الأوراق دون استخدامها وإلقائها في القمامة",isCorrect:false,rationale:"هدر للموارد وسلوك غير صديق للبيئة."},{text:"التحول نحو الحقائب الرقمية واستخدام الشاشات الإلكترونية والتقليل من المطبوعات الورقية",isCorrect:true,rationale:"يدعم الممارسات الخضراء والاستدامة وتوفير التكاليف وحفظ البيئة."},{text:"ترك الإضاءة والمكيفات تعمل طوال الليل دون حاجة",isCorrect:false,rationale:"استنزاف للطاقة دون مبرر."},{text:"رفض استخدام التقنية الإلكترونية إطلاقاً",isCorrect:false,rationale:"يقلل العائد ويزيد الهدر المادي والورقي."}]},
-            {id:57,domain:3,domainName:"القيم والمسؤوليات المهنية",question:"ما الدور المتوقع من المدرب تجاه مجتمعه المهني والزملاء الجدد؟",options:[{text:"احتكار الخبرة ومنع أي مدرب مبتدئ من التعلم أو الاطلاع على تجاربه",isCorrect:false,rationale:"سلوك سلبي يضعف نمو المجتمع التدريبي."},{text:"مشاركة المعرفة، ونقل الخبرات، وإرشاد المدربين المبتدئين (Mentoring) لبناء قدرات المجتمع",isCorrect:true,rationale:"المسئولية المجتمعية والمهنية تتطلب نقل الخبرة وتمكين الأجيال القادمة."},{text:"محاربة أي مدرب جديد ونشر الشائعات عنه",isCorrect:false,rationale:"سلوك غير أخلاقي يهدم بيئة العمل."},{text:"رفع أسعار التدريب لمنع الآخرين من المنافسة",isCorrect:false,rationale:"ممارسات احتكارية لا تتصل بالجودة المهنية."}]},
-            {id:58,domain:3,domainName:"القيم والمسؤوليات المهنية",question:"إذا تعارضت الآراء الفكرية والدينية لشخصية المدرب مع موضوع عام يطرحه أحد المتدربين، الأسلوب المهني هو:",options:[{text:"الهجوم على الشخص والإساءة لمعتقداته",isCorrect:false,rationale:"ينتهك أخلاقيات الاحترام والحياد المهني."},{text:"إدارة الحوار بالحياد، والتركيز على المحتوى العلمي والتخصصي للدورة بعيداً عن الجدل العقائدي",isCorrect:true,rationale:"المدرب المهني يحافظ على حيادية المنبر التدريبي والتركيز على الأهداف التخصصية."},{text:"طرد المتدرب فوراً",isCorrect:false,rationale:"تعسف وضرر بالبيئة التعلمية."},{text:"تحويل التدريب لمناظرة شخصية طوال اليوم",isCorrect:false,rationale:"هدر لوقت وأهداف المشاركين الآخرين."}]},
-            {id:59,domain:3,domainName:"القيم والمسؤوليات المهنية",question:"احترام سياسات وأنظمة الجهة الراعية للتدريب يتطلب من المدرب:",options:[{text:"تجاهل الأنظمة وتطبيق ما يراه هو فقط دون أخذ الإذن",isCorrect:false,rationale:"يعرض البرامج للمشاكل النظامية والإدارية."},{text:"الاطلاع على لوائح الجهة، والالتزام بأوقاتها وسياسات الأمن والسلامة وإجراءات التوثيق",isCorrect:true,rationale:"الاحترافية تقتضي الامتثال للوائح المؤسسية المنظمة للعمل."},{text:"تحريض المتدربين على مخالفة قوانين المنظمة",isCorrect:false,rationale:"سلوك تخريبي يتنافى مع أمانة المهنة."},{text:"تغيير مكان الدورة ودون علم الجهة المنظمة",isCorrect:false,rationale:"إخلال جسيم بالعقد وتوفير التجهيزات."}]},
-            {id:60,domain:3,domainName:"القيم والمسؤوليات المهنية",question:"تكتمل القيمة المهنية للتدريب عندما ينعكس أثر التعلم على:",options:[{text:"حصول المدرب على مستحقاته المالية فقط",isCorrect:false,rationale:"هدف شخصي لا يعكس القيمة التدريبية الحقيقية."},{text:"تحسين أداء المتدرب، وتطوير بيئة العمل، وتحقيق القيمة المضافة للمجتمع والمؤسسة",isCorrect:true,rationale:"الغاية السامية للتدريب هي التغيير الإيجابي والتنمية المستدامة للأفراد والمؤسسات."},{text:"التقاط الصور التذكارية ونشرها في المنصات فقط",isCorrect:false,rationale:"مظهر خارجي لا يضمن التطبيق والأثر الواقعي."},{text:"إنهاء أوراق الحقيبة ودلائل الأنشطة دون تنفيذها",isCorrect:false,rationale:"توثيق شكلي يفتقد للجوهر والعمل الميداني."}]},
-            // Domain 4
-            {id:61,domain:4,domainName:"مهارات المستقبل",question:"مدرب يلاحظ زميله يمر بضغط نفسي شديد قبيل جلسة تدريبية مهمة. أي سلوك يعكس الذكاء العاطفي والاجتماعي (EQ) للمدرب؟",options:[{text:"تجاهل الأمر تماماً حفاظاً على وقته الشخصي",isCorrect:false,rationale:"يظهر ضعف الحساسية الاجتماعية والتعاطف."},{text:"انتقاد الزميل أمام الجميع لعدم استعداده",isCorrect:false,rationale:"يزيد الضغط النفسي ويهدم العلاقة الزميلية."},{text:"التعبير عن التعاطف، وتقديم الدعم العملي والنفسي ومساعدته لتهدئة روعه",isCorrect:true,rationale:"الذكاء العاطفي يشمل الوعي بمشاعر الآخرين، والتعاطف، وتقديم المساندة بمرونة."},{text:"رفع تقرير سلبية فوري للإدارة دون الحديث معه",isCorrect:false,rationale:"تصرف إداري جاف يخلو من البُعد الإنساني والذكاء الاجتماعي."}]},
-            {id:62,domain:4,domainName:"مهارات المستقبل",question:"كيف يمكن للمدرب توظيف أدوات 'الذكاء الاصطناعي التوليدي' (Generative AI) بمهنية في إعداد التدريب؟",options:[{text:"نسخ المحتوى الصادر من الذكاء الاصطناعي بالكامل دون مراجعة أو تحقق علمي",isCorrect:false,rationale:"يعرض الحقيبة للأخطاء والهلوسة الرقمية وانتهاك الأمانة العلمية."},{text:"استخدامه كمساعد لإلهام الأفكار، وتصميم الهياكل، وتوليد السيناريوهات مع التعديل والتحقق من المراجع",isCorrect:true,rationale:"الاستخدام الذكي للـ AI يسرع الإنتاجية بشرط التدقيق البشري وإضفاء الخبرة التخصصية."},{text:"حظر استخدام الذكاء الاصطناعي ومنعه تماماً في كافة مراحل العمل",isCorrect:false,rationale:"تخلف عن مواكبة أدوات المستقبل الرقمية التي ترفع كفاءة العمل."},{text:"استخدامه لإنشاء شهادات وهمية للمتدربين",isCorrect:false,rationale:"استخدام غير مشروع يخرق القوانين الأخلاقية."}]},
-            {id:63,domain:4,domainName:"مهارات المستقبل",question:"أي المهارات التالية تُصنف ضمن 'المهارات الناعمة' (Soft Skills) الأكثر طلباً للمدرب في سوق العمل المستقبلي؟",options:[{text:"صيانة أجهزة العروض الميكانيكية",isCorrect:false,rationale:"مهارة تقنية/صلبة فنية محدودة."},{text:"التفكير الناقد، والمرونة والتكيف، والتواصل الفعال، وحل المشكلات المعقدة",isCorrect:true,rationale:"المهارات الناعمة تمثل سلوكيات وممارسات التفكير والمرونة والتفاعل البشري المتقدم."},{text:"سرعة الطباعة على لوحة المفاتيح",isCorrect:false,rationale:"مهارة أدائية إجرائية بسيطة."},{text:"حفظ النصوص القانونية عن ظهر قلب",isCorrect:false,rationale:"استرجاع معرفي مجرد لا يضمن التكيف والحل المبتكر."}]},
-            {id:64,domain:4,domainName:"مهارات المستقبل",question:"ما المفهوم المعروف بـ 'التغذية الراجعة التكيفية الرقمية' (Adaptive Learning) في المنصات الإلكترونية؟",options:[{text:"تقديم نفس المسار ونفس الأسئلة لجميع المتعلمين دون تغيير",isCorrect:false,rationale:"هذا هو التدريب التقليدي النمطي."},{text:"تعديل المسار والمحتوى والأنشطة تلقائياً بواسطة خوارزميات بناءً على مستوى أداء وسرعة كل متدرب",isCorrect:true,rationale:"التعلم التكيفي يفرّد تجربة التعلم لكل شخص طبقاً لنقاط قوته وفجواته."},{text:"إرسال رسائل نصية يومية للتذكير بجدول الدورة",isCorrect:false,rationale:"خدمة تنبيهات إدارية بسيطة."},{text:"إغلاق المنصة تلقائياً بعد ساعة من الفتح",isCorrect:false,rationale:"خاصية ضبط وقت لا علاقة لها بالتكيف التعلمي."}]},
-            {id:65,domain:4,domainName:"مهارات المستقبل",question:"في جلسات التدريب الافتراضي عبر البرامج (مثل MS Teams أو Zoom)، الأسلوب الأنسب لتقسيم المتدربين لورش عمل هو:",options:[{text:"طلب منهم إغلاق البرنامج والاتصال ببعضهم عبر الهاتف الشخصي",isCorrect:false,rationale:"يفقد التناغم الموحد ويسهل متابعة المدرب للمجموعات."},{text:"استخدام خاصية 'غرف النقاش الفرعية' (Breakout Rooms) مع التنقل بينهم للإشراف والدعم",isCorrect:true,rationale:"تضمن الميزة تفاعل المجموعات الصغيرة سحابياً مع قدرة المدرب على الدعم والتوجيه."},{text:"إلغاء ورش العمل والاقتصار على حديث المدرب",isCorrect:false,rationale:"يحول التدريب الافتراضي إلى محض محاضرة جافة."},{text:"ترك الجميع يتحدثون في الميكروفون الرئيسي في وقت واحد",isCorrect:false,rationale:"يحدث ضوضاء وفوضى عارمة تمنع الفهم."}]},
-            {id:66,domain:4,domainName:"مهارات المستقبل",question:"ما مفهوم 'المايكروليرنينج' أو التعلم المصغر (Micro-learning) في بيئة التدريب الرقمية الحديثة؟",options:[{text:"تقديم المحتوى في جلسات طويلة تمتد لـ 12 ساعة متواصلة",isCorrect:false,rationale:"عكس التعلم المصغر تماماً ويسبب الإجهاد."},{text:"تقديم المعرفة والمهارات في وحدات كبسولية صغيرة ومقاطع مركزة (من 3 إلى 5 دقائق) لتسهيل الاستيعاب",isCorrect:true,rationale:"يتناسب التعلم المصغر مع نمط الحياة السريع وتشتت الانتباه ويسهل الوصول السريع عبر الجوال."},{text:"تدريب الأطفال الصغار فقط على الألعاب",isCorrect:false,rationale:"ترجمة خاطئة للمفهوم."},{text:"الاعتماد التام على المطبوعات الورقية المصغرة",isCorrect:false,rationale:"يتعلق بالبنية التقنية والمحتوى الرقمي المكثف."}]},
-            {id:67,domain:4,domainName:"مهارات المستقبل",question:"تُعتبر مهارة 'تحليل البيانات التدريبية' (Learning Analytics) مهمة للمدرب القائد لأنها تساعده على:",options:[{text:"معرفة المبيعات المالية لشركات التقنية",isCorrect:false,rationale:"بيانات تسويقية خارج النطاق التدريبي الفردي."},{text:"قراءة مؤشرات المشاركة، ومعدلات الأداء، واكتشاف الفجوات لاتخاذ قرارات تحسين مستندة للأدلة",isCorrect:true,rationale:"تحليل البيانات يمنح رؤية عملية دقيقة مبنية على الأرقام لتطوير المحتوى والأساليب."},{text:"زيادة أعداد الأسئلة التعجيزية في الاختبارات",isCorrect:false,rationale:"استخدام خاطئ للتقويم."},{text:"حذف حسابات المتدربين من المنصة إلكترونياً",isCorrect:false,rationale:"إجراء إداري زجري لا يخدم التحسين."}]},
-            {id:68,domain:4,domainName:"مهارات المستقبل",question:"أي السلوكيات التالية يُمثل تكاملاً فعلياً بين مهارات التفكير والتطبيقات الرقمية في الممارسة التدريبية؟",options:[{text:"استخدام الحاسب لطباعة الاختبارات الورقية فقط",isCorrect:false,rationale:"استخدام بدائي للتقنية كبديل للآلة الكاتبة."},{text:"عرض الشرائح الرقمية بنفس طريقة اللوح والطباشير التقليدية دون تفاعل",isCorrect:false,rationale:"استبدال الوسيلة مع بقاء نفس المنهجية التلقينية."},{text:"توظيف أدوات التحليل البياني الرقمي والخرائط التفاعلية لاستخلاص النتائج وحل المشكلات",isCorrect:true,rationale:"تكامل حقيقي يجمع بين المهارة التقنية المتقدمة والتفكير الناقد في اتخاذ القرار."},{text:"استخدام الهاتف الذكي لإرسال التهاني فقط",isCorrect:false,rationale:"استخدام اجتماعي عام لا يتصل بالتكامل التدريبي."}]},
-            {id:69,domain:4,domainName:"مهارات المستقبل",question:"ما فائدة تطبيق تقنيات 'التلعيب' (Gamification) في البيئات التدريبية الرقمية والحضورية؟",options:[{text:"تحويل التدريب إلى مجرد تسلية وألعاب أطفال دون هدف معرفي",isCorrect:false,rationale:"فهم قاصر يتجاهل النواحي التعليمية."},{text:"دمج عناصر الألعاب (كالمستويات، النقاط، الأوسمة، والمسابقات) لتحفيز المشاركة ورفع الدافعية",isCorrect:true,rationale:"التلعيب يزيد من اندماج المتدربين والمتعة والارتباط بالتعلم لتحقيق الأهداف التدريبية."},{text:"إلغاء المادة العلمية واكتفاء باللعب",isCorrect:false,rationale:"تفريغ للدورة من محتواها المهاراتي المعرفي."},{text:"إجبار المتدربين على الشراء داخل التطبيق",isCorrect:false,rationale:"استغلال تجاري غير مشروع."}]},
-            {id:70,domain:4,domainName:"مهارات المستقبل",question:"أي التقنيات التالية تسمح للمتدربين بالتدرب على مهارات خطرة (كإطفاء الحرائق أو العمليات الجراحية) بآمان تام؟",options:[{text:"المحاضرة الشفهية النظرية",isCorrect:false,rationale:"لا توفر خبرة التكرار الحركي والبيئة الواقعية."},{text:"تقنيات الواقع الافتراضي والواقع المعزز (VR / AR Simulation)",isCorrect:true,rationale:"توفر بيئة محاكاة غاطسة غنية تحاكي الواقع وتمنع المخاطر والتكلفة الباهظة."},{text:"قراءة الكتيبات الورقية",isCorrect:false,rationale:"تمنح معرفة بدون تجربة حسية وبصرية وتفاعلية."},{text:"الاستماع لتسجيل صوتي قديم",isCorrect:false,rationale:"وسيلة قديمة لا تنقل بيئة الواقع المعقد."}]},
-            {id:71,domain:4,domainName:"مهارات المستقبل",question:"ما الواجب على المدرب اتخاذه للحفاظ على 'الأمن السيبراني والخصوصية' أثناء إقامة جلسة تدريبية عبر الإنترنت؟",options:[{text:"مشاركة رابط القاعة الافتراضية بكلمة مرور مفتوحة للعموم في المنصات العامة",isCorrect:false,rationale:"يعرض الجلسة للاختراق والتشويش والاقتحام غير المصرح به (Zoom-bombing)."},{text:"تأمين القاعة بكلمات مرور، وغرفة انتظار (Waiting Room)، وعدم تسجيل المتدربين إلا بإذن صريح",isCorrect:true,rationale:"إجراءات الأمن السيبراني تحمي الخصوصية، وتمنع المتطفلين، وتضمن سلامة البيئة الافتراضية."},{text:"طلب كلمة المرور الخاصة بالبريد الإلكتروني لكل متدرب",isCorrect:false,rationale:"انتهاك لخصوصية الحسابات ولا يحق للمدرب طلبه."},{text:"سحب كافة بيانات الأجهزة الشخصية للمشاركين",isCorrect:false,rationale:"تعدٍ غير قانوني على خصوصية الأجهزة."}]},
-            {id:72,domain:4,domainName:"مهارات المستقبل",question:"القدرة على التعلم الذاتي المستمر وتحديث المهارات (Reskilling & Upskilling) تعني أن المدرب يتصف بـ:",options:[{text:"الجمود والتمسك بالمهارات القديمة نفسها",isCorrect:false,rationale:"عكس التكيف ومواكبة المستقبل."},{text:"عقلية النمو (Growth Mindset) والقدرة على التكيف مع تغيرات سوق العمل والتكنولوجيا",isCorrect:true,rationale:"عقلية النمو تجعل الفرد شغوفاً بالتعلم المستمر واكتساب أدوات العصر الحديثة."},{text:"انتظار المؤسسة لتفرض عليه الدورات بالقوة",isCorrect:false,rationale:"موقف سلبي يفتقد للمبادرة الذاتية."},{text:"ترك مهنة التدريب بالكامل عند ظهور التقنية",isCorrect:false,rationale:"هروب بدلاً من التكيف وتطوير الذات."}]},
-            {id:73,domain:4,domainName:"مهارات المستقبل",question:"المصطلح المقترن بالهوية المهنية الرقمية للمدرب على شبكات التواصل المتخصصة (مثل LinkedIn) هو:",options:[{text:"التخفي والعمل بالأسماء المستعارة الوهمية",isCorrect:false,rationale:"يقلل الثقة والمصداقية المهنية."},{text:"بناء العلامة الشخصية المهنية (Personal Branding) وإبراز الخبرات والقيم المضافة",isCorrect:true,rationale:"بناء العلامة الشخصية يعكس الاحترافية والتواجد الرقمي الواعي في سوق العمل المستقبلي."},{text:"نشر المنشورات العشوائية غير المتخصصة بكثرة",isCorrect:false,rationale:"يشتت المتابعين ويضعف الصورة الذهنية للتخصص."},{text:"شراء المتابعين الوهميين بالمال",isCorrect:false,rationale:"خداع يسهل اكتشافه ويدمر المصداقية."}]},
-            {id:74,domain:4,domainName:"مهارات المستقبل",question:"عند بناء ورشة تدريبية لتعليم 'حل المشكلات المعقدة' (Complex Problem Solving)، أفضل منهجية تصميم هي:",options:[{text:"إعطاء الحلول الجاهزة وحفظها للاختبار",isCorrect:false,rationale:"لا ينمي مهارة التفكير والتحليل بالمرة."},{text:"منهجية التفكير التصميمي (Design Thinking) والتعلم القائم على المشكلات (PBL)",isCorrect:true,rationale:"التفكير التصميمي (تعاطف، تحديد، توليد أفكار، نموذج، اختبار) ينمي الابتكار والحلول التكيفية."},{text:"قراءة رواية أدبية غير مرتبطة بالموضوع",isCorrect:false,rationale:"تشتيت عن موضوع المهارة المحددة."},{text:"المحاضرة التقليدية أحادية الاتجاه",isCorrect:false,rationale:"لا تتيح التجريب الفعلي وحل التحديات."}]},
-            {id:75,domain:4,domainName:"مهارات المستقبل",question:"تفاعل المدرب الرقمي مع المتدربين في المنصات اللاتزامنية (Asynchronous Learning) يتم غالباً عبر:",options:[{text:"البث المباشر المستمر لمدة 24 ساعة",isCorrect:false,rationale:"البث المباشر هو تعلم متزامن (Synchronous)."},{text:"منتديات النقاش، والملاحظات الصوتية المكتوبة، والتقييمات الذاتية المجدولة عبر منصة LMS",isCorrect:true,rationale:"التعلم اللاتزامني يتطرق للتفاعل المستقل مرن الوقت دون الحاجة للتواجد اللحظي في وقت واحد."},{text:"اللقاء الحضوري في القاعة فقط",isCorrect:false,rationale:"هذا تدريب حضوري مباشر وليس لاتزامني رقمي."},{text:"الرسائل الورقية عبر البريد المكتوب التقليدي",isCorrect:false,rationale:"وسيلة قديمة لا تتناسب مع المنصات الرقمية."}]},
-            {id:76,domain:4,domainName:"مهارات المستقبل",question:"أثناء تقديم العرض التقديمي الافتراضي، ما التقنية التي تساعد المدرب على متابعة أسئلة الدردشة والنص في وقت واحد؟",options:[{text:"إغلاق نافذة الدردشة ومنع الأسئلة نهائياً",isCorrect:false,rationale:"يلغي التفاعل والمشاركة الرقمية."},{text:"استخدام شاشتين (Dual Monitors) أو الاستعانة بميسر مساند (Co-host / Moderator)",isCorrect:true,rationale:"يعزز الإدارة السلسة وتلبية استفسارات الجمهور دون التوقف المفاجئ للعرض."},{text:"التوقف عن الحديث لمدة نصف ساعة لقراءة الرسائل",isCorrect:false,rationale:"يقطع تسلسل الأفكار ويكسر ريتم الجلسة."},{text:"طلب من المتدربين الاتصال به بعد أسبوع",isCorrect:false,rationale:"تفقد التغذية الراجعة واللقاء الافتراضي قيمته."}]},
-            {id:77,domain:4,domainName:"مهارات المستقبل",question:"ما الفائدة الأساسية من الحفظ التلقائي للحقائب والمستندات على 'السحابة الرقمية' (Cloud Storage مثل OneDrive / Google Drive)؟",options:[{text:"زيادة استهلاك بطارية الجهاز فقط",isCorrect:false,rationale:"أثر جانبي بسيط مقابل الفائدة الكبرى."},{text:"سهولة الوصول من أي جهاز، والنسخ الاحتياطي، وإمكانية التحرير التشاركي الفوري مع فريق العمل",isCorrect:true,rationale:"التخزين السحابي يوفر المرونة والتعاون الفوري وحماية الملفات من الضياع."},{text:"منع أي شخص من فتح الملفات للأبد",isCorrect:false,rationale:"السحابة تدعم المشاركة المحددة بصلاحيات مرنة."},{text:"تحويل النص تلقائياً إلى مقطع فيديو سينمائي",isCorrect:false,rationale:"هذه ميزة أدوات توليد فيديو وليس التخزين السحابي."}]},
-            {id:78,domain:4,domainName:"مهارات المستقبل",question:"أي الممارسات التالية تُساعد المدرب على تنظيم وبناء 'مجتمع تعلم مهني افتراضي' (PLC) مستدام للمتدربين؟",options:[{text:"حظر التواصل بين المتدربين بعد نهاية اليوم الأخير",isCorrect:false,rationale:"يقطع أثر استدامة التعلم والشبكات المهنية."},{text:"إنشاء مجموعة تفاعلية موجّهة (مثل LinkedIn Group / Slack) لمشاركة التجارب والمقالات ودعم التطبيق",isCorrect:true,rationale:"مجتمعات التعلم الافتراضية تعزز نقل الأثر وتوفر المساندة المستمرة بعد انتهاء البرنامج."},{text:"إلزامهم بدفع اشتراكات شهرية متزايدة",isCorrect:false,rationale:"هدف تجاري ينفر الأعضاء من الاستمرار."},{text:"إغلاق أي مناقشة تثري التخصص",isCorrect:false,rationale:"يتنافى مع روح التعلم المستمر."}]},
-            {id:79,domain:4,domainName:"مهارات المستقبل",question:"ما المقصود بـ 'المرونة الرقمية' (Digital Agility) في مهارات المدرب المستقبلي؟",options:[{text:"القدرة على سرعة أداء التمارين الرياضية أمام الكاميرا",isCorrect:false,rationale:"خلط بين اللياقة البدنية والمرونة الرقمية."},{text:"السرعة والقدرة على التكيف مع التحديثات والبرامج الرقمية الجديدة وتوظيفها بمرونة في التدريب",isCorrect:true,rationale:"المرونة الرقمية تعني سرعة الاستجابة والتكيف مع الأدوات والتقنيات الناشئة دون خوف."},{text:"استخدام جهاز حاسوب واحد طوال الحياة",isCorrect:false,rationale:"جمود تقني يتنافى مع مفهوم المرونة."},{text:"الاستغناء عن الإنترنت تماماً في العمليات التدريبية",isCorrect:false,rationale:"عزل عن البيئة الرقمية الحديثة."}]},
-            {id:80,domain:4,domainName:"مهارات المستقبل",question:"المعادلة الذهبية لنجاح المدرب في عصر المستقبل تعتمد على التوازن بين:",options:[{text:"التقنية فقط بدون أي وجود للمهارات البشرية والتعاطف",isCorrect:false,rationale:"تجعل التدريب جافاً ومجرداً من الروح الإنسانية."},{text:"التمكين التقني الرقمي الذكي مع المهارات الإنسانية العميقة (التواصل، التعاطف، والقيادة)",isCorrect:true,rationale:"الدمج بين التقنية المتقدمة واللمسة الإنسانية العميقة (High Tech + High Touch) هو جوهر التميز المستقبلي."},{text:"المحاضرة التقليدية الجافة والصمت التام",isCorrect:false,rationale:"أسلوب قديم لا يواكب متطلبات العصر."},{text:"التدريب دون إعداد حقيبة أو أهداف",isCorrect:false,rationale:"عشوائية تضمن الفشل والضعف في الأداء."}]}
-        ];
+    <h2 style="margin:20px 0 8px;text-align:center">اختر وضع الاختبار</h2>
+    <div class="mode-grid">
+      <div class="mode-card featured" onclick="startQuiz('test')" role="button" aria-label="وضع الاختبار">
+        <div class="icon">📝</div>
+        <h3>وضع الاختبار</h3>
+        <p>60 ثانية لكل سؤال مع مؤقت</p>
+      </div>
+      <div class="mode-card" onclick="startQuiz('training')" role="button" aria-label="وضع التدريب">
+        <div class="icon">🎓</div>
+        <h3>وضع التدريب</h3>
+        <p>بدون مؤقت - تعلم براحتك</p>
+      </div>
+      <div class="mode-card" onclick="startQuiz('simulation')" role="button" aria-label="وضع المحاكاة">
+        <div class="icon">🏆</div>
+        <h3>محاكاة حقيقية</h3>
+        <p>90 دقيقة للاختبار الكامل</p>
+      </div>
+      <div class="mode-card" onclick="startQuiz('daily')" role="button" aria-label="التحدي اليومي">
+        <div class="icon">⚡</div>
+        <h3>التحدي اليومي</h3>
+        <p>10 أسئلة عشوائية يومياً</p>
+      </div>
+      <div class="mode-card" onclick="showDuelMode()" role="button" aria-label="وضع المبارزة">
+        <div class="icon">⚔️</div>
+        <h3>وضع المبارزة</h3>
+        <p>قارن نتيجتك مع صديق</p>
+      </div>
+      <div class="mode-card" onclick="startQuiz('review')" role="button" aria-label="المراجعة الذكية" id="reviewCard" style="display:none">
+        <div class="icon">🔁</div>
+        <h3>المراجعة الذكية</h3>
+        <p>راجع الأسئلة التي أخطأت فيها فقط</p>
+      </div>
+    </div>
 
-        // ========== HELPERS ==========
-        const DOMAIN_META = {
-            1: { name: "المعرفة المهنية", color: "blue", bg: "bg-blue-100 dark:bg-blue-900/40", text: "text-blue-800 dark:text-blue-200", border: "border-blue-400", icon: Book },
-            2: { name: "الممارسات المهنية", color: "emerald", bg: "bg-emerald-100 dark:bg-emerald-900/40", text: "text-emerald-800 dark:text-emerald-200", border: "border-emerald-400", icon: Target },
-            3: { name: "القيم والمسؤوليات", color: "purple", bg: "bg-purple-100 dark:bg-purple-900/40", text: "text-purple-800 dark:text-purple-200", border: "border-purple-400", icon: Shield },
-            4: { name: "مهارات المستقبل", color: "cyan", bg: "bg-cyan-100 dark:bg-cyan-900/40", text: "text-cyan-800 dark:text-cyan-200", border: "border-cyan-400", icon: Cpu }
-        };
+    <div class="settings-panel">
+      <h3>⚙️ الإعدادات</h3>
+      <div class="setting-row">
+        <span>🌙 الوضع الليلي</span>
+        <div class="toggle" id="darkToggle" onclick="toggleDark()" role="switch" aria-label="الوضع الليلي"></div>
+      </div>
+      <div class="setting-row">
+        <span>🔲 تباين عالي</span>
+        <div class="toggle" id="contrastToggle" onclick="toggleContrast()" role="switch" aria-label="تباين عالي"></div>
+      </div>
+      <div class="setting-row">
+        <span>🔊 تنبيه صوتي</span>
+        <div class="toggle active" id="soundToggle" onclick="toggleSound()" role="switch" aria-label="تنبيه صوتي"></div>
+      </div>
+      <div class="setting-row">
+        <span>🔤 حجم الخط</span>
+        <div class="font-btns">
+          <button class="font-btn" onclick="setFontSize('small')" data-size="small">صغير</button>
+          <button class="font-btn active" onclick="setFontSize('medium')" data-size="medium">متوسط</button>
+          <button class="font-btn" onclick="setFontSize('large')" data-size="large">كبير</button>
+        </div>
+      </div>
+    </div>
 
-        const STORAGE_KEY = "etec_trainer_license_quiz_v2";
+    <div class="credit-footer">
+      إعداد <strong>المهندس سمير حبيب بنتن</strong><br>
+      <span style="font-size:0.8em">جميع الحقوق محفوظة © 2026</span>
+    </div>
+  </div>
+</div>
 
-        // ========== MAIN APP ==========
-        const QuizApp = () => {
-            const [darkMode, setDarkMode] = useState(() => localStorage.getItem("etec_dark") === "1");
-            const [step, setStep] = useState("welcome"); // welcome | quiz | results | review
-            const [mode, setMode] = useState("practice"); // practice | exam
-            const [selectedDomain, setSelectedDomain] = useState("all");
-            const [activeQuestions, setActiveQuestions] = useState([]);
-            const [currentIndex, setCurrentIndex] = useState(0);
-            const [userAnswers, setUserAnswers] = useState({}); // index -> optionIndex | -1 (timeout) | -2 (skipped)
-            const [showFeedback, setShowFeedback] = useState(false);
-            const [timeLeft, setTimeLeft] = useState(60);
-            const [isTimerRunning, setIsTimerRunning] = useState(false);
-            const [showMap, setShowMap] = useState(true);
-            const [notes, setNotes] = useState({});
-            const [copiedMsg, setCopiedMsg] = useState(false);
-            const [timerDuration, setTimerDuration] = useState(60);
-            const [shuffleOptions, setShuffleOptions] = useState(false);
-            const timerRef = useRef(null);
-            const autoNextRef = useRef(null);
+<!-- QUIZ SCREEN -->
+<div class="screen" id="quizScreen">
+  <div class="etec-header" style="padding:12px">
+    <h1 style="font-size:1.1em">اختبار الرخصة المهنية للمدربين</h1>
+  </div>
+  <div class="quiz-container">
+    <div class="quiz-top-bar no-print">
+      <div class="quiz-progress">
+        <span id="qCounter">1 / 80</span>
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill" id="progressBar" style="width:1.25%"></div>
+        </div>
+      </div>
+      <div class="streak-badge" id="streakBadge" style="display:none">
+        🔥 <span id="streakCount">0</span>
+      </div>
+      <div class="timer-container" id="timerContainer">
+        <svg class="timer-svg" width="80" height="80" viewBox="0 0 80 80">
+          <circle class="timer-circle-bg" cx="40" cy="40" r="36"/>
+          <circle class="timer-circle" id="timerCircle" cx="40" cy="40" r="36" stroke-dasharray="226.2" stroke-dashoffset="0"/>
+        </svg>
+        <span class="timer-text" id="timerText">60</span>
+      </div>
+    </div>
 
-            useEffect(() => {
-                if (darkMode) document.documentElement.classList.add("dark");
-                else document.documentElement.classList.remove("dark");
-                localStorage.setItem("etec_dark", darkMode ? "1" : "0");
-            }, [darkMode]);
+    <div id="quoteBanner" class="quote-banner">
+      <p id="quoteText"></p>
+      <div class="author" id="quoteAuthor"></div>
+    </div>
 
-            // Persist progress
-            useEffect(() => {
-                if (step === "quiz" && activeQuestions.length) {
-                    const data = { selectedDomain, mode, currentIndex, userAnswers, notes, timerDuration };
-                    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-                }
-            }, [step, currentIndex, userAnswers, notes, selectedDomain, mode, timerDuration, activeQuestions.length]);
+    <div class="question-card" id="questionCard">
+      <button class="copy-btn no-print" onclick="copyQuestion()" aria-label="نسخ السؤال">📋 نسخ</button>
+      <div class="question-meta" id="questionMeta"></div>
+      <div class="question-text" id="questionText"></div>
+      <div class="options-list" id="optionsList"></div>
+      <div class="explanation-box" id="explanationBox">
+        <h4>💡 الشرح</h4>
+        <p id="explanationText"></p>
+      </div>
+    </div>
 
-            const startQuiz = (domainId, quizMode = mode) => {
-                let filtered = domainId === "all" ? [...allQuestions] : allQuestions.filter(q => q.domain === domainId);
-                if (shuffleOptions) {
-                    filtered = filtered.map(q => ({
-                        ...q,
-                        options: [...q.options].sort(() => Math.random() - 0.5)
-                    }));
-                }
-                setSelectedDomain(domainId);
-                setMode(quizMode);
-                setActiveQuestions(filtered);
-                setCurrentIndex(0);
-                setUserAnswers({});
-                setShowFeedback(false);
-                setTimeLeft(timerDuration);
-                setIsTimerRunning(true);
-                setStep("quiz");
-                setNotes({});
-            };
+    <div class="quiz-nav no-print">
+      <div class="quiz-nav-group">
+        <button class="btn btn-secondary" onclick="goHome()" aria-label="الرئيسية">🏠 الرئيسية</button>
+        <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()" aria-label="السابق">→ السابق</button>
+      </div>
+      <div class="quiz-nav-group">
+        <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" aria-label="التالي">التالي ←</button>
+        <button class="btn btn-success" id="finishBtn" onclick="finishQuiz()" style="display:none" aria-label="إنهاء">✅ إنهاء</button>
+      </div>
+    </div>
+  </div>
+  <button class="map-toggle no-print" id="mapToggle" onclick="toggleMap()" aria-label="خريطة الأسئلة">🗺️</button>
+</div>
 
-            const resumeProgress = () => {
-                try {
-                    const raw = localStorage.getItem(STORAGE_KEY);
-                    if (!raw) return;
-                    const data = JSON.parse(raw);
-                    let filtered = data.selectedDomain === "all" ? [...allQuestions] : allQuestions.filter(q => q.domain === data.selectedDomain);
-                    setSelectedDomain(data.selectedDomain);
-                    setMode(data.mode || "practice");
-                    setActiveQuestions(filtered);
-                    setCurrentIndex(data.currentIndex || 0);
-                    setUserAnswers(data.userAnswers || {});
-                    setNotes(data.notes || {});
-                    setTimerDuration(data.timerDuration || 60);
-                    setTimeLeft(data.timerDuration || 60);
-                    setShowFeedback(false);
-                    setIsTimerRunning(true);
-                    setStep("quiz");
-                } catch (e) {}
-            };
+<!-- QUESTION MAP OVERLAY -->
+<div class="question-map-overlay" id="mapOverlay" onclick="closeMap(event)">
+  <div class="question-map" onclick="event.stopPropagation()">
+    <h3>🗺️ خريطة الأسئلة</h3>
+    <div class="map-grid" id="mapGrid"></div>
+    <div class="map-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--green-light);border:2px solid var(--green)"></div> صحيحة</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--red-light);border:2px solid var(--red)"></div> خاطئة</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--yellow-light);border:2px solid var(--yellow)"></div> انتهى الوقت</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--gray-light);border:2px solid var(--gray)"></div> لم تُجب</div>
+    </div>
+    <div style="text-align:center;margin-top:16px">
+      <button class="btn btn-secondary" onclick="document.getElementById('mapOverlay').classList.remove('show')">إغلاق</button>
+    </div>
+  </div>
+</div>
 
-            // Timer
-            useEffect(() => {
-                if (step === "quiz" && isTimerRunning && !showFeedback) {
-                    timerRef.current = setInterval(() => {
-                        setTimeLeft(prev => {
-                            if (prev <= 1) {
-                                clearInterval(timerRef.current);
-                                handleTimeout();
-                                return 0;
-                            }
-                            return prev - 1;
-                        });
-                    }, 1000);
-                } else {
-                    clearInterval(timerRef.current);
-                }
-                return () => clearInterval(timerRef.current);
-            }, [step, isTimerRunning, showFeedback, currentIndex]);
+<!-- RESULTS SCREEN -->
+<div class="screen" id="resultsScreen">
+  <div class="etec-header">
+    <div class="etec-logo">📊</div>
+    <h1>نتائج الاختبار</h1>
+  </div>
+  <div class="results-container">
+    <div class="results-header">
+      <div class="score-circle" id="scoreCircle">
+        <span id="scoreValue">0%</span>
+        <span class="score-label">النتيجة</span>
+      </div>
+      <h2 id="resultMessage"></h2>
+      <p style="color:var(--text2);margin-top:8px" id="resultSubMessage"></p>
+    </div>
 
-            const handleTimeout = () => {
-                setIsTimerRunning(false);
-                setUserAnswers(prev => {
-                    if (prev[currentIndex] === undefined) return { ...prev, [currentIndex]: -1 };
-                    return prev;
-                });
-                if (mode === "practice") {
-                    setShowFeedback(true);
-                    autoNextRef.current = setTimeout(() => {
-                        goNext(true);
-                    }, 3500);
-                } else {
-                    // Exam: auto advance immediately
-                    setTimeout(() => goNext(true), 600);
-                }
-            };
+    <div class="results-stats">
+      <div class="stat-card stat-correct"><div class="stat-value" id="statCorrect">0</div><div class="stat-label">✅ إجابة صحيحة</div></div>
+      <div class="stat-card stat-wrong"><div class="stat-value" id="statWrong">0</div><div class="stat-label">❌ إجابة خاطئة</div></div>
+      <div class="stat-card stat-timeout"><div class="stat-value" id="statTimeout">0</div><div class="stat-label">⏰ انتهى الوقت</div></div>
+      <div class="stat-card stat-skipped"><div class="stat-value" id="statSkipped">0</div><div class="stat-label">⏭️ تم التخطي</div></div>
+    </div>
 
-            const handleAnswer = (optionIndex) => {
-                if (showFeedback || userAnswers[currentIndex] !== undefined) return;
-                clearInterval(timerRef.current);
-                clearTimeout(autoNextRef.current);
-                setIsTimerRunning(false);
-                setUserAnswers(prev => ({ ...prev, [currentIndex]: optionIndex }));
-                if (mode === "practice") {
-                    setShowFeedback(true);
-                } else {
-                    // Exam mode: no feedback, just mark and enable next
-                    setShowFeedback(false);
-                }
-            };
+    <div class="chart-container">
+      <h3>📊 الأداء حسب المجال</h3>
+      <div class="domain-bars" id="domainBars"></div>
+    </div>
 
-            const goNext = (fromTimeout = false) => {
-                clearTimeout(autoNextRef.current);
-                if (currentIndex < activeQuestions.length - 1) {
-                    setCurrentIndex(i => i + 1);
-                    setShowFeedback(false);
-                    setTimeLeft(timerDuration);
-                    setIsTimerRunning(true);
-                } else {
-                    setStep("results");
-                    setIsTimerRunning(false);
-                }
-            };
+    <div class="chart-container">
+      <h3>📈 مسار الأداء عبر الأسئلة</h3>
+      <canvas class="chart-canvas" id="timelineChart"></canvas>
+    </div>
 
-            const goPrev = () => {
-                if (mode === "exam") return; // no back in exam
-                if (currentIndex > 0) {
-                    clearTimeout(autoNextRef.current);
-                    setCurrentIndex(i => i - 1);
-                    const ans = userAnswers[currentIndex - 1];
-                    setShowFeedback(ans !== undefined && mode === "practice");
-                    setTimeLeft(timerDuration);
-                    setIsTimerRunning(ans === undefined);
-                }
-            };
+    <div class="chart-container">
+      <h3>🏅 الإنجازات</h3>
+      <div class="badges-grid" id="badgesGrid"></div>
+    </div>
 
-            const skipQuestion = () => {
-                if (userAnswers[currentIndex] !== undefined) return;
-                clearInterval(timerRef.current);
-                clearTimeout(autoNextRef.current);
-                setIsTimerRunning(false);
-                setUserAnswers(prev => ({ ...prev, [currentIndex]: -2 })); // skipped
-                if (mode === "practice") setShowFeedback(true);
-                else setTimeout(() => goNext(), 300);
-            };
+    <div style="text-align:center;margin:24px 0;display:flex;flex-wrap:wrap;gap:12px;justify-content:center" class="no-print">
+      <button class="btn btn-primary" onclick="goHome()">🏠 الرئيسية</button>
+      <button class="btn btn-success" onclick="startQuiz('review')">🔁 مراجعة الأخطاء</button>
+      <button class="btn btn-secondary" onclick="exportPDF()">📄 تصدير PDF</button>
+      <button class="btn btn-secondary" onclick="shareResults()">📤 مشاركة النتيجة</button>
+    </div>
 
-            const jumpTo = (idx) => {
-                if (mode === "exam" && userAnswers[idx] === undefined && idx !== currentIndex) return;
-                clearTimeout(autoNextRef.current);
-                setCurrentIndex(idx);
-                const ans = userAnswers[idx];
-                setShowFeedback(ans !== undefined && mode === "practice");
-                setTimeLeft(timerDuration);
-                setIsTimerRunning(ans === undefined && step === "quiz");
-            };
+    <div class="credit-footer">
+      إعداد <strong>المهندس سمير حبيب بنتن</strong>
+    </div>
+  </div>
+</div>
 
-            const resetToHome = () => {
-                clearInterval(timerRef.current);
-                clearTimeout(autoNextRef.current);
-                setIsTimerRunning(false);
-                setStep("welcome");
-            };
+<!-- DUEL SCREEN -->
+<div class="screen" id="duelScreen">
+  <div class="etec-header">
+    <div class="etec-logo">⚔️</div>
+    <h1>وضع المبارزة</h1>
+  </div>
+  <div class="duel-container">
+    <p style="margin:20px 0;color:var(--text2)">أدخل نتيجة صديقك لمقارنتها بنتيجتك</p>
+    <input type="number" class="duel-input" id="duelInput" placeholder="أدخل نسبة صديقك (مثال: 75)" min="0" max="100">
+    <button class="btn btn-primary" onclick="compareDuel()" style="margin:12px">⚔️ قارن الآن</button>
+    <div id="duelResult" style="display:none">
+      <div class="duel-comparison">
+        <div class="duel-player" id="duelPlayer1">
+          <div style="font-size:2em">🧑</div>
+          <h3>أنت</h3>
+          <div style="font-size:2em;font-weight:800;color:var(--primary)" id="duelScore1">0%</div>
+        </div>
+        <div class="duel-player" id="duelPlayer2">
+          <div style="font-size:2em">👤</div>
+          <h3>صديقك</h3>
+          <div style="font-size:2em;font-weight:800;color:var(--accent)" id="duelScore2">0%</div>
+        </div>
+      </div>
+      <h2 id="duelWinner" style="margin:16px 0"></h2>
+    </div>
+    <button class="btn btn-secondary" onclick="goHome()" style="margin-top:20px">🏠 العودة للرئيسية</button>
+  </div>
+</div>
 
-            const calculateScore = () => {
-                let correct = 0, wrong = 0, timeout = 0, skipped = 0;
-                activeQuestions.forEach((q, idx) => {
-                    const ans = userAnswers[idx];
-                    if (ans === -1) timeout++;
-                    else if (ans === -2 || ans === undefined) skipped++;
-                    else if (q.options[ans]?.isCorrect) correct++;
-                    else wrong++;
-                });
-                return { correct, wrong, timeout, skipped, total: activeQuestions.length, percentage: Math.round((correct / activeQuestions.length) * 100) };
-            };
+<script>
+// ==================== QUESTIONS DATABASE ====================
+const questions = [
+  // Domain 1: أساسيات التعلم والتدريب
+  {id:1,text:"ما المقصود بالتعلم الذاتي؟",options:["تعلم يتم تحت إشراف مباشر من المعلم","تعلم يتحمل فيه المتعلم مسؤولية تخطيط وتنفيذ وتقويم تعلمه","تعلم يتم فقط من خلال الكتب","تعلم يتم في الفصول الدراسية فقط"],correct:1,domain:"أساسيات التعلم",difficulty:1,explanation:"التعلم الذاتي هو عملية يتحمل فيها المتعلم المسؤولية الكاملة عن تخطيط وتنفيذ وتقويم عملية تعلمه بنفسه."},
+  {id:2,text:"أي من نظريات التعلم تركز على الملاحظة والنمذجة؟",options:["النظرية السلوكية","النظرية المعرفية","نظرية التعلم الاجتماعي لباندورا","النظرية البنائية"],correct:2,domain:"أساسيات التعلم",difficulty:1,explanation:"نظرية التعلم الاجتماعي لألبرت باندورا تؤكد على أهمية الملاحظة والنمذجة والتقليد في عملية التعلم."},
+  {id:3,text:"ما الفرق الأساسي بين التدريب والتعليم؟",options:["لا يوجد فرق بينهما","التدريب يركز على المهارات العملية والتعليم يركز على المعرفة الشاملة","التعليم أقصر مدة من التدريب","التدريب يتم فقط في الشركات"],correct:1,domain:"أساسيات التعلم",difficulty:2,explanation:"التدريب يركز على تطوير مهارات محددة وأداء عملي، بينما التعليم أشمل ويتناول المعرفة والفهم والاتجاهات."},
+  {id:4,text:"ما هو هرم بلوم للمستويات المعرفية (من الأدنى للأعلى)؟",options:["التحليل، التطبيق، التذكر، الفهم","التذكر، الفهم، التطبيق، التحليل، التركيب، التقويم","التقويم، التركيب، التحليل، التطبيق","الفهم، التذكر، التطبيق، التحليل"],correct:1,domain:"أساسيات التعلم",difficulty:2,explanation:"هرم بلوم يرتب المستويات المعرفية من الأدنى (التذكر) إلى الأعلى (التقويم) مروراً بالفهم والتطبيق والتحليل والتركيب."},
+  {id:5,text:"ما المقصود بأسلوب التعلم البصري؟",options:["التعلم من خلال الاستماع","التعلم من خلال الصور والرسوم والمخططات","التعلم من خلال الحركة واللمس","التعلم من خلال القراءة فقط"],correct:1,domain:"أساسيات التعلم",difficulty:1,explanation:"المتعلم البصري يستوعب المعلومات بشكل أفضل من خلال الصور والرسوم البيانية والمخططات والعروض المرئية."},
+  {id:6,text:"ما هي نظرية الذكاءات المتعددة؟",options:["نظرية تقول إن الذكاء واحد فقط","نظرية هوارد غاردنر التي تقترح وجود أنواع متعددة من الذكاء","نظرية تركز على الذكاء العاطفي فقط","نظرية تقيس الذكاء بالوراثة فقط"],correct:1,domain:"أساسيات التعلم",difficulty:2,explanation:"نظرية هوارد غاردنر تقترح وجود 8 أنواع على الأقل من الذكاء منها اللغوي والمنطقي والمكاني والموسيقي والحركي والاجتماعي والذاتي والطبيعي."},
+  {id:7,text:"ما المقصود بمنطقة التطور القريب (ZPD) عند فيغوتسكي؟",options:["المنطقة التي يتعلم فيها الطفل بمفرده","الفرق بين ما يستطيع المتعلم إنجازه بمفرده وما ينجزه بمساعدة","منطقة الراحة في التعلم","المنطقة التي يفشل فيها المتعلم"],correct:1,domain:"أساسيات التعلم",difficulty:3,explanation:"منطقة التطور القريب هي المسافة بين مستوى الأداء الفعلي (بمفرده) ومستوى الأداء المحتمل (بمساعدة شخص أكثر خبرة)."},
+  {id:8,text:"أي مما يلي يُعد من مبادئ تعلم الكبار (الأندراغوجيا)؟",options:["الكبار يتعلمون مثل الأطفال تماماً","الكبار يحتاجون لمعرفة سبب تعلمهم قبل البدء","الكبار لا يملكون خبرة سابقة","الكبار يفضلون التعلم السلبي"],correct:1,domain:"أساسيات التعلم",difficulty:2,explanation:"من مبادئ تعلم الكبار عند نولز: الحاجة لمعرفة السبب، الخبرة السابقة كمرجع، الاستعداد للتعلم المرتبط بأدوارهم، والتوجه نحو حل المشكلات."},
+  {id:9,text:"ما هو التعلم التجريبي (Experiential Learning)؟",options:["التعلم من خلال المحاضرات فقط","التعلم من خلال التجربة المباشرة والتأمل فيها","التعلم من خلال الاختبارات","التعلم عن بعد فقط"],correct:1,domain:"أساسيات التعلم",difficulty:1,explanation:"التعلم التجريبي عند كولب يعتمد على دورة: التجربة الملموسة → التأمل → المفهمة المجردة → التجربة النشطة."},
+  {id:10,text:"ما المقصود بالتعزيز الإيجابي في النظرية السلوكية؟",options:["عقاب المتعلم عند الخطأ","إضافة مثير مرغوب بعد السلوك لزيادة احتمالية تكراره","إزالة مثير غير مرغوب","تجاهل السلوك"],correct:1,domain:"أساسيات التعلم",difficulty:1,explanation:"التعزيز الإيجابي يعني تقديم مكافأة أو مثير مرغوب بعد ظهور السلوك المرغوب مما يزيد من احتمالية تكراره."},
+  {id:11,text:"ما هو التعلم التعاوني؟",options:["تعلم فردي بحت","تعلم يتم في مجموعات صغيرة لتحقيق هدف مشترك","تعلم تنافسي بين الطلاب","تعلم يتم عبر الإنترنت فقط"],correct:1,domain:"أساسيات التعلم",difficulty:1,explanation:"التعلم التعاوني هو أسلوب تعليمي يعمل فيه المتعلمون في مجموعات صغيرة لتحقيق هدف تعليمي مشترك مع تحمل المسؤولية الفردية والجماعية."},
+  {id:12,text:"ما المقصود بالتعلم المقلوب (Flipped Learning)؟",options:["عكس ترتيب الفصول الدراسية","دراسة المحتوى في المنزل وتطبيقه في الفصل","إلغاء الواجبات المنزلية","تدريس المعلم للطلاب في منازلهم"],correct:1,domain:"أساسيات التعلم",difficulty:2,explanation:"في التعلم المقلوب يدرس الطالب المحتوى الجديد في المنزل (عبر فيديوهات مثلاً) ويستخدم وقت الحصة للتطبيق والمناقشة وحل المشكلات."},
+  {id:13,text:"أي مما يلي يُعد من استراتيجيات التعلم النشط؟",options:["المحاضرة الإلقائية","التفكير-الزوجي-المشاركة (Think-Pair-Share)","القراءة الصامتة فقط","النسخ من السبورة"],correct:1,domain:"أساسيات التعلم",difficulty:1,explanation:"استراتيجية التفكير-الزوجي-المشاركة تتيح للمتعلم التفكير فردياً ثم مناقشة زميله ثم المشاركة مع المجموعة الكبيرة."},
+  {id:14,text:"ما هو دور المدرب في التعلم المتمركز حول المتعلم؟",options:["الملقن الرئيسي للمعرفة","الميسر والمرشد والموجه","المراقب السلبي","الممتحن فقط"],correct:1,domain:"أساسيات التعلم",difficulty:1,explanation:"في التعلم المتمركز حول المتعلم، يتحول دور المدرب من ملقن إلى ميسر ومرشد يوجه عملية التعلم ويدعم المتعلم."},
+  {id:15,text:"ما المقصود بالتعلم المدمج (Blended Learning)؟",options:["التعلم في فصلين دراسيين","الجمع بين التعلم وجهاً لوجه والتعلم الإلكتروني","خلط المواد الدراسية","التعلم في أوقات مختلفة"],correct:1,domain:"أساسيات التعلم",difficulty:1,explanation:"التعلم المدمج يجمع بين مزايا التعليم التقليدي وجهاً لوجه والتعليم الإلكتروني عبر الإنترنت لتحقيق أفضل نتائج."},
+  {id:16,text:"ما هو نموذج ADDIE في التصميم التعليمي؟",options:["نموذج لتقييم الطلاب","نموذج يتكون من: التحليل، التصميم، التطوير، التنفيذ، التقويم","نموذج لإدارة الفصول","نموذج لقياس الذكاء"],correct:1,domain:"أساسيات التعلم",difficulty:2,explanation:"نموذج ADDIE هو إطار منهجي لتصميم التعليم يتكون من 5 مراحل: Analysis, Design, Development, Implementation, Evaluation."},
 
-            const getStatus = (idx) => {
-                const ans = userAnswers[idx];
-                if (ans === undefined) return "gray";
-                if (ans === -1) return "yellow";
-                if (ans === -2) return "gray";
-                if (activeQuestions[idx]?.options[ans]?.isCorrect) return "green";
-                return "red";
-            };
+  // Domain 2: القياس والتقويم
+  {id:17,text:"ما الفرق بين القياس والتقويم؟",options:["لا فرق بينهما","القياس عملية كمية لجمع البيانات والتقويم عملية حكم قيمي على هذه البيانات","التقويم يسبق القياس دائماً","القياس أوسع من التقويم"],correct:1,domain:"القياس والتقويم",difficulty:2,explanation:"القياس هو تعيين أرقام أو قيم كمية لسمات معينة، أما التقويم فهو إصدار حكم قيمي بناءً على نتائج القياس ومعايير محددة."},
+  {id:18,text:"ما المقصود بالصدق في الاختبارات؟",options:["ثبات النتائج عند التكرار","مدى قياس الاختبار لما وُضع لقياسه فعلاً","سهولة الاختبار","صعوبة الاختبار"],correct:1,domain:"القياس والتقويم",difficulty:2,explanation:"الصدق (Validity) يعني أن الاختبار يقيس فعلاً ما صُمم لقياسه، وهو أهم خصائص الاختبار الجيد."},
+  {id:19,text:"ما المقصود بالثبات في الاختبارات؟",options:["قياس ما وُضع لقياسه","اتساق نتائج الاختبار عند تكراره تحت ظروف مشابهة","صعوبة الأسئلة","تنوع الأسئلة"],correct:1,domain:"القياس والتقويم",difficulty:2,explanation:"الثبات (Reliability) يعني أن نتائج الاختبار تكون متسقة ومستقرة عند تطبيقه أكثر من مرة على نفس المجموعة."},
+  {id:20,text:"أي مما يلي يُعد من أنواع التقويم التكويني؟",options:["الاختبار النهائي","الملاحظة المستمرة أثناء التعلم","اختبار القبول","الاختبار المعياري"],correct:1,domain:"القياس والتقويم",difficulty:1,explanation:"التقويم التكويني يتم أثناء عملية التعلم بهدف تحسينها وتطويرها، مثل الملاحظة المستمرة والأسئلة الشفهية والواجبات."},
+  {id:21,text:"ما هو التقويم الختامي (النهائي)؟",options:["تقويم يتم أثناء التعلم","تقويم يتم في نهاية البرنامج للحكم على مستوى التحصيل","تقويم ذاتي فقط","تقويم يتم قبل بدء البرنامج"],correct:1,domain:"القياس والتقويم",difficulty:1,explanation:"التقويم الختامي يُجرى في نهاية البرنامج التعليمي أو التدريبي للحكم على مدى تحقيق الأهداف واتخاذ قرارات مثل النجاح أو الرسوب."},
+  {id:22,text:"ما المقصود بالتقويم التشخيصي؟",options:["تقويم في نهاية الفصل","تقويم يُجرى قبل بدء التعلم لتحديد نقاط القوة والضعف","تقويم ذاتي","تقويم الأقران"],correct:1,domain:"القياس والتقويم",difficulty:1,explanation:"التقويم التشخيصي يُجرى قبل بدء العملية التعليمية لتحديد مستوى المتعلمين المسبق ونقاط القوة والضعف لديهم."},
+  {id:23,text:"ما هي روبريك التقويم (Rubric)؟",options:["نوع من الاختبارات","أداة تقويم تحتوي على معايير ومستويات أداء محددة","برنامج حاسوبي","طريقة إحصائية"],correct:1,domain:"القياس والتقويم",difficulty:2,explanation:"الروبريك هو أداة تقويم تصف مستويات الأداء المتوقعة لمهمة ما وفق معايير محددة، مما يجعل التقويم أكثر موضوعية ووضوحاً."},
+  {id:24,text:"ما المقصود بالتقويم المعياري المرجع (Norm-Referenced)؟",options:["مقارنة أداء المتعلم بمعايير محددة مسبقاً","مقارنة أداء المتعلم بأداء مجموعة مرجعية","تقويم ذاتي","تقويم بدون درجات"],correct:1,domain:"القياس والتقويم",difficulty:3,explanation:"التقويم المعياري المرجع يقارن أداء الفرد بأداء مجموعة مرجعية (مثلPercentile)، بينما محكي المرجع يقارنه بمعايير ثابتة."},
+  {id:25,text:"ما هو ملف الإنجاز (Portfolio)؟",options:["مجلد أوراق فقط","مجموعة منظمة من أعمال المتعلم تُظهر تطوره وإنجازاته","سجل حضور","شهادة تدريب"],correct:1,domain:"القياس والتقويم",difficulty:1,explanation:"ملف الإنجاز هو مجموعة هادفة ومنظمة من أعمال المتعلم تُجمع على مدى زمني لتُظهر نموه وتطوره وإنجازاته."},
+  {id:26,text:"ما المقصود بصعوبة السؤال في تحليل الاختبارات؟",options:["مدى تعقيد اللغة","نسبة الممتحنين الذين أجابوا إجابة صحيحة","طول السؤال","عدد خيارات السؤال"],correct:1,domain:"القياس والتقويم",difficulty:3,explanation:"صعوبة السؤال تُحسب كنسبة الممتحنين الذين أجابوا بشكل صحيح. كلما زادت النسبة كان السؤال أسهل والعكس صحيح."},
+  {id:27,text:"ما هو معامل التمييز للسؤال؟",options:["مدى صعوبة السؤال","قدرة السؤال على التمييز بين المتفوقين والضعفاء","عدد خيارات الإجابة","زمن الإجابة"],correct:1,domain:"القياس والتقويم",difficulty:3,explanation:"معامل التمييز يقيس قدرة السؤال على التمييز بين الطلاب ذوي الأداء المرتفع والمنخفض. يتراوح بين -1 و +1."},
+  {id:28,text:"أي مما يلي يُعد من أساليب التقويم البديل؟",options:["اختبار اختيار من متعدد","الملاحظة، المشاريع، ملفات الإنجاز","اختبار مقالي فقط","اختبار شفهي فقط"],correct:1,domain:"القياس والتقويم",difficulty:1,explanation:"التقويم البديل يشمل أساليب غير تقليدية مثل الملاحظة والمشاريع وملفات الإنجاز والعروض التقديمية والتقويم الذاتي."},
+  {id:29,text:"ما المقصود بالتغذية الراجعة الفعالة؟",options:["إعطاء الدرجة فقط","معلومات محددة وبناءة وفي الوقت المناسب تساعد المتعلم على التحسن","عقاب المتعلم","مقارنة المتعلم بزملائه"],correct:1,domain:"القياس والتقويم",difficulty:1,explanation:"التغذية الراجعة الفعالة تكون محددة وواضحة وبناءة وفي الوقت المناسب وتركز على الأداء وليس الشخص."},
+  {id:30,text:"ما الفرق بين الاختبار المحكي المرجع والمعيار المرجع؟",options:["لا فرق","المحكي يقارن بمعايير أداء ثابتة والمعيار يقارن بمجموعة","المحكي أصعب دائماً","المعيار المرجع لا يستخدم درجات"],correct:1,domain:"القياس والتقويم",difficulty:3,explanation:"الاختبار المحكي المرجع (Criterion-Referenced) يقيس أداء المتعلم ضد معايير محددة مسبقاً، بينما المعياري المرجع (Norm-Referenced) يقارنه بمجموعة."},
+  {id:31,text:"ما هي أهمية التقويم الذاتي للمتعلم؟",options:["لا أهمية له","يعزز الوعي بالتعلم والمسؤولية والتفكير التأملي","يحل محل تقويم المعلم","يستخدم فقط في الجامعات"],correct:1,domain:"القياس والتقويم",difficulty:1,explanation:"التقويم الذاتي يساعد المتعلم على تطوير وعيه بعملية تعلمه وتحمل المسؤولية وتعزيز مهارات التفكير التأملي."},
+  {id:32,text:"ما المقصود بتحليل الفقرات في الاختبارات؟",options:["تحليل اللغة فقط","دراسة خصائص كل سؤال من حيث الصعوبة والتمييز وفعالية البدائل","حذف الأسئلة الصعبة","ترتيب الأسئلة"],correct:1,domain:"القياس والتقويم",difficulty:3,explanation:"تحليل الفقرات يشمل دراسة معامل الصعوبة ومعامل التمييز وفعالية البدائل المشتتة لكل سؤال لتحسين جودة الاختبار."},
 
-            const copyQuestion = () => {
-                const q = activeQuestions[currentIndex];
-                if (!q) return;
-                const letters = ["أ", "ب", "ج", "د"];
-                let text = `السؤال ${currentIndex + 1}:\n${q.question}\n\n`;
-                q.options.forEach((o, i) => {
-                    text += `${letters[i]}) ${o.text}\n`;
-                });
-                navigator.clipboard.writeText(text).then(() => {
-                    setCopiedMsg(true);
-                    setTimeout(() => setCopiedMsg(false), 2000);
-                });
-            };
+  // Domain 3: البيئة التعليمية
+  {id:33,text:"ما هي عناصر البيئة التعليمية الفعالة؟",options:["الأثاث فقط","المادية والاجتماعية والنفسية والتقنية","المبنى فقط","الكتب فقط"],correct:1,domain:"البيئة التعليمية",difficulty:1,explanation:"البيئة التعليمية الفعالة تشمل العناصر المادية (التجهيزات) والاجتماعية (التفاعلات) والنفسية (الأمان والدافعية) والتقنية."},
+  {id:34,text:"ما المقصود بإدارة الفصل الدراسي؟",options:["تنظيف الفصل فقط","مجموعة الإجراءات والاستراتيجيات لتنظيم بيئة التعلم وتحقيق الأهداف","عقاب الطلاب","توزيع المقاعد فقط"],correct:1,domain:"البيئة التعليمية",difficulty:1,explanation:"إدارة الفصل تشمل جميع الإجراءات والاستراتيجيات التي يستخدمها المعلم لتنظيم بيئة التعلم والحفاظ على جو تعليمي منتج."},
+  {id:35,text:"أي مما يلي يُعد من استراتيجيات إدارة السلوك الإيجابية؟",options:["العقاب البدني","تعزيز السلوك المرغوب ووضع توقعات واضحة","الطرد من الفصل","الصراخ على المتعلمين"],correct:1,domain:"البيئة التعليمية",difficulty:1,explanation:"إدارة السلوك الإيجابية تعتمد على تعزيز السلوك المرغوب ووضع قواعد واضحة وتوقعات إيجابية وبناء علاقات جيدة."},
+  {id:36,text:"ما أهمية التنوع في طرق التدريس؟",options:["لا أهمية له","يلبي أنماط التعلم المختلفة ويزيد الدافعية","يُربك المتعلمين","يستهلك وقتاً فقط"],correct:1,domain:"البيئة التعليمية",difficulty:1,explanation:"تنويع طرق التدريس يراعي الفروق الفردية وأنماط التعلم المختلفة ويزيد من دافعية المتعلمين ويمنع الملل."},
+  {id:37,text:"ما المقصود بالتعلم الشامل (Inclusive Education)؟",options:["تعليم المتفوقين فقط","توفير فرص تعلم متكافئة لجميع المتعلمين بغض النظر عن اختلافاتهم","تعليم ذوي الإعاقة فقط","تعليم الكبار فقط"],correct:1,domain:"البيئة التعليمية",difficulty:2,explanation:"التعلم الشامل يعني تصميم بيئة تعليمية تلبي احتياجات جميع المتعلمين بما فيهم ذوو الإعاقة والموهوبون ومختلفو الخلفيات."},
+  {id:38,text:"ما هو دور التكنولوجيا في البيئة التعليمية الحديثة؟",options:["استبدال المعلم تماماً","تعزيز التعلم وتسهيل الوصول للمعلومات وتفعيل المشاركة","لا دور لها","تستخدم للترفيه فقط"],correct:1,domain:"البيئة التعليمية",difficulty:1,explanation:"التكنولوجيا تعزز التعلم من خلال توفير مصادر متنوعة وتسهيل التفاعل والتعاون وتمكين التعلم الشخصي والتغذية الراجعة الفورية."},
+  {id:39,text:"ما المقصود بالبيئة التعليمية الآمنة نفسياً؟",options:["بيئة خالية من المخاطر الجسدية فقط","بيئة يشعر فيها المتعلم بالقبول والاحترام والحرية في التعبير والخطأ","بيئة مغلقة","بيئة بدون قواعد"],correct:1,domain:"البيئة التعليمية",difficulty:2,explanation:"الأمان النفسي يعني أن المتعلم يشعر بالراحة في التعبير عن أفكاره وطرح الأسئلة وارتكاب الأخطاء دون خوف من السخرية أو العقاب."},
+  {id:40,text:"كيف يمكن تعزيز الدافعية الداخلية للمتعلمين؟",options:["المكافآت المالية فقط","ربط التعلم باهتماماتهم وتوفير خيارات ومنحهم استقلالية","التهديد بالعقاب","الإجبار على الحضور"],correct:1,domain:"البيئة التعليمية",difficulty:2,explanation:"تعزيز الدافعية الداخلية يتم عبر ربط التعلم باهتمامات المتعلم وتوفير خيارات ومنح استقلالية وإظهار قيمة التعلم."},
+  {id:41,text:"ما هي نظرية تقرير المصير (Self-Determination Theory)؟",options:["نظرية في الإدارة","نظرية تحدد ثلاثة احتياجات أساسية: الكفاءة والاستقلالية والانتماء","نظرية في الفيزياء","نظرية في الاقتصاد"],correct:1,domain:"البيئة التعليمية",difficulty:3,explanation:"نظرية تقرير المصير لديسي وريان تقترح أن الدافعية الداخلية تُعزز بتلبية ثلاث حاجات: الكفاءة والاستقلالية والانتماء."},
+  {id:42,text:"ما المقصود بالتمايز التعليمي (Differentiation)؟",options:["تدريس نفس المحتوى بنفس الطريقة للجميع","تعديل المحتوى والعمليات والنواتج لتلبية احتياجات المتعلمين المتنوعة","فصل الطلاب حسب المستوى","تدريس المتفوقين فقط"],correct:1,domain:"البيئة التعليمية",difficulty:2,explanation:"التمايز التعليمي يعني تكييف المحتوى وطرق التدريس والمنتجات التعليمية لتلبية الاحتياجات المتنوعة للمتعلمين في نفس الفصل."},
+  {id:43,text:"ما أهمية التعلم الاجتماعي العاطفي (SEL)؟",options:["لا أهمية له","يطور مهارات الوعي الذاتي وإدارة المشاعر والعلاقات الاجتماعية","يحل محل التعلم الأكاديمي","مهم فقط للأطفال"],correct:1,domain:"البيئة التعليمية",difficulty:2,explanation:"التعلم الاجتماعي العاطفي يطور مهارات أساسية مثل الوعي الذاتي وإدارة المشاعر والتعاطف وبناء العلاقات واتخاذ القرارات المسؤولة."},
+  {id:44,text:"ما هو نموذج SAMR في دمج التقنية؟",options:["نموذج لإدارة المدارس","نموذج لتصنيف مستويات دمج التقنية: الإحلال، التعزيز، التعديل، إعادة التعريف","نموذج لتقييم المعلمين","نموذج للمناهج"],correct:1,domain:"البيئة التعليمية",difficulty:3,explanation:"نموذج SAMR يصنف دمج التقنية في 4 مستويات: Substitution (إحلال)، Augmentation (تعزيز)، Modification (تعديل)، Redefinition (إعادة تعريف)."},
+  {id:45,text:"ما المقصود بتصميم التعلم الشامل (UDL)؟",options:["تصميم مبنى المدرسة","إطار عمل يوفر وسائل متعددة للتمثيل والتعبير والمشاركة","تصميم الأثاث","تصميم الزي المدرسي"],correct:1,domain:"البيئة التعليمية",difficulty:3,explanation:"التصميم الشامل للتعلم (Universal Design for Learning) يوفر وسائل متعددة للتمثيل (عرض المعلومات) والتعبير (إظهار التعلم) والمشاركة (الدافعية)."},
+  {id:46,text:"كيف يتعامل المدرب الفعال مع الفروق الفردية؟",options:["يتجاهلها","يستخدم استراتيجيات متنوعة ويوفر خيارات ويعدل وتيرة التعلم","يدرس المتفوقين فقط","يوحد الأسلوب للجميع"],correct:1,domain:"البيئة التعليمية",difficulty:1,explanation:"المدرب الفعال يراعي الفروق الفردية من خلال تنويع الاستراتيجيات وتوفير خيارات متعددة وتعديل وتيرة التعليم وتقديم دعم متفاوت."},
+  {id:47,text:"ما دور اللعب في التعلم؟",options:["لا دور له","يعزز الإبداع وحل المشكلات والمهارات الاجتماعية والدافعية","يُضيع الوقت","مناسب فقط لرياض الأطفال"],correct:1,domain:"البيئة التعليمية",difficulty:1,explanation:"اللعب أداة تعليمية قوية تعزز الإبداع والتفكير النقدي وحل المشكلات والمهارات الاجتماعية والدافعية في جميع الأعمار."},
+  {id:48,text:"ما المقصود بالمساحة التعليمية المرنة (Flexible Learning Space)؟",options:["فصل دراسي تقليدي","بيئة تعلم قابلة لإعادة التكوين لدعم أنماط تعلم مختلفة","غرفة فارغة","مختبر حاسوب"],correct:1,domain:"البيئة التعليمية",difficulty:2,explanation:"المساحة التعليمية المرنة هي بيئة يمكن إعادة ترتيبها وتكييفها بسهولة لدعم أنشطة تعلم متنوعة (فردي، جماعي، تعاوني)."},
 
-            // Keyboard shortcuts
-            useEffect(() => {
-                const handler = (e) => {
-                    if (step !== "quiz") return;
-                    if (e.key === "ArrowLeft") goNext();
-                    if (e.key === "ArrowRight" && mode === "practice") goPrev();
-                    if (["1","2","3","4"].includes(e.key) && !showFeedback) handleAnswer(parseInt(e.key)-1);
-                    if (e.key.toLowerCase() === "c") copyQuestion();
-                    if (e.key.toLowerCase() === "h") resetToHome();
-                    if (e.key.toLowerCase() === "m") setShowMap(s => !s);
-                };
-                window.addEventListener("keydown", handler);
-                return () => window.removeEventListener("keydown", handler);
-            });
+  // Domain 4: التطوير المهني
+  {id:49,text:"ما المقصود بالتطوير المهني المستمر؟",options:["حضور دورة واحدة فقط","عملية مستمرة لتطوير المعارف والمهارات والاتجاهات المهنية","الحصول على شهادة عليا فقط","القراءة فقط"],correct:1,domain:"التطوير المهني",difficulty:1,explanation:"التطوير المهني المستمر هو عملية منهجية ومستمرة طوال الحياة المهنية لتطوير الكفايات المهنية وتحسين الممارسة."},
+  {id:50,text:"ما هو التعلم التأملي (Reflective Practice)؟",options:["التفكير في المستقبل فقط","عملية التفكير النقدي في الممارسات المهنية لتحسينها","تكرار نفس الأساليب","حفظ المعلومات"],correct:1,domain:"التطوير المهني",difficulty:2,explanation:"التعلم التأملي هو ممارسة التفكير النقدي المنظم في الخبرات والممارسات المهنية لاستخلاص الدروس وتحسين الأداء المستقبلي."},
+  {id:51,text:"ما هو مجتمع الممارسة (Community of Practice)؟",options:["نادي رياضي","مجموعة من المهنيين يتشاركون الاهتمام ويتعلمون من بعضهم","فصل دراسي","مؤسسة حكومية"],correct:1,domain:"التطوير المهني",difficulty:2,explanation:"مجتمع الممارسة هو مجموعة من الأشخاص الذين يتشاركون مهنة أو اهتماماً ويتفاعلون بانتظام لتبادل المعرفة والخبرات."},
+  {id:52,text:"ما أهمية الإرشاد المهني (Mentoring) في التطوير المهني؟",options:["لا أهمية له","يوفر الدعم والتوجيه ونقل الخبرة من شخص أكثر خبرة","يحل محل التدريب","مهم فقط للمبتدئين"],correct:1,domain:"التطوير المهني",difficulty:1,explanation:"الإرشاد المهني يوفر دعماً فردياً وتوجيهاً مهنياً ونقل خبرة من المرشد (الأكثر خبرة) إلى المُرشَد مما يُسرّع النمو المهني."},
+  {id:53,text:"ما هو نموذج كولب للتعلم التجريبي؟",options:["نموذج من مرحلتين","نموذج من 4 مراحل: التجربة الملموسة، التأمل، المفهمة المجردة، التجريب النشط","نموذج نظري فقط","نموذج للتقويم"],correct:1,domain:"التطوير المهني",difficulty:2,explanation:"دورة كولب للتعلم التجريبي تتكون من 4 مراحل متصلة: التجربة الملموسة → الملاحظة والتأمل → المفهمة المجردة → التجريب النشط."},
+  {id:54,text:"ما المقصود بخطة التطوير المهني الفردية (IDP)؟",options:["خطة المؤسسة","خطة شخصية تحدد أهداف التطوير والأنشطة والجدول الزمني","خطة مالية","خطة تقاعد"],correct:1,domain:"التطوير المهني",difficulty:1,explanation:"خطة التطوير المهني الفردية هي وثيقة شخصية تحدد أهداف التطوير المهني والأنشطة المطلوبة والموارد والجدول الزمني."},
+  {id:55,text:"ما هو البحث الإجرائي (Action Research)؟",options:["بحث أكاديمي بحت","بحث يُجريه الممارس في بيئة عمله لتحسين ممارسته","بحث مختبري","بحث تاريخي"],correct:1,domain:"التطوير المهني",difficulty:2,explanation:"البحث الإجرائي هو بحث منهجي يُجريه المعلم/المدرب في بيئته العملية لتحديد مشكلة وتطوير حل وتطبيقه وتقويم نتائجه."},
+  {id:56,text:"ما أهمية التغذية الراجعة 360 درجة في التطوير المهني؟",options:["لا أهمية لها","توفر رؤية شاملة من مصادر متعددة (رؤساء، زملاء، مرؤوسين، ذاتية)","تأتي من مدير واحد فقط","تستخدم للفصل من العمل"],correct:1,domain:"التطوير المهني",difficulty:2,explanation:"التغذية الراجعة 360 درجة تجمع آراء من مصادر متعددة مما يعطي صورة شاملة ومتوازنة عن أداء الفرد ونقاط تطويره."},
+  {id:57,text:"ما المقصود بالكفايات المهنية؟",options:["الشهادات فقط","مجموعة المعارف والمهارات والاتجاهات اللازمة لأداء المهنة بفعالية","سنوات الخبرة فقط","الراتب"],correct:1,domain:"التطوير المهني",difficulty:1,explanation:"الكفايات المهنية هي مزيج متكامل من المعارف والمهارات والاتجاهات والقيم التي تمكن الشخص من أداء مهامه المهنية بفعالية."},
+  {id:58,text:"ما هو التعلم المصغر (Microlearning)؟",options:["تعلم طويل المدى","وحدات تعلم قصيرة ومركزة تتناول موضوعاً محدداً","تعلم للأطفال","تعلم بدون تقنية"],correct:1,domain:"التطوير المهني",difficulty:1,explanation:"التعلم المصغر يقدم محتوى تعليمي في وحدات قصيرة ومركزة (3-5 دقائق) يسهل استهلاكها وتطبيقها فوراً."},
+  {id:59,text:"ما دور القيادة في التطوير المهني؟",options:["لا دور لها","توفير الدعم والموارد والثقافة الداعمة للتعلم المستمر","الرقابة فقط","تقييم الأداء السنوي فقط"],correct:1,domain:"التطوير المهني",difficulty:2,explanation:"القيادة الفعالة تدعم التطوير المهني من خلال توفير الموارد والوقت والثقافة التنظيمية الداعمة للتعلم والنمو المستمر."},
+  {id:60,text:"ما المقصود بالتعلم الاجتماعي (Social Learning) في سياق التطوير المهني؟",options:["التعلم في وسائل التواصل فقط","التعلم من خلال التفاعل مع الآخرين والملاحظة والمشاركة","التعلم الفردي","التعلم من الكتب فقط"],correct:1,domain:"التطوير المهني",difficulty:1,explanation:"التعلم الاجتماعي يؤكد أن كثيراً من التعلم المهني يحدث من خلال التفاعل مع الزملاء والملاحظة والمشاركة في مجتمعات الممارسة."},
+  {id:61,text:"ما هو نموذج 70-20-10 في التطوير المهني؟",options:["نسب رواتب","70% تعلم من الخبرة العملية، 20% من الآخرين، 10% من التدريب الرسمي","نموذج إحصائي","نموذج تقييم"],correct:1,domain:"التطوير المهني",difficulty:2,explanation:"نموذج 70-20-10 يشير إلى أن 70% من التعلم يحدث من التجارب العملية، 20% من التفاعل مع الآخرين، و10% من التدريب الرسمي."},
+  {id:62,text:"ما أهمية التوثيق في التطوير المهني؟",options:["لا أهمية له","يساعد في تتبع النمو والتأمل وإثبات الكفايات","مطلوب بيروقراطي فقط","يأخذ وقتاً بلا فائدة"],correct:1,domain:"التطوير المهني",difficulty:1,explanation:"توثيق التطور المهني يساعد في تتبع مسار النمو والتأمل في الخبرات وإثبات الكفايات وتخطيط الخطوات المستقبلية."},
+  {id:63,text:"ما المقصود بالتدريب القائم على الكفايات؟",options:["تدريب نظري فقط","تدريب يركز على إتقان كفايات محددة وقابلة للقياس","تدريب طويل المدة","تدريب بدون أهداف"],correct:1,domain:"التطوير المهني",difficulty:1,explanation:"التدريب القائم على الكفايات يركز على تطوير وإتقان كفايات محددة وقابلة للقياس والملاحظة بدلاً من مجرد نقل معلومات."},
+  {id:64,text:"ما هو التعلم التكيفي (Adaptive Learning)؟",options:["تعلم ثابت للجميع","تعلم يتكيف تلقائياً مع مستوى واحتياجات كل متعلم","تعلم بدون تقنية","تعلم جماعي فقط"],correct:1,domain:"التطوير المهني",difficulty:2,explanation:"التعلم التكيفي يستخدم التقنية لتعديل المحتوى والمسار والصعوبة تلقائياً بناءً على أداء واحتياجات كل متعلم فردياً."},
 
-            const currentQ = activeQuestions[currentIndex];
-            const domainInfo = currentQ ? DOMAIN_META[currentQ.domain] : null;
-            const DomainIcon = domainInfo?.icon || Layers;
+  // Domain 5: المناهج والتخطيط
+  {id:65,text:"ما المقصود بالمنهج الدراسي بمفهومه الواسع؟",options:["الكتاب المدرسي فقط","جميع الخبرات التعليمية المخططة التي يمر بها المتعلم","الامتحانات فقط","جدول الحصص"],correct:1,domain:"المناهج والتخطيط",difficulty:1,explanation:"المنهج بمفهومه الواسع يشمل جميع الخبرات التعليمية المخططة وغير المخططة التي يمر بها المتعلم تحت إشراف المؤسسة التعليمية."},
+  {id:66,text:"ما هي عناصر المنهج الأساسية؟",options:["الكتاب والمعلم فقط","الأهداف، المحتوى، طرق التدريس، التقويم","المبنى والأثاث","الطلاب فقط"],correct:1,domain:"المناهج والتخطيط",difficulty:1,explanation:"عناصر المنهج الأساسية هي: الأهداف التعليمية، المحتوى التعليمي، طرق ووسائل التدريس، وأساليب التقويم."},
+  {id:67,text:"ما المقصود بتحليل الاحتياجات التدريبية؟",options:["تحليل الميزانية","عملية منهجية لتحديد الفجوة بين الأداء الحالي والمطلوب","تحليل الحضور","تحليل المباني"],correct:1,domain:"المناهج والتخطيط",difficulty:2,explanation:"تحليل الاحتياجات التدريبية هو عملية منهجية لتحديد الفجوة بين الأداء الحالي والمطلوب وتحديد الأولويات التدريبية لسدها."},
+  {id:68,text:"ما هي صياغة الأهداف التعليمية السلوكية؟",options:["أهداف عامة غامضة","أهداف تصف سلوكاً قابلاً للملاحظة والقياس يمكن للمتعلم أداؤه","أهداف للمعلم فقط","أهداف مالية"],correct:1,domain:"المناهج والتخطيط",difficulty:2,explanation:"الأهداف السلوكية تصف أداءً قابلاً للملاحظة والقياس وتشمل: المتعلم، السلوك، الظروف، ومعيار الأداء."},
+  {id:69,text:"ما المقصود بتسلسل المحتوى التعليمي؟",options:["ترتيب عشوائي","تنظيم المحتوى بترتيب منطقي يراعي التدرج من البسيط للمعقد","حذف المحتوى الصعب","تكرار نفس المحتوى"],correct:1,domain:"المناهج والتخطيط",difficulty:1,explanation:"تسلسل المحتوى يعني تنظيمه بترتيب منطقي وتدرجي يراعي الانتقال من البسيط إلى المعقد ومن المألوف إلى الجديد."},
+  {id:70,text:"ما هو التصميم العكسي (Backward Design)؟",options:["البدء بالأنشطة ثم الأهداف","البدء بتحديد النتائج المرغوبة ثم أدلة التقويم ثم تصميم الأنشطة","البدء بالتقويم فقط","تصميم بدون أهداف"],correct:1,domain:"المناهج والتخطيط",difficulty:3,explanation:"التصميم العكسي (Wiggins & McTighe) يبدأ بتحديد النتائج التعليمية المرغوبة، ثم تحديد أدلة التقويم المقبولة، ثم تصميم خبرات التعلم."},
+  {id:71,text:"ما المقصود بالموائمة البنائية (Constructive Alignment)؟",options:["بناء المبنى المدرسي","التوافق بين الأهداف وأنشطة التعلم وأساليب التقويم","مواءمة الميزانية","مواءمة الجدول"],correct:1,domain:"المناهج والتخطيط",difficulty:3,explanation:"الموائمة البنائية (Biggs) تعني ضمان التوافق والاتساق بين الأهداف التعليمية وأنشطة التعلم وأساليب التقويم."},
+  {id:72,text:"ما هي أنواع تنظيم المحتوى المنهجي؟",options:["تنظيم واحد فقط","تنظيم خطي، حلزوني، تكاملي، وحداتي","تنظيم عشوائي","تنظيم أبجدي"],correct:1,domain:"المناهج والتخطيط",difficulty:2,explanation:"من أنماط تنظيم المحتوى: الخطي (تسلسلي)، الحلزوني (تكرار بتعمق)، التكاملي (ربط مواد مختلفة)، والوحداتي (وحدات مستقلة)."},
+  {id:73,text:"ما المقصود بالمنهج الخفي (Hidden Curriculum)؟",options:["منهج سري","القيم والاتجاهات والممارسات غير المعلنة التي يتعلمها المتعلم من البيئة","منهج إضافي","منهج اختياري"],correct:1,domain:"المناهج والتخطيط",difficulty:3,explanation:"المنهج الخفي يشمل القيم والاتجاهات والمعايير الاجتماعية التي يتعلمها المتعلم بشكل غير مباشر من بيئة المدرسة وثقافتها."},
+  {id:74,text:"ما أهمية ربط المحتوى بالسياق المحلي؟",options:["لا أهمية له","يجعل التعلم أكثر معنى وملاءمة وارتباطاً بحياة المتعلم","يزيد الصعوبة","يقلل الجودة"],correct:1,domain:"المناهج والتخطيط",difficulty:1,explanation:"ربط المحتوى بالسياق المحلي يجعل التعلم أكثر معنى وملاءمة لاحتياجات المتعلم وبيئته ويزيد من دافعيته وقدرته على التطبيق."},
+  {id:75,text:"ما هو تخطيط الدرس الفعال؟",options:["كتابة عنوان الدرس فقط","تحديد الأهداف والأنشطة والوسائل والتقويم مسبقاً بشكل منظم","نسخ خطة زميل","الارتجال الكامل"],correct:1,domain:"المناهج والتخطيط",difficulty:1,explanation:"تخطيط الدرس الفعال يشمل تحديد الأهداف بوضوح واختيار الأنشطة والوسائل المناسبة وتصميم أساليب التقويم وإدارة الوقت."},
+  {id:76,text:"ما المقصود بنطاق المنهج (Scope)؟",options:["طول الكتاب","عمق واتساع المحتوى والمهارات المغطاة في المنهج","عدد الطلاب","عدد الحصص"],correct:1,domain:"المناهج والتخطيط",difficulty:2,explanation:"نطاق المنهج يشير إلى مدى اتساع وعمق المحتوى والمهارات والخبرات التي يغطيها المنهج في فترة زمنية محددة."},
+  {id:77,text:"ما هو المنهج القائم على الكفايات؟",options:["منهج يركز على الحفظ","منهج يركز على إتقان المتعلم لكفايات محددة وقابلة للتطبيق","منهج نظري فقط","منهج بدون تقويم"],correct:1,domain:"المناهج والتخطيط",difficulty:2,explanation:"المنهج القائم على الكفايات يركز على تمكين المتعلم من إتقان كفايات (معارف ومهارات واتجاهات) قابلة للتطبيق والقياس في سياقات حقيقية."},
+  {id:78,text:"ما أهمية التنوع في مصادر التعلم؟",options:["لا أهمية له","يثري التعلم ويلبي أنماطاً مختلفة ويعزز الفهم العميق","يُربك المتعلم","يكلف كثيراً فقط"],correct:1,domain:"المناهج والتخطيط",difficulty:1,explanation:"تنويع مصادر التعلم (كتب، فيديوهات، تجارب، زيارات، خبراء) يثري التجربة التعليمية ويلبي أنماط تعلم مختلفة ويعزز الفهم."},
+  {id:79,text:"ما المقصود بتقويم المنهج؟",options:["تغيير الكتاب فقط","عملية منهجية لجمع بيانات عن فاعلية المنهج واتخاذ قرارات تطويرية","حذف المنهج","توزيع المنهج"],correct:1,domain:"المناهج والتخطيط",difficulty:2,explanation:"تقويم المنهج هو عملية منهجية لجمع وتحليل بيانات عن مدى فاعلية المنهج في تحقيق أهدافه واتخاذ قرارات تطويرية مستنيرة."},
+  {id:80,text:"ما هي معايير جودة البرنامج التدريبي؟",options:["طول البرنامج فقط","ملاءمة الأهداف، جودة المحتوى، كفاءة التنفيذ، فاعلية التقويم، الأثر","عدد المتدربين","تكلفة البرنامج"],correct:1,domain:"المناهج والتخطيط",difficulty:2,explanation:"جودة البرنامج التدريبي تُقاس بملاءمة الأهداف للاحتياجات، جودة المحتوى، كفاءة التنفيذ، فاعلية التقويم، والأثر على الأداء."}
+];
 
-            const getTimerStyle = () => {
-                if (timeLeft > 30) return "text-etec-700 border-etec-500 bg-etec-50 dark:bg-etec-900/40 dark:text-etec-300";
-                if (timeLeft > 10) return "text-amber-600 border-amber-500 bg-amber-50 dark:bg-amber-900/40";
-                return "text-red-600 border-red-500 bg-red-50 dark:bg-red-900/40 pulse-red";
-            };
+// ==================== QUOTES ====================
+const quotes = [
+  {text:"العلم نور والجهل ظلام",author:"حكمة عربية"},
+  {text:"من طلب العلا سهر الليالي",author:"حكمة عربية"},
+  {text:"التعليم هو أقوى سلاح يمكنك استخدامه لتغيير العالم",author:"نيلسون مانديلا"},
+  {text:"لا تقلق من فشلك، بل قلق من عدم المحاولة",author:"حكمة"},
+  {text:"الاستثمار في المعرفة يحقق أفضل عائد",author:"بنجامين فرانكلين"},
+  {text:"كل خبير كان يوماً مبتدئاً",author:"هيلين هايز"},
+  {text:"الطريقة الوحيدة للقيام بعمل عظيم هي أن تحب ما تفعله",author:"ستيف جوبز"},
+  {text:"النجاح ليس نهائياً والفشل ليس قاتلاً، الشجاعة للاستمرار هي ما يهم",author:"ونستون تشرشل"}
+];
 
-            // ========== WELCOME ==========
-            if (step === "welcome") {
-                const hasProgress = !!localStorage.getItem(STORAGE_KEY);
-                return (
-                    <div className="min-h-screen etec-pattern flex flex-col">
-                        {/* Top bar */}
-                        <div className="bg-etec-primary text-white py-2 px-4 text-center text-sm font-medium">
-                            مستوحى من معايير هيئة تقويم التعليم والتدريب (ETEC) — الرخصة المهنية للمدربين
-                        </div>
+// ==================== BADGES ====================
+const badgesDef = [
+  {id:"perfect",icon:"🏆",name:"مثالي",desc:"100% في الاختبار",check:r=>r.pct===100},
+  {id:"excellent",icon:"🌟",name:"ممتاز",desc:"90% أو أكثر",check:r=>r.pct>=90},
+  {id:"good",icon:"👍",name:"جيد جداً",desc:"80% أو أكثر",check:r=>r.pct>=80},
+  {id:"pass",icon:"✅",name:"ناجح",desc:"60% أو أكثر",check:r=>r.pct>=60},
+  {id:"streak10",icon:"🔥",name:"سلسلة 10",desc:"10 إجابات صحيحة متتالية",check:r=>r.maxStreak>=10},
+  {id:"streak5",icon:"💪",name:"سلسلة 5",desc:"5 إجابات صحيحة متتالية",check:r=>r.maxStreak>=5},
+  {id:"speed",icon:"⚡",name:"سريع",desc:"متوسط أقل من 20 ثانية",check:r=>r.avgTime<20&&r.avgTime>0},
+  {id:"domain_master",icon:"🎯",name:"سيد المجال",desc:"100% في أي مجال",check:r=>r.domainPcts.some(p=>p.pct===100)},
+  {id:"no_timeout",icon:"⏱️",name:"في الوقت",desc:"بدون أي انتهاء وقت",check:r=>r.timeouts===0},
+  {id:"no_skip",icon:"📝",name:"مكتمل",desc:"أجاب على كل الأسئلة",check:r=>r.skipped===0},
+  {id:"half",icon:"🎖️",name:"نصف الطريق",desc:"أكمل 40 سؤال",check:r=>r.total>=40},
+  {id:"first",icon:"🎉",name:"البداية",desc:"أكمل أول اختبار",check:r=>r.total>0}
+];
 
-                        <div className="flex-1 flex items-center justify-center p-4 md:p-8">
-                            <div className="max-w-5xl w-full glass rounded-3xl shadow-2xl border border-slate-200/60 dark:border-slate-700 p-6 md:p-10 fade-in">
-                                <div className="flex justify-between items-start mb-6">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-14 h-14 bg-etec-primary rounded-2xl flex items-center justify-center shadow-lg">
-                                            <Award className="w-8 h-8 text-white" />
-                                        </div>
-                                        <div>
-                                            <h1 className="text-2xl md:text-3xl font-extrabold text-slate-800 dark:text-white">بنك أسئلة الرخصة المهنية للمدربين</h1>
-                                            <p className="text-sm text-etec-700 dark:text-etec-300 font-medium mt-0.5">إعداد المهندس سمير حبيب بنتن</p>
-                                        </div>
-                                    </div>
-                                    <button onClick={() => setDarkMode(!darkMode)} className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
-                                        {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-                                    </button>
-                                </div>
+// ==================== STATE ====================
+let state = {
+  mode: 'test',
+  currentQ: 0,
+  answers: {},
+  timer: 60,
+  timerInterval: null,
+  simTimer: 90*60,
+  simInterval: null,
+  streak: 0,
+  maxStreak: 0,
+  questionTimes: {},
+  questionStartTime: 0,
+  quizQuestions: [],
+  soundEnabled: true,
+  lastResult: null
+};
 
-                                <p className="text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
-                                    أداة تدريب تفاعلية شاملة (80 سؤالاً) تغطي المجالات الأربعة لمعايير الرخصة المهنية للمدربين. اختر الوضع والمجال ثم ابدأ.
-                                </p>
+// ==================== INIT ====================
+document.addEventListener('DOMContentLoaded', () => {
+  loadSettings();
+  checkResume();
+  document.addEventListener('keydown', handleKeyboard);
+});
 
-                                {/* Mode + Settings */}
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                                    <div className="p-4 rounded-2xl border-2 border-etec-200 dark:border-etec-800 bg-etec-50/50 dark:bg-etec-900/20">
-                                        <label className="block text-sm font-bold mb-2 text-etec-800 dark:text-etec-200">وضع الاختبار</label>
-                                        <div className="flex gap-2">
-                                            <button onClick={() => setMode("practice")} className={`flex-1 py-2 rounded-xl text-sm font-bold transition ${mode==="practice" ? "bg-etec-primary text-white" : "bg-white dark:bg-slate-800 border"}`}>تدريب</button>
-                                            <button onClick={() => setMode("exam")} className={`flex-1 py-2 rounded-xl text-sm font-bold transition ${mode==="exam" ? "bg-etec-primary text-white" : "bg-white dark:bg-slate-800 border"}`}>محاكاة رسمية</button>
-                                        </div>
-                                        <p className="text-xs text-slate-500 mt-2">{mode==="practice" ? "يظهر التحليل فور الإجابة + رجوع مسموح" : "لا تحليل حتى النهاية + منع الرجوع"}</p>
-                                    </div>
-                                    <div className="p-4 rounded-2xl border border-slate-200 dark:border-slate-700">
-                                        <label className="block text-sm font-bold mb-2">مدة المؤقت (ثانية)</label>
-                                        <select value={timerDuration} onChange={e => setTimerDuration(+e.target.value)} className="w-full p-2 rounded-xl border dark:bg-slate-800 dark:border-slate-600 text-sm">
-                                            <option value={30}>30</option>
-                                            <option value={45}>45</option>
-                                            <option value={60}>60 (افتراضي)</option>
-                                            <option value={90}>90</option>
-                                            <option value={0}>بدون مؤقت</option>
-                                        </select>
-                                    </div>
-                                    <div className="p-4 rounded-2xl border border-slate-200 dark:border-slate-700 flex flex-col justify-center">
-                                        <label className="flex items-center gap-2 cursor-pointer text-sm font-medium">
-                                            <input type="checkbox" checked={shuffleOptions} onChange={e => setShuffleOptions(e.target.checked)} className="rounded text-etec-primary" />
-                                            خلط ترتيب الخيارات
-                                        </label>
-                                        {hasProgress && (
-                                            <button onClick={resumeProgress} className="mt-3 w-full py-2 bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-200 rounded-xl text-sm font-bold hover:bg-amber-200 transition">
-                                                استكمال التقدم السابق
-                                            </button>
-                                        )}
-                                    </div>
-                                </div>
+function loadSettings() {
+  const theme = localStorage.getItem('etec_theme') || 'light';
+  const font = localStorage.getItem('etec_font') || 'medium';
+  const sound = localStorage.getItem('etec_sound');
+  document.body.setAttribute('data-theme', theme);
+  document.body.setAttribute('data-font', font);
+  if(theme==='dark') document.getElementById('darkToggle').classList.add('active');
+  if(theme==='high-contrast') document.getElementById('contrastToggle').classList.add('active');
+  if(sound==='false') { state.soundEnabled=false; document.getElementById('soundToggle').classList.remove('active'); }
+  document.querySelectorAll('.font-btn').forEach(b=>b.classList.toggle('active',b.dataset.size===font));
+}
 
-                                {/* Full quiz CTA */}
-                                <button onClick={() => startQuiz("all", mode)} className="w-full group flex items-center justify-between p-5 md:p-6 bg-gradient-to-l from-etec-primary to-etec-dark text-white rounded-2xl shadow-xl hover:shadow-2xl hover:scale-[1.01] transition-all mb-6">
-                                    <div className="flex items-center gap-4 text-right">
-                                        <div className="p-3 bg-white/20 rounded-xl"><Layers className="w-8 h-8" /></div>
-                                        <div>
-                                            <span className="block text-xl md:text-2xl font-black">الاختبار الشامل — 80 سؤالاً</span>
-                                            <span className="text-etec-100 text-sm">جميع المجالات طبقاً لمعايير هيئة تقويم التعليم والتدريب</span>
-                                        </div>
-                                    </div>
-                                    <div className="bg-white text-etec-primary px-5 py-3 rounded-xl font-bold flex items-center gap-2 shadow">
-                                        ابدأ الآن
-                                        <ChevronLeft className="w-5 h-5 group-hover:-translate-x-1 transition" />
-                                    </div>
-                                </button>
+function checkResume() {
+  const saved = localStorage.getItem('etec_quiz_state');
+  if(saved) {
+    try {
+      const s = JSON.parse(saved);
+      if(s.answers && Object.keys(s.answers).length > 0) {
+        document.getElementById('resumeBanner').style.display = 'flex';
+        document.getElementById('resumeInfo').textContent = `أجبت على ${Object.keys(s.answers).length} سؤال من ${s.quizQuestions?s.quizQuestions.length:80}`;
+      }
+    } catch(e) {}
+  }
+  const lr = localStorage.getItem('etec_last_result');
+  if(lr) {
+    document.getElementById('reviewCard').style.display = '';
+    state.lastResult = JSON.parse(lr);
+  }
+}
 
-                                <div className="relative my-6">
-                                    <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-slate-200 dark:border-slate-700"></div></div>
-                                    <div className="relative flex justify-center text-sm"><span className="px-4 bg-white dark:bg-slate-900 text-slate-500 font-bold">أو اختر مجالاً محدداً (20 سؤالاً)</span></div>
-                                </div>
+// ==================== SETTINGS ====================
+function toggleDark() {
+  const t = document.getElementById('darkToggle');
+  t.classList.toggle('active');
+  const theme = t.classList.contains('active') ? 'dark' : 'light';
+  document.body.setAttribute('data-theme', theme);
+  localStorage.setItem('etec_theme', theme);
+  document.getElementById('contrastToggle').classList.remove('active');
+}
+function toggleContrast() {
+  const t = document.getElementById('contrastToggle');
+  t.classList.toggle('active');
+  const theme = t.classList.contains('active') ? 'high-contrast' : 'light';
+  document.body.setAttribute('data-theme', theme);
+  localStorage.setItem('etec_theme', theme);
+  document.getElementById('darkToggle').classList.remove('active');
+}
+function toggleSound() {
+  const t = document.getElementById('soundToggle');
+  t.classList.toggle('active');
+  state.soundEnabled = t.classList.contains('active');
+  localStorage.setItem('etec_sound', state.soundEnabled);
+}
+function setFontSize(size) {
+  document.body.setAttribute('data-font', size);
+  localStorage.setItem('etec_font', size);
+  document.querySelectorAll('.font-btn').forEach(b=>b.classList.toggle('active',b.dataset.size===size));
+}
 
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    {[1,2,3,4].map(d => {
-                                        const m = DOMAIN_META[d];
-                                        const IconComp = m.icon;
-                                        return (
-                                            <div key={d} onClick={() => startQuiz(d, mode)} className={`p-5 rounded-2xl border-2 ${m.border} ${m.bg} cursor-pointer hover:shadow-md transition-all flex flex-col`}>
-                                                <div className="flex justify-between items-start mb-3">
-                                                    <div className={`p-2.5 rounded-xl bg-white/80 dark:bg-slate-800 shadow-sm`}><IconComp className={`w-6 h-6 text-${m.color}-600`} /></div>
-                                                    <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-white/70 dark:bg-slate-800">20 سؤالاً</span>
-                                                </div>
-                                                <h3 className="text-lg font-bold mb-1">{m.name}</h3>
-                                                <p className="text-sm text-slate-600 dark:text-slate-300 flex-1 mb-3">
-                                                    {d===1 && "نظريات التعلم، الأندراغوجيا، ADDIE/SAM، الاحتياجات التدريبية"}
-                                                    {d===2 && "إدارة القاعة، التيسير، لغة الجسد، التعامل مع أنماط المتدربين"}
-                                                    {d===3 && "الأخلاقيات، الملكية الفكرية، السرية، النزاهة، المسؤولية"}
-                                                    {d===4 && "الذكاء الاصطناعي، التدريب الرقمي، EQ، الواقع الافتراضي"}
-                                                </p>
-                                                <button className={`w-full py-2.5 rounded-xl text-sm font-bold text-white bg-${m.color}-600 hover:opacity-90 transition flex items-center justify-center gap-1`}>
-                                                    اختبار هذا المجال <ChevronLeft className="w-4 h-4" />
-                                                </button>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
+// ==================== QUIZ START ====================
+function startQuiz(mode) {
+  state.mode = mode;
+  state.currentQ = 0;
+  state.answers = {};
+  state.streak = 0;
+  state.maxStreak = 0;
+  state.questionTimes = {};
+  clearInterval(state.timerInterval);
+  clearInterval(state.simInterval);
 
-                                <div className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-700 text-center text-sm text-slate-500">
-                                    <p>إعداد وتطوير: <span className="font-bold text-etec-primary">المهندس سمير حبيب بنتن</span></p>
-                                    <p className="mt-1 text-xs">اختصارات: ← التالي | → السابق | 1-4 اختيار | C نسخ | H رئيسية | M خريطة</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                );
-            }
+  if(mode === 'review') {
+    if(!state.lastResult) return showToast('لا توجد أخطاء لمراجعتها');
+    const wrongIds = state.lastResult.wrongIds || [];
+    if(wrongIds.length === 0) return showToast('لا توجد أخطاء لمراجعتها');
+    state.quizQuestions = wrongIds.map(id => questions.find(q=>q.id===id)).filter(Boolean);
+  } else if(mode === 'daily') {
+    const shuffled = [...questions].sort(()=>Math.random()-0.5);
+    state.quizQuestions = shuffled.slice(0, 10);
+  } else {
+    state.quizQuestions = [...questions];
+  }
 
-            // ========== QUIZ ==========
-            if (step === "quiz" && currentQ) {
-                const statusColors = {
-                    green: "bg-emerald-200 dark:bg-emerald-800 text-emerald-900 dark:text-emerald-100 border-emerald-400",
-                    red: "bg-red-200 dark:bg-red-900/60 text-red-900 dark:text-red-100 border-red-400",
-                    yellow: "bg-amber-200 dark:bg-amber-900/60 text-amber-900 dark:text-amber-100 border-amber-400",
-                    gray: "bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 border-slate-300"
-                };
+  showScreen('quizScreen');
+  document.getElementById('mapToggle').classList.add('visible');
+  renderQuestion();
 
-                return (
-                    <div className="min-h-screen etec-pattern flex flex-col">
-                        {/* Header */}
-                        <div className="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-700 shadow-sm">
-                            <div className="max-w-6xl mx-auto px-3 py-2.5 flex flex-wrap items-center justify-between gap-2">
-                                <div className="flex items-center gap-2">
-                                    <button onClick={resetToHome} className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-sm font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition">
-                                        <Home className="w-4 h-4" /> رئيسية
-                                    </button>
-                                    <button onClick={() => setShowMap(!showMap)} className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-sm font-bold hover:bg-slate-200 transition">
-                                        <MapIcon className="w-4 h-4" /> خريطة
-                                    </button>
-                                    <span className="text-xs font-medium text-slate-500 hidden sm:inline">إعداد: سمير حبيب بنتن</span>
-                                </div>
+  if(mode === 'simulation') {
+    state.simTimer = 90*60;
+    state.simInterval = setInterval(()=>{
+      state.simTimer--;
+      if(state.simTimer <= 0) { clearInterval(state.simInterval); finishQuiz(); }
+    }, 1000);
+  }
+}
 
-                                <div className="flex items-center gap-3">
-                                    <span className="font-extrabold text-sm md:text-base">
-                                        {currentIndex + 1} / {activeQuestions.length}
-                                    </span>
-                                    {domainInfo && (
-                                        <div className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold ${domainInfo.bg} ${domainInfo.text}`}>
-                                            <DomainIcon className="w-4 h-4" />
-                                            <span className="hidden sm:inline">{domainInfo.name}</span>
-                                        </div>
-                                    )}
-                                    {timerDuration > 0 && (
-                                        <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border-2 font-mono font-bold text-sm ${getTimerStyle()}`}>
-                                            <Clock className="w-4 h-4" />
-                                            <span>00:{timeLeft < 10 ? `0${timeLeft}` : timeLeft}</span>
-                                        </div>
-                                    )}
-                                    <button onClick={() => setDarkMode(!darkMode)} className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
-                                        {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-                                    </button>
-                                </div>
-                            </div>
-                            {/* Progress */}
-                            <div className="h-1.5 bg-slate-200 dark:bg-slate-700">
-                                <div className="h-full bg-etec-primary transition-all duration-300" style={{ width: `${((currentIndex + 1) / activeQuestions.length) * 100}%` }} />
-                            </div>
-                        </div>
+function resumeQuiz() {
+  try {
+    const s = JSON.parse(localStorage.getItem('etec_quiz_state'));
+    state.mode = s.mode || 'test';
+    state.currentQ = s.currentQ || 0;
+    state.answers = s.answers || {};
+    state.streak = s.streak || 0;
+    state.maxStreak = s.maxStreak || 0;
+    state.questionTimes = s.questionTimes || {};
+    state.quizQuestions = s.quizQuestions ? s.quizQuestions.map(id=>questions.find(q=>q.id===id)).filter(Boolean) : [...questions];
+    showScreen('quizScreen');
+    document.getElementById('mapToggle').classList.add('visible');
+    renderQuestion();
+  } catch(e) { startQuiz('test'); }
+}
 
-                        <div className="flex-1 max-w-6xl mx-auto w-full p-3 md:p-6 flex flex-col lg:flex-row gap-4">
-                            {/* Question Map Sidebar */}
-                            {showMap && (
-                                <div className="lg:w-56 flex-shrink-0 order-2 lg:order-1">
-                                    <div className="glass rounded-2xl p-3 border border-slate-200 dark:border-slate-700 sticky top-20">
-                                        <h4 className="text-xs font-bold text-slate-500 mb-2 flex items-center gap-1"><MapIcon className="w-3.5 h-3.5" /> خريطة الأسئلة</h4>
-                                        <div className="grid grid-cols-5 sm:grid-cols-8 lg:grid-cols-5 gap-1.5 max-h-64 lg:max-h-[70vh] overflow-y-auto">
-                                            {activeQuestions.map((_, idx) => {
-                                                const st = getStatus(idx);
-                                                const isCurrent = idx === currentIndex;
-                                                return (
-                                                    <button key={idx} onClick={() => jumpTo(idx)}
-                                                        className={`map-btn w-8 h-8 rounded-lg text-xs font-bold border ${statusColors[st]} ${isCurrent ? "ring-2 ring-etec-primary scale-110" : ""}`}
-                                                        title={`سؤال ${idx+1}`}>
-                                                        {idx + 1}
-                                                    </button>
-                                                );
-                                            })}
-                                        </div>
-                                        <div className="mt-3 text-[10px] space-y-1 text-slate-500">
-                                            <div className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-emerald-200 border border-emerald-400"></span> صحيح</div>
-                                            <div className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-red-200 border border-red-400"></span> خاطئ</div>
-                                            <div className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-amber-200 border border-amber-400"></span> انتهى الوقت</div>
-                                            <div className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-slate-200 border border-slate-300"></span> لم يُجب / تخطي</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
+// ==================== RENDER QUESTION ====================
+function renderQuestion() {
+  const q = state.quizQuestions[state.currentQ];
+  if(!q) return;
+  const total = state.quizQuestions.length;
+  const idx = state.currentQ;
+  const answered = state.answers[q.id];
 
-                            {/* Main Question Area */}
-                            <div className="flex-1 order-1 lg:order-2">
-                                <div className={`glass rounded-3xl p-5 md:p-8 shadow-xl border-r-8 ${domainInfo?.border || "border-etec-400"} fade-in`}>
-                                    {timeLeft === 0 && userAnswers[currentIndex] === -1 && (
-                                        <div className="mb-4 p-3 bg-amber-100 dark:bg-amber-900/40 border border-amber-300 rounded-xl text-amber-800 dark:text-amber-200 font-bold text-center text-sm">
-                                            ⏱ انتهى الوقت! تم الانتقال تلقائياً {mode === "practice" ? "— يمكنك مراجعة التحليل أدناه" : ""}
-                                        </div>
-                                    )}
+  // Counter & progress
+  document.getElementById('qCounter').textContent = `${idx+1} / ${total}`;
+  document.getElementById('progressBar').style.width = `${((idx+1)/total)*100}%`;
 
-                                    <div className="flex justify-between items-start gap-3 mb-5">
-                                        <h2 className="text-lg md:text-xl font-bold leading-relaxed flex-1">{currentQ.question}</h2>
-                                        <button onClick={copyQuestion} className="flex-shrink-0 flex items-center gap-1 px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-bold hover:bg-etec-100 dark:hover:bg-etec-900/40 transition" title="نسخ السؤال والخيارات">
-                                            <Copy className="w-4 h-4" />
-                                            {copiedMsg ? "تم!" : "نسخ"}
-                                        </button>
-                                    </div>
+  // Meta badges
+  const diffLabel = q.difficulty===1?'سهل':q.difficulty===2?'متوسط':'صعب';
+  const diffClass = q.difficulty===1?'badge-easy':q.difficulty===2?'badge-medium':'badge-hard';
+  document.getElementById('questionMeta').innerHTML = `
+    <span class="badge badge-domain">${q.domain}</span>
+    <span class="badge ${diffClass}">${diffLabel}</span>
+    <span style="color:var(--text3);font-size:0.85em">السؤال ${q.id}</span>
+  `;
 
-                                    <div className="grid gap-3">
-                                        {currentQ.options.map((option, idx) => {
-                                            let style = "border-slate-200 dark:border-slate-600 hover:border-etec-400 hover:bg-etec-50/50 dark:hover:bg-etec-900/20";
-                                            let icon = null;
-                                            const userAns = userAnswers[currentIndex];
-                                            if (showFeedback || (mode === "exam" && userAns !== undefined)) {
-                                                if (option.isCorrect && mode === "practice") {
-                                                    style = "border-emerald-500 bg-emerald-50 dark:bg-emerald-900/30 ring-2 ring-emerald-200 font-bold";
-                                                    icon = <CheckCircle className="text-emerald-600 w-6 h-6 flex-shrink-0" />;
-                                                } else if (userAns === idx) {
-                                                    if (option.isCorrect) {
-                                                        style = "border-emerald-500 bg-emerald-50 dark:bg-emerald-900/30 ring-2 ring-emerald-200 font-bold";
-                                                        icon = <CheckCircle className="text-emerald-600 w-6 h-6 flex-shrink-0" />;
-                                                    } else {
-                                                        style = "border-red-500 bg-red-50 dark:bg-red-900/30 ring-2 ring-red-200";
-                                                        icon = <XCircle className="text-red-600 w-6 h-6 flex-shrink-0" />;
-                                                    }
-                                                } else if (mode === "practice") {
-                                                    style = "border-slate-100 dark:border-slate-700 opacity-60";
-                                                }
-                                            }
-                                            return (
-                                                <button key={idx} onClick={() => handleAnswer(idx)} disabled={showFeedback || userAns !== undefined}
-                                                    className={`flex items-center justify-between p-4 rounded-2xl border-2 text-right text-base transition-all ${style}`}>
-                                                    <span className="flex-1 ml-3 leading-relaxed">{option.text}</span>
-                                                    {icon}
-                                                </button>
-                                            );
-                                        })}
-                                    </div>
+  // Question text
+  document.getElementById('questionText').textContent = q.text;
 
-                                    {showFeedback && mode === "practice" && (
-                                        <div className="mt-6 p-5 rounded-2xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 fade-in">
-                                            <div className="flex items-start gap-3">
-                                                <Info className="w-5 h-5 text-etec-600 mt-0.5 flex-shrink-0" />
-                                                <div>
-                                                    <h4 className="font-bold mb-1.5">التحليل والتوضيح المهني:</h4>
-                                                    <p className="text-sm leading-relaxed text-slate-700 dark:text-slate-300">
-                                                        {currentQ.options[userAnswers[currentIndex]]?.rationale || currentQ.options.find(o => o.isCorrect)?.rationale}
-                                                    </p>
-                                                    {userAnswers[currentIndex] !== undefined && userAnswers[currentIndex] >= 0 && !currentQ.options[userAnswers[currentIndex]]?.isCorrect && (
-                                                        <p className="text-emerald-700 dark:text-emerald-400 mt-2 font-bold text-sm">
-                                                            الإجابة الصحيحة: {currentQ.options.find(o => o.isCorrect)?.text}
-                                                        </p>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )}
+  // Options
+  const letters = ['أ','ب','ج','د'];
+  const optList = document.getElementById('optionsList');
+  optList.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.setAttribute('role', 'radio');
+    btn.setAttribute('aria-label', `الخيار ${letters[i]}: ${opt}`);
+    if(answered !== undefined) {
+      btn.classList.add('disabled');
+      if(i === q.correct) btn.classList.add('correct');
+      if(answered.selected === i && i !== q.correct) btn.classList.add('wrong');
+      if(answered.selected === i) btn.classList.add('selected');
+    }
+    btn.innerHTML = `<span class="option-letter">${letters[i]}</span><span>${opt}</span>`;
+    if(answered === undefined) {
+      btn.onclick = () => selectAnswer(q, i);
+    }
+    optList.appendChild(btn);
+  });
 
-                                    {/* Notes */}
-                                    <div className="mt-4">
-                                        <textarea
-                                            placeholder="ملاحظة شخصية على هذا السؤال (تُحفظ محلياً)..."
-                                            value={notes[currentIndex] || ""}
-                                            onChange={e => setNotes(prev => ({ ...prev, [currentIndex]: e.target.value }))}
-                                            className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-600 dark:bg-slate-800 text-sm resize-none h-16 focus:ring-2 focus:ring-etec-400 outline-none"
-                                        />
-                                    </div>
-                                </div>
+  // Explanation
+  const expBox = document.getElementById('explanationBox');
+  if(answered !== undefined) {
+    document.getElementById('explanationText').textContent = q.explanation;
+    expBox.classList.add('show');
+  } else {
+    expBox.classList.remove('show');
+  }
 
-                                {/* Navigation Footer */}
-                                <div className="flex flex-wrap justify-between items-center gap-3 mt-4">
-                                    <div className="flex gap-2">
-                                        <button onClick={goPrev} disabled={currentIndex === 0 || mode === "exam"}
-                                            className="flex items-center gap-1 px-4 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-700 font-bold text-sm disabled:opacity-40 hover:bg-slate-300 transition">
-                                            <ChevronRight className="w-4 h-4" /> السابق
-                                        </button>
-                                        <button onClick={skipQuestion} disabled={userAnswers[currentIndex] !== undefined}
-                                            className="flex items-center gap-1 px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 font-bold text-sm disabled:opacity-40 hover:bg-slate-200 transition">
-                                            <Skip className="w-4 h-4" /> تخطي
-                                        </button>
-                                    </div>
+  // Nav buttons
+  document.getElementById('prevBtn').disabled = idx === 0;
+  const isLast = idx === total - 1;
+  document.getElementById('nextBtn').style.display = isLast ? 'none' : '';
+  document.getElementById('finishBtn').style.display = isLast ? '' : 'none';
 
-                                    <button onClick={() => goNext()}
-                                        className="flex items-center gap-2 px-6 py-3 rounded-xl bg-etec-primary text-white font-bold shadow-lg hover:bg-etec-dark transition">
-                                        {currentIndex === activeQuestions.length - 1 ? "عرض النتيجة النهائية" : "السؤال التالي"}
-                                        <ChevronLeft className="w-5 h-5" />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                );
-            }
+  // Streak
+  updateStreak();
 
-            // ========== RESULTS ==========
-            if (step === "results") {
-                const score = calculateScore();
-                const byDomain = [1,2,3,4].map(d => {
-                    const qs = activeQuestions.filter(q => q.domain === d);
-                    let c = 0;
-                    qs.forEach(q => {
-                        const idx = activeQuestions.indexOf(q);
-                        const ans = userAnswers[idx];
-                        if (ans >= 0 && q.options[ans]?.isCorrect) c++;
-                    });
-                    return { domain: d, total: qs.length, correct: c, pct: qs.length ? Math.round((c/qs.length)*100) : 0 };
-                }).filter(x => x.total > 0);
+  // Timer
+  clearInterval(state.timerInterval);
+  if(state.mode === 'test' && answered === undefined) {
+    startTimer();
+  } else if(state.mode === 'simulation' && answered === undefined) {
+    startTimer();
+  } else {
+    document.getElementById('timerText').textContent = state.mode==='training'?'∞':'--';
+    document.getElementById('timerCircle').style.strokeDashoffset = '0';
+    document.getElementById('timerCircle').style.stroke = 'var(--green)';
+    document.getElementById('timerText').className = 'timer-text';
+  }
 
-                return (
-                    <div className="min-h-screen etec-pattern flex items-center justify-center p-4 md:p-8">
-                        <div className="max-w-3xl w-full glass rounded-3xl p-6 md:p-10 shadow-2xl fade-in border border-slate-200 dark:border-slate-700">
-                            <div className="text-center mb-8">
-                                <div className="relative inline-block mb-4">
-                                    <svg className="w-36 h-36 transform -rotate-90">
-                                        <circle className="text-slate-200 dark:text-slate-700" strokeWidth="10" stroke="currentColor" fill="transparent" r="60" cx="72" cy="72" />
-                                        <circle className="text-etec-primary transition-all duration-1000" strokeWidth="10" strokeDasharray={377} strokeDashoffset={377 - (377 * score.percentage) / 100} strokeLinecap="round" stroke="currentColor" fill="transparent" r="60" cx="72" cy="72" />
-                                    </svg>
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                        <span className="text-3xl font-extrabold">{score.percentage}%</span>
-                                    </div>
-                                </div>
-                                <h2 className="text-2xl md:text-3xl font-bold mb-1">
-                                    {score.percentage >= 80 ? "إنجاز متميز! أداء مهني رائع" : score.percentage >= 60 ? "نتيجة جيدة — واصل التحسين" : "تم إنهاء الاختبار"}
-                                </h2>
-                                <p className="text-slate-600 dark:text-slate-300">
-                                    أجبت صحيحاً على <span className="font-extrabold text-etec-primary">{score.correct}</span> من أصل <span className="font-bold">{score.total}</span>
-                                </p>
-                                <p className="text-sm text-slate-500 mt-1">خاطئ: {score.wrong} | انتهى الوقت: {score.timeout} | تخطي/بدون إجابة: {score.skipped}</p>
-                            </div>
+  // Quote every 10 questions
+  const qb = document.getElementById('quoteBanner');
+  if((idx+1) % 10 === 0 && idx > 0) {
+    const quote = quotes[Math.floor(idx/10) % quotes.length];
+    document.getElementById('quoteText').textContent = `"${quote.text}"`;
+    document.getElementById('quoteAuthor').textContent = `- ${quote.author}`;
+    qb.classList.add('show');
+  } else {
+    qb.classList.remove('show');
+  }
 
-                            {/* Domain breakdown */}
-                            {byDomain.length > 0 && (
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-                                    {byDomain.map(d => {
-                                        const m = DOMAIN_META[d.domain];
-                                        return (
-                                            <div key={d.domain} className={`p-3 rounded-xl ${m.bg} text-center`}>
-                                                <div className="text-xs font-bold mb-1">{m.name}</div>
-                                                <div className="text-xl font-extrabold">{d.pct}%</div>
-                                                <div className="text-[10px]">{d.correct}/{d.total}</div>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            )}
+  // Animation
+  const card = document.getElementById('questionCard');
+  card.style.animation = 'none';
+  card.offsetHeight;
+  card.style.animation = 'slideIn 0.4s ease';
 
-                            {/* Map for review */}
-                            <div className="mb-6 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
-                                <h4 className="font-bold text-sm mb-3">خريطة المراجعة السريعة</h4>
-                                <div className="grid grid-cols-8 sm:grid-cols-10 gap-1.5">
-                                    {activeQuestions.map((_, idx) => {
-                                        const st = getStatus(idx);
-                                        const colors = { green: "bg-emerald-300", red: "bg-red-300", yellow: "bg-amber-300", gray: "bg-slate-300" };
-                                        return (
-                                            <button key={idx} onClick={() => { setCurrentIndex(idx); setStep("quiz"); setShowFeedback(true); setIsTimerRunning(false); }}
-                                                className={`w-8 h-8 rounded-lg text-xs font-bold ${colors[st]} hover:scale-110 transition`} title={`سؤال ${idx+1}`}>
-                                                {idx+1}
-                                            </button>
-                                        );
-                                    })}
-                                </div>
-                            </div>
+  // Save state
+  saveState();
+}
 
-                            <div className="bg-etec-50 dark:bg-etec-900/30 p-5 rounded-2xl mb-6 border border-etec-100 dark:border-etec-800">
-                                <h4 className="font-bold text-etec-900 dark:text-etec-200 mb-2 flex items-center gap-2"><Info className="w-5 h-5" /> التوصية المهنية</h4>
-                                <p className="text-sm text-etec-800 dark:text-etec-300 leading-relaxed">
-                                    {score.percentage >= 80
-                                        ? "تمتلك حصيلة معرفية وتطبيقية ممتازة تتوافق مع المعايير الوطنية للرخصة المهنية للمدربين. واصل الاطلاع على مهارات الذكاء الاصطناعي وتطبيقات المستقبل."
-                                        : "نتيجة طيبة! ننصح بمراجعة مجالات الفجوات عبر خريطة الأسئلة وتكرار الأسئلة ذات التحليل الفني لترسيخ المفاهيم قبل الاختبار الرسمي."}
-                                </p>
-                            </div>
+// ==================== TIMER ====================
+function startTimer() {
+  state.timer = 60;
+  state.questionStartTime = Date.now();
+  const circle = document.getElementById('timerCircle');
+  const text = document.getElementById('timerText');
+  const circumference = 226.2;
 
-                            <div className="flex flex-col sm:flex-row gap-3">
-                                <button onClick={() => startQuiz(selectedDomain, mode)} className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl bg-slate-200 dark:bg-slate-700 font-bold hover:bg-slate-300 transition">
-                                    <Refresh className="w-5 h-5" /> إعادة الاختبار
-                                </button>
-                                <button onClick={() => { setStep("quiz"); setCurrentIndex(0); setShowFeedback(true); setIsTimerRunning(false); }} className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-200 font-bold hover:bg-amber-200 transition">
-                                    مراجعة الإجابات
-                                </button>
-                                <button onClick={resetToHome} className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl bg-etec-primary text-white font-bold shadow hover:bg-etec-dark transition">
-                                    <Home className="w-5 h-5" /> اختيار مجال آخر
-                                </button>
-                            </div>
+  text.textContent = '60';
+  text.className = 'timer-text';
+  circle.style.stroke = 'var(--green)';
+  circle.style.strokeDashoffset = '0';
 
-                            <p className="text-center text-xs text-slate-500 mt-6">إعداد المهندس سمير حبيب بنتن — مستوحى من معايير ETEC</p>
-                        </div>
-                    </div>
-                );
-            }
+  state.timerInterval = setInterval(() => {
+    state.timer--;
+    text.textContent = state.timer;
+    const offset = circumference * (1 - state.timer/60);
+    circle.style.strokeDashoffset = offset;
 
-            return null;
-        };
+    if(state.timer <= 10 && state.timer > 0) {
+      circle.style.stroke = 'var(--red)';
+      text.className = 'timer-text timer-danger';
+      if(state.timer === 10 && state.soundEnabled) playBeep(800, 200);
+      if(state.timer <= 5 && state.soundEnabled) playBeep(1000, 100);
+    } else if(state.timer <= 20) {
+      circle.style.stroke = 'var(--yellow)';
+      text.className = 'timer-text timer-warning';
+    }
 
-        const root = ReactDOM.createRoot(document.getElementById("root"));
-        root.render(<QuizApp />);
-    </script>
+    if(state.timer <= 0) {
+      clearInterval(state.timerInterval);
+      timeoutQuestion();
+    }
+  }, 1000);
+}
+
+function timeoutQuestion() {
+  const q = state.quizQuestions[state.currentQ];
+  state.answers[q.id] = { selected: -1, status: 'timeout' };
+  state.streak = 0;
+  state.questionTimes[q.id] = 60;
+  if(state.soundEnabled) playBeep(400, 500);
+  showToast('⏰ انتهى الوقت!');
+  renderQuestion();
+  setTimeout(() => {
+    if(state.currentQ < state.quizQuestions.length - 1) {
+      state.currentQ++;
+      renderQuestion();
+    }
+  }, 1500);
+}
+
+// ==================== ANSWER ====================
+function selectAnswer(q, selected) {
+  clearInterval(state.timerInterval);
+  const timeTaken = Math.round((Date.now() - state.questionStartTime)/1000);
+  state.questionTimes[q.id] = timeTaken;
+  const isCorrect = selected === q.correct;
+
+  state.answers[q.id] = { selected, status: isCorrect ? 'correct' : 'wrong' };
+
+  if(isCorrect) {
+    state.streak++;
+    if(state.streak > state.maxStreak) state.maxStreak = state.streak;
+    if(state.soundEnabled) playBeep(600, 150);
+  } else {
+    state.streak = 0;
+    if(state.soundEnabled) playBeep(300, 300);
+    document.getElementById('questionCard').classList.add('shake');
+    setTimeout(()=>document.getElementById('questionCard').classList.remove('shake'), 500);
+  }
+
+  renderQuestion();
+}
+
+// ==================== NAVIGATION ====================
+function nextQuestion() {
+  if(state.currentQ < state.quizQuestions.length - 1) {
+    // If not answered, mark as skipped
+    const q = state.quizQuestions[state.currentQ];
+    if(state.answers[q.id] === undefined) {
+      clearInterval(state.timerInterval);
+      state.answers[q.id] = { selected: -1, status: 'skipped' };
+    }
+    state.currentQ++;
+    renderQuestion();
+  }
+}
+
+function prevQuestion() {
+  if(state.currentQ > 0) {
+    clearInterval(state.timerInterval);
+    state.currentQ--;
+    renderQuestion();
+  }
+}
+
+function goToQuestion(idx) {
+  clearInterval(state.timerInterval);
+  state.currentQ = idx;
+  renderQuestion();
+  document.getElementById('mapOverlay').classList.remove('show');
+}
+
+function goHome() {
+  clearInterval(state.timerInterval);
+  clearInterval(state.simInterval);
+  document.getElementById('mapToggle').classList.remove('visible');
+  showScreen('homeScreen');
+  checkResume();
+}
+
+// ==================== STREAK ====================
+function updateStreak() {
+  const badge = document.getElementById('streakBadge');
+  if(state.streak >= 2) {
+    badge.style.display = 'flex';
+    document.getElementById('streakCount').textContent = state.streak;
+    badge.classList.remove('pop');
+    badge.offsetHeight;
+    badge.classList.add('pop');
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+// ==================== QUESTION MAP ====================
+function toggleMap() {
+  const overlay = document.getElementById('mapOverlay');
+  overlay.classList.toggle('show');
+  if(overlay.classList.contains('show')) renderMap();
+}
+function closeMap(e) {
+  if(e.target === document.getElementById('mapOverlay')) {
+    document.getElementById('mapOverlay').classList.remove('show');
+  }
+}
+function renderMap() {
+  const grid = document.getElementById('mapGrid');
+  grid.innerHTML = '';
+  state.quizQuestions.forEach((q, i) => {
+    const item = document.createElement('div');
+    item.className = 'map-item';
+    if(i === state.currentQ) item.classList.add('current');
+    const ans = state.answers[q.id];
+    if(ans) {
+      if(ans.status === 'correct') item.classList.add('correct');
+      else if(ans.status === 'wrong') item.classList.add('wrong');
+      else if(ans.status === 'timeout') item.classList.add('timeout');
+      else if(ans.status === 'skipped') item.classList.add('skipped');
+    }
+    item.textContent = i + 1;
+    item.onclick = () => goToQuestion(i);
+    item.setAttribute('role', 'button');
+    item.setAttribute('aria-label', `السؤال ${i+1}`);
+    grid.appendChild(item);
+  });
+}
+
+// ==================== COPY ====================
+function copyQuestion() {
+  const q = state.quizQuestions[state.currentQ];
+  const letters = ['أ','ب','ج','د'];
+  let text = `السؤال ${q.id}: ${q.text}\n\n`;
+  q.options.forEach((opt, i) => {
+    text += `${letters[i]}) ${opt}\n`;
+  });
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = '✅ تم النسخ';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 نسخ'; btn.classList.remove('copied'); }, 2000);
+  }).catch(() => showToast('فشل النسخ'));
+}
+
+// ==================== FINISH & RESULTS ====================
+function finishQuiz() {
+  clearInterval(state.timerInterval);
+  clearInterval(state.simInterval);
+
+  // Mark unanswered as skipped
+  state.quizQuestions.forEach(q => {
+    if(!state.answers[q.id]) {
+      state.answers[q.id] = { selected: -1, status: 'skipped' };
+    }
+  });
+
+  localStorage.removeItem('etec_quiz_state');
+
+  const total = state.quizQuestions.length;
+  let correct=0, wrong=0, timeouts=0, skipped=0;
+  const wrongIds = [];
+  const domainStats = {};
+
+  state.quizQuestions.forEach(q => {
+    const ans = state.answers[q.id];
+    if(!domainStats[q.domain]) domainStats[q.domain] = {total:0,correct:0};
+    domainStats[q.domain].total++;
+
+    if(ans.status === 'correct') { correct++; domainStats[q.domain].correct++; }
+    else if(ans.status === 'wrong') { wrong++; wrongIds.push(q.id); }
+    else if(ans.status === 'timeout') { timeouts++; wrongIds.push(q.id); }
+    else { skipped++; wrongIds.push(q.id); }
+  });
+
+  const pct = Math.round((correct/total)*100);
+  const times = Object.values(state.questionTimes).filter(t=>t>0);
+  const avgTime = times.length ? Math.round(times.reduce((a,b)=>a+b,0)/times.length) : 0;
+  const domainPcts = Object.entries(domainStats).map(([name,d])=>({name,pct:Math.round((d.correct/d.total)*100),correct:d.correct,total:d.total}));
+
+  const result = { pct, correct, wrong, timeouts, skipped, total, avgTime, maxStreak: state.maxStreak, domainPcts, wrongIds, mode: state.mode };
+  state.lastResult = result;
+  localStorage.setItem('etec_last_result', JSON.stringify(result));
+
+  showScreen('resultsScreen');
+  renderResults(result);
+}
+
+function renderResults(r) {
+  // Score circle
+  const circle = document.getElementById('scoreCircle');
+  circle.style.setProperty('--score-pct', r.pct + '%');
+  document.getElementById('scoreValue').textContent = r.pct + '%';
+
+  // Message
+  let msg = '', sub = '';
+  if(r.pct >= 90) { msg = '🏆 أداء ممتاز!'; sub = 'أنت مستعد للاختبار الحقيقي'; }
+  else if(r.pct >= 80) { msg = '🌟 أداء جيد جداً!'; sub = 'أداء رائع مع بعض التحسينات'; }
+  else if(r.pct >= 70) { msg = '👍 أداء جيد'; sub = 'تحتاج لمزيد من المراجعة في بعض المجالات'; }
+  else if(r.pct >= 60) { msg = '✅ مقبول'; sub = 'تحتاج لمراجعة مكثفة'; }
+  else { msg = '📚 تحتاج مزيداً من المذاكرة'; sub = 'لا تيأس، راجع وحاول مرة أخرى'; }
+  document.getElementById('resultMessage').textContent = msg;
+  document.getElementById('resultSubMessage').textContent = sub;
+
+  // Stats
+  document.getElementById('statCorrect').textContent = r.correct;
+  document.getElementById('statWrong').textContent = r.wrong;
+  document.getElementById('statTimeout').textContent = r.timeouts;
+  document.getElementById('statSkipped').textContent = r.skipped;
+
+  // Domain bars
+  const barsContainer = document.getElementById('domainBars');
+  barsContainer.innerHTML = '';
+  r.domainPcts.forEach(d => {
+    const color = d.pct >= 80 ? 'var(--green)' : d.pct >= 60 ? 'var(--yellow)' : 'var(--red)';
+    const row = document.createElement('div');
+    row.className = 'domain-bar-row';
+    row.innerHTML = `
+      <div class="domain-bar-label">${d.name}</div>
+      <div class="domain-bar-track">
+        <div class="domain-bar-fill" style="width:0%;background:${color}">${d.correct}/${d.total}</div>
+      </div>
+      <div class="domain-bar-pct" style="color:${color}">${d.pct}%</div>
+    `;
+    barsContainer.appendChild(row);
+    setTimeout(() => row.querySelector('.domain-bar-fill').style.width = d.pct+'%', 100);
+  });
+
+  // Timeline chart
+  drawTimeline(r);
+
+  // Badges
+  const grid = document.getElementById('badgesGrid');
+  grid.innerHTML = '';
+  badgesDef.forEach(b => {
+    const earned = b.check(r);
+    const card = document.createElement('div');
+    card.className = `badge-card ${earned?'earned':'locked'}`;
+    card.innerHTML = `<div class="badge-icon">${b.icon}</div><div class="badge-name">${b.name}</div><div style="font-size:0.7em;color:var(--text3);margin-top:4px">${b.desc}</div>`;
+    grid.appendChild(card);
+  });
+
+  // Confetti if good result
+  if(r.pct >= 80) launchConfetti();
+}
+
+// ==================== TIMELINE CHART ====================
+function drawTimeline(r) {
+  const canvas = document.getElementById('timelineChart');
+  const ctx = canvas.getContext('2d');
+  canvas.width = canvas.offsetWidth * 2;
+  canvas.height = 500;
+  ctx.scale(2, 2);
+  const w = canvas.offsetWidth;
+  const h = 250;
+  ctx.clearRect(0, 0, w, h);
+
+  const total = state.quizQuestions.length;
+  const step = w / (total + 1);
+
+  // Grid
+  ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue('--border').trim() || '#ddd';
+  ctx.lineWidth = 0.5;
+  for(let i = 0; i <= 4; i++) {
+    const y = 20 + (h-40) * (i/4);
+    ctx.beginPath(); ctx.moveTo(30, y); ctx.lineTo(w-10, y); ctx.stroke();
+  }
+
+  // Points
+  let cumCorrect = 0;
+  const points = [];
+  state.quizQuestions.forEach((q, i) => {
+    const ans = state.answers[q.id];
+    if(ans && ans.status === 'correct') cumCorrect++;
+    const pct = ((cumCorrect/(i+1))*100);
+    const x = 30 + (i+1) * step;
+    const y = 20 + (h-40) * (1 - pct/100);
+    points.push({x, y, status: ans?ans.status:'skipped'});
+  });
+
+  // Line
+  ctx.beginPath();
+  ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue('--primary').trim() || '#0066CC';
+  ctx.lineWidth = 2;
+  points.forEach((p, i) => {
+    if(i===0) ctx.moveTo(p.x, p.y);
+    else ctx.lineTo(p.x, p.y);
+  });
+  ctx.stroke();
+
+  // Dots
+  points.forEach(p => {
+    ctx.beginPath();
+    const color = p.status==='correct'?'#22C55E':p.status==='wrong'?'#EF4444':p.status==='timeout'?'#F59E0B':'#94A3B8';
+    ctx.fillStyle = color;
+    ctx.arc(p.x, p.y, 4, 0, Math.PI*2);
+    ctx.fill();
+  });
+
+  // Labels
+  ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--text3').trim() || '#999';
+  ctx.font = '10px Arial';
+  ctx.textAlign = 'center';
+  ctx.fillText('100%', 15, 25);
+  ctx.fillText('50%', 15, h/2+5);
+  ctx.fillText('0%', 15, h-15);
+}
+
+// ==================== DUEL MODE ====================
+function showDuelMode() {
+  if(!state.lastResult) return showToast('أكمل اختباراً أولاً للمقارنة');
+  showScreen('duelScreen');
+  document.getElementById('duelResult').style.display = 'none';
+  document.getElementById('duelInput').value = '';
+}
+function compareDuel() {
+  const friendPct = parseInt(document.getElementById('duelInput').value);
+  if(isNaN(friendPct) || friendPct < 0 || friendPct > 100) return showToast('أدخل نسبة صحيحة بين 0 و 100');
+
+  const myPct = state.lastResult.pct;
+  document.getElementById('duelScore1').textContent = myPct + '%';
+  document.getElementById('duelScore2').textContent = friendPct + '%';
+
+  const p1 = document.getElementById('duelPlayer1');
+  const p2 = document.getElementById('duelPlayer2');
+  p1.classList.remove('winner');
+  p2.classList.remove('winner');
+
+  let winnerText = '';
+  if(myPct > friendPct) { p1.classList.add('winner'); winnerText = '🎉 أنت الفائز!'; }
+  else if(friendPct > myPct) { p2.classList.add('winner'); winnerText = '😅 صديقك فاز هذه المرة'; }
+  else { winnerText = '🤝 تعادل!'; }
+
+  document.getElementById('duelWinner').textContent = winnerText;
+  document.getElementById('duelResult').style.display = 'block';
+}
+
+// ==================== EXPORT & SHARE ====================
+function exportPDF() {
+  window.print();
+}
+function shareResults() {
+  const r = state.lastResult;
+  if(!r) return;
+  const text = `📊 نتيجة اختبار الرخصة المهنية للمدربين\n✅ النتيجة: ${r.pct}%\n✔️ صحيحة: ${r.correct} | ❌ خاطئة: ${r.wrong}\n🔥 أعلى سلسلة: ${r.maxStreak}\nإعداد المهندس سمير حبيب بنتن`;
+  if(navigator.share) {
+    navigator.share({title:'نتيجة الاختبار', text}).catch(()=>{});
+  } else {
+    navigator.clipboard.writeText(text).then(()=>showToast('تم نسخ النتيجة للمشاركة'));
+  }
+}
+
+// ==================== UTILITIES ====================
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function saveState() {
+  const s = {
+    mode: state.mode,
+    currentQ: state.currentQ,
+    answers: state.answers,
+    streak: state.streak,
+    maxStreak: state.maxStreak,
+    questionTimes: state.questionTimes,
+    quizQuestions: state.quizQuestions.map(q=>q.id)
+  };
+  localStorage.setItem('etec_quiz_state', JSON.stringify(s));
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function playBeep(freq, duration) {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.frequency.value = freq;
+    gain.gain.value = 0.1;
+    osc.start();
+    setTimeout(() => { osc.stop(); ctx.close(); }, duration);
+  } catch(e) {}
+}
+
+function launchConfetti() {
+  const colors = ['#FF6B35','#0066CC','#22C55E','#F59E0B','#EF4444','#8B5CF6','#EC4899'];
+  for(let i = 0; i < 60; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = Math.random()*100 + 'vw';
+    piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+    piece.style.animationDelay = Math.random()*2 + 's';
+    piece.style.animationDuration = (2+Math.random()*2) + 's';
+    piece.style.borderRadius = Math.random()>0.5?'50%':'0';
+    piece.style.width = (6+Math.random()*8) + 'px';
+    piece.style.height = (6+Math.random()*8) + 'px';
+    document.body.appendChild(piece);
+    setTimeout(() => piece.remove(), 5000);
+  }
+}
+
+function handleKeyboard(e) {
+  if(!document.getElementById('quizScreen').classList.contains('active')) return;
+  if(e.key === 'ArrowLeft') nextQuestion();
+  else if(e.key === 'ArrowRight') prevQuestion();
+  else if(e.key === '1' || e.key === 'a') clickOption(0);
+  else if(e.key === '2' || e.key === 'b') clickOption(1);
+  else if(e.key === '3' || e.key === 'c') clickOption(2);
+  else if(e.key === '4' || e.key === 'd') clickOption(3);
+  else if(e.key === 'm') toggleMap();
+  else if(e.key === 'h') goHome();
+}
+
+function clickOption(idx) {
+  const q = state.quizQuestions[state.currentQ];
+  if(state.answers[q.id] === undefined) selectAnswer(q, idx);
+}
+</script>
 </body>
 </html>
